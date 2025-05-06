@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import PlaceholderImage from '@/components/PlaceholderImage';
 
 // Define question types
 type QuestionOption = {
@@ -265,27 +263,10 @@ export default function Questionnaire() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState(backgroundImages.general);
   const [transitionClass, setTransitionClass] = useState("animate-fade-in");
   
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-  
-  // Set background image based on question type
-  useEffect(() => {
-    // Select background image based on question content
-    let newBackground = backgroundImages.general;
-    
-    if (currentQuestion.id === 'location') {
-      newBackground = backgroundImages.location;
-    } else if (['personality_type', 'self_perception', 'introversion'].includes(currentQuestion.id)) {
-      newBackground = backgroundImages.personality;
-    } else if (['brunch_plate', 'alcohol'].includes(currentQuestion.id)) {
-      newBackground = backgroundImages.food;
-    }
-    
-    setBackgroundImage(newBackground);
-  }, [currentQuestion]);
   
   useEffect(() => {
     // Reset transition class when question changes to allow re-animation
@@ -327,8 +308,6 @@ export default function Questionnaire() {
     router.push('/confirmation');
   };
 
-  const canProceed = !currentQuestion.required || !!answers[currentQuestion.id];
-  
   const renderQuestion = () => {
     const { id, type, question, options = [], placeholder = '', scaleLabels } = currentQuestion;
     

@@ -3,8 +3,6 @@
 import React from 'react';
 
 interface PlaceholderImageProps {
-  width?: number;
-  height?: number;
   text?: string;
   bgColor?: string;
   textColor?: string;
@@ -12,8 +10,6 @@ interface PlaceholderImageProps {
 }
 
 const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
-  width = 400,
-  height = 300,
   text = 'Image Placeholder',
   bgColor = 'var(--neutral-light)', // Default to soft peach from new palette
   textColor = 'var(--foreground)', // Default to main foreground color
