@@ -33,7 +33,7 @@ export default function Home() {
             In a world of fleeting scrolls, Sun &amp; Stories offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
           </p>
           <div className="mb-10 text-lg italic text-[var(--foreground)] animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            "Because the best stories begin when strangers meet over a meal."
+            &quot;Because the best stories begin when strangers meet over a meal.&quot;
           </div>
           <Link href="/questionnaire" className="btn btn-accent text-lg py-3 px-8 shadow-xl hover:shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             Find Your Table
@@ -78,9 +78,9 @@ export default function Home() {
         <p className="text-center mb-16 max-w-xl mx-auto text-lg text-[var(--foreground)] leading-relaxed">Real stories from a community built on connection.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {[ 
-            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn't have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can't wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-            { quote: "Sun & Stories is my new favorite Sunday ritual. It's the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
+            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
+            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+            { quote: "Sun &amp; Stories is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-neutral-dark/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-neutral-light/60 flex flex-col animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
               <p className="italic mb-6 text-lg text-[var(--foreground)] flex-grow">"{testimonial.quote}"</p>

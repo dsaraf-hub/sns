@@ -82,7 +82,7 @@ export default function ConfirmationPage() {
             <h2 className="text-2xl font-display font-semibold mb-6 text-secondary-dark text-center">Crafting Connections: Our Curation Philosophy</h2>
             <div className="space-y-4 text-text-light leading-relaxed">
               <p>
-                At Sun & Stories, we believe the magic lies in the mix. We don't just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-gray-700">genuine connection and stimulating conversation</strong>.
+                At Sun &amp; Stories, we believe the magic lies in the mix. We don&apos;t just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-gray-700">genuine connection and stimulating conversation</strong>.
               </p>
               <p>
                 Our goal is to create <strong className="font-medium text-gray-700">balanced groups with diverse perspectives</strong>. This means bringing together individuals who might not typically cross paths but who share an openness to new experiences and a desire for authentic interaction. We consider factors like your expressed interests, communication style, and what you hope to gain from the experience.

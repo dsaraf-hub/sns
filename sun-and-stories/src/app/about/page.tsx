@@ -52,7 +52,7 @@ export default function AboutPage() {
               What started as a small brunch among friends in 2023 sparked a movement: genuine connection over shared meals. We witnessed magic as strangers opened up, exchanged stories, and left with lasting friendships.
             </p>
             <p className="text-[var(--foreground)] leading-relaxed">
-              Sun & Stories was born to recreate that magic every Sunday in Mumbai, handpicking six individuals to spark conversations that wouldn't happen otherwise.
+              Sun &amp; Stories was born to recreate that magic every Sunday in Mumbai, handpicking six individuals to spark conversations that wouldn&apos;t happen otherwise.
             </p>
           </section>
           

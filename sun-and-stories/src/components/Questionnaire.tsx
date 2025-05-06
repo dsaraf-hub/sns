@@ -251,14 +251,6 @@ const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
   19: { title: "All set!" },
 };
 
-// Image backgrounds for question types
-const backgroundImages = {
-  general: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop",
-  location: "https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?q=80&w=1974&auto=format&fit=crop",
-  personality: "https://images.unsplash.com/photo-1517732306149-e8f829eb588a?q=80&w=2072&auto=format&fit=crop",
-  food: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=2070&auto=format&fit=crop"
-};
-
 export default function Questionnaire() {
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
