@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ConfirmationPage() {
   return (
@@ -33,11 +34,11 @@ export default function ConfirmationPage() {
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-gray-800">
-            You're In! (Almost!)
+            You&apos;re In! (Almost!)
           </h1>
           
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-text-light leading-relaxed">
-            Thank you for filling out our questionnaire! We're thrilled you're interested in joining a Sun & Stories brunch. 
+            Thank you for filling out our questionnaire! We&apos;re thrilled you&apos;re interested in joining a Sun & Stories brunch. 
             Our team is now carefully reviewing responses to curate balanced and engaging groups.
           </p>
 
@@ -95,18 +96,18 @@ export default function ConfirmationPage() {
           {/* Visual Section */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
             <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" alt="Thoughtful Matching" className="w-full h-full object-cover" />
+              <Image src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" alt="Thoughtful Matching" layout="fill" objectFit="cover" />
             </div>
             <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <img src="https://images.unsplash.com/photo-1523289333742-bea4f06ad6b2?q=80&w=2070&auto=format&fit=crop" alt="Diverse Conversations" className="w-full h-full object-cover" />
+              <Image src="https://images.unsplash.com/photo-1523289333742-bea4f06ad6b2?q=80&w=2070&auto=format&fit=crop" alt="Diverse Conversations" layout="fill" objectFit="cover" />
             </div>
             <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=2070&auto=format&fit=crop" alt="Authentic Connections" className="w-full h-full object-cover" />
+              <Image src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=2070&auto=format&fit=crop" alt="Authentic Connections" layout="fill" objectFit="cover" />
             </div>
           </div>
 
           <p className="text-md mb-8 text-text-light">
-            If you don't hear from us for this Sunday, don't worry! We host brunches regularly and will keep your profile for future matching opportunities.
+            If you don&apos;t hear from us for this Sunday, don&apos;t worry! We host brunches regularly and will keep your profile for future matching opportunities.
             <br />For any questions, reach out to <a href="mailto:hello@sunandstories.com" className="text-accent hover:underline font-semibold">hello@sunandstories.com</a>.
           </p>
           

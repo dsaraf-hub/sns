@@ -31,7 +31,7 @@ export default function AboutPage() {
                 About <span className="text-accent">Sun & Stories</span>
               </h1>
               <p className="text-lg mb-6 text-[var(--foreground)] leading-relaxed">
-                In a world of constant scrolling, Sun & Stories invites you to pause and connect. Each Sunday, we curate intimate tables where strangers become friends over a shared meal.
+                In a world of constant scrolling, Sun &amp; Stories invites you to pause and connect. Each Sunday, we curate intimate tables where strangers become friends over a shared meal.
               </p>
             </div>
             <div className="md:w-1/2 w-full rounded-xl overflow-hidden shadow-lg relative">

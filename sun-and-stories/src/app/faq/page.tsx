@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function FAQPage() {
   const faqs = [
@@ -66,7 +67,7 @@ export default function FAQPage() {
       {/* Hero banner */}
       <section className="bg-neutral-light py-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <img src="https://images.unsplash.com/photo-1499960049225-af8013f47abc?q=80&w=2070&auto=format&fit=crop" alt="Brunch table" className="mx-auto rounded-xl shadow-md h-48 object-cover mb-6" />
+          <Image src="https://images.unsplash.com/photo-1499960049225-af8013f47abc?q=80&w=2070&auto=format&fit=crop" alt="Brunch table" layout="fill" objectFit="cover" className="mx-auto rounded-xl shadow-md h-48 object-cover mb-6" />
           <h1 className="text-4xl md:text-5xl font-display font-bold text-[var(--foreground)] mb-4">Frequently Asked <span className="text-accent">Questions</span></h1>
           <p className="text-lg text-[var(--foreground)]">Everything you need to know about Sun & Stories and our Sunday brunches.</p>
         </div>
@@ -90,7 +91,7 @@ export default function FAQPage() {
           <div className="mt-12 pt-8 border-t border-neutral-dark/10">
             <h2 className="text-2xl font-display font-bold mb-6 text-[var(--foreground)]">Still have questions?</h2>
             <p className="mb-8 text-[var(--foreground)]">
-              If you didn't find the answer you were looking for, feel free to reach out to us directly. 
+              If you didn&apos;t find the answer you were looking for, feel free to reach out to us directly. 
             </p>
             <div className="flex flex-col md:flex-row gap-6">
               <a href="mailto:hello@sunandstories.com" className="btn btn-primary inline-flex items-center">
