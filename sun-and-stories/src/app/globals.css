@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+:root {
+  /* New Warm & Lively Palette */
+  --background: #fffcf5; /* Soft Cream/Off-white */
+  --foreground: #4a4a4a; /* Dark Gray for text */
+  
+  --primary: #ffc069;   /* Golden Yellow */
+  --primary-dark: #fca311; /* Deeper Gold */
+  
+  --secondary: #a0d2eb; /* Soft Blue */
+  --secondary-dark: #7cbcdf; /* Medium Blue */
+
+  --accent: #ff7f50;    /* Coral */
+  --accent-dark: #e66a40;  /* Darker Coral */
+
+  --neutral-light: #fdf6e3; /* Soft Peach (for backgrounds) */
+  --neutral-medium: #e8f5e9; /* Light Green (for backgrounds) */
+  --neutral-dark: #d1ccc0;   /* Muted Taupe */
+
+  --text-light: #757575; /* Lighter gray for secondary text */
+  --success: #4caf50; /* Green for success messages */
+  --error: #f44336;   /* Red for error messages */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+}
+
+/* Remove dark mode overrides to keep pastel backgrounds in all modes */
+/* @media (prefers-color-scheme: dark) { */
+/*   :root { */
+/*     --background: #2d2a26;  */
+/*     --foreground: #e0e0e0; */
+/*     --primary: #ffc069; */
+/*     --primary-dark: #fca311; */
+/*     --secondary: #a0d2eb; */
+/*     --secondary-dark: #7cbcdf; */
+/*     --accent: #ff7f50; */
+/*     --accent-dark: #e66a40; */
+/*     --neutral-light: #3a352f; */
+/*     --neutral-medium: #303d32; */
+/*     --neutral-dark: #504b43; */
+/*     --text-light: #b0b0b0;  */
+/*   } */
+/* } */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display), serif;
+  line-height: 1.3;
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Button Hover Effects & General Button Styling */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--foreground); /* Or white if contrast is better */
+  border-color: var(--primary-dark);
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: white;
+}
+.btn-accent:hover {
+  background-color: var(--accent-dark);
+  box-shadow: 0 4px 15px rgba(255, 127, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--foreground); /* Or white if contrast is better */
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.btn-outline:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+
+/* Questionnaire Specific Styles */
+.questionnaire-option {
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--neutral-dark);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--background); /* Ensure it's not transparent */
+}
+
+.questionnaire-option:hover, .radio-option-hover { /* Combined hover for radio */
+  border-color: var(--accent);
+  background-color: var(--neutral-light); /* Soft Peach on hover */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.option-selected {
+  border-color: var(--accent) !important;
+  background-color: rgba(255, 127, 80, 0.15) !important; /* Coral accent with more opacity */
+  box-shadow: 0 4px 12px rgba(255, 127, 80, 0.2) !important;
+  transform: translateY(-2px); /* Keep this subtle lift */
+}
+
+.scale-button {
+  padding: 0.75rem;
+  height: 3.5rem; /* 56px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem; /* 8px */
+  border: 2px solid var(--neutral-dark);
+  transition: all 0.2s ease-in-out;
+  background-color: var(--background);
+  font-weight: 500;
+}
+
+.scale-button:hover {
+  border-color: var(--secondary); /* Soft blue border on hover */
+  background-color: var(--neutral-medium); /* Light green bg on hover */
+}
+
+.scale-button-selected {
+  border-color: var(--accent) !important;
+  background-color: var(--accent) !important;
+  color: white !important;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 127, 80, 0.3);
+}
+
+.scale-label {
+  font-size: 0.875rem; /* 14px */
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.scale-label-left {
+  text-align: left;
+}
+
+.scale-label-right {
+  text-align: right;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 8px; /* Thicker bar */
+  background-color: var(--neutral-medium); /* Light green background */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--primary); /* Golden yellow fill */
+  border-radius: 4px;
+  transition: width 0.5s ease-in-out;
+}
