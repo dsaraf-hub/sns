@@ -83,7 +83,7 @@ export default function Home() {
             { quote: "Sun &amp; Stories is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-neutral-dark/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-neutral-light/60 flex flex-col animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
-              <p className="italic mb-6 text-lg text-[var(--foreground)] flex-grow">"{testimonial.quote}"</p>
+              <p className="italic mb-6 text-lg text-[var(--foreground)] flex-grow">&quot;{testimonial.quote}&quot;</p>
               <div className="flex items-center mt-auto pt-4 border-t border-neutral-dark/10">
                 <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
                   {testimonial.initials}
