@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // Define question types
 type QuestionOption = {
@@ -393,7 +394,7 @@ export default function Questionnaire() {
         {header.subtitle && <p className="text-[var(--foreground)] opacity-70 mb-4">{header.subtitle}</p>}
         {imgUrl && (
           <div className="mt-4 w-full h-40 md:h-56 overflow-hidden rounded-xl shadow-md">
-            <img src={imgUrl} alt={header.title} className="w-full h-full object-cover" />
+            <Image src={imgUrl} alt={header.title} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
           </div>
         )}
       </div>

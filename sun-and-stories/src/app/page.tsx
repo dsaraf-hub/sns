@@ -30,7 +30,7 @@ export default function Home() {
             <span className="text-accent">Meaningful Connections</span><br /> Over Sunday Brunch
           </h1>
           <p className="text-lg sm:text-xl mb-8 max-w-xl text-[var(--foreground)] leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            In a world of fleeting scrolls, Sun & Stories offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
+            In a world of fleeting scrolls, Sun &amp; Stories offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
           </p>
           <div className="mb-10 text-lg italic text-[var(--foreground)] animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             "Because the best stories begin when strangers meet over a meal."
@@ -116,7 +116,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-[var(--foreground)] animate-fade-in-up">Ready to Join the Table?</h2>
           <p className="text-xl mb-10 max-w-2xl mx-auto text-[var(--foreground)] leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             Your seat at a table of new friends and fascinating conversations is just a few clicks away. 
-            Take 5 minutes for a chance at a Sunday you won't forget.
+            Take 5 minutes for a chance at a Sunday you won&apos;t forget.
           </p>
           <Link href="/questionnaire" className="btn btn-accent text-xl py-4 px-10 shadow-xl hover:shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             Apply for Sunday Brunch
