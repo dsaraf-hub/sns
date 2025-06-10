@@ -1,16 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import PlaceholderImage from '@/components/PlaceholderImage';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 // Animated Text Component for the hero title
 function AnimatedText() {
-  const phrases = [
+  const phrases = useMemo(() => [
     { first: "PATHS", second: "INTERSECT" },
     { first: "SOULS", second: "CONVERGE" },  
     { first: "HEARTS", second: "UNITE" }
-  ];
+  ], []);
   
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
