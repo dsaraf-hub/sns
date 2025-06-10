@@ -143,7 +143,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
             HOW DOES IT <em className="italic font-bold">WORK?</em>
           </h2>
-          <p className="text-lg mb-4 text-black">It's dining, made effortless.</p>
+          <p className="text-lg mb-4 text-black">It&apos;s dining, made effortless.</p>
           <p className="text-lg mb-16 text-black font-semibold">We plan everything, just show up!</p>
           
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-7xl mx-auto">
