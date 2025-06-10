@@ -1,71 +1,19 @@
-'use client';
-
 import Link from 'next/link';
 import PlaceholderImage from '@/components/PlaceholderImage';
-import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-      const nowIST = new Date(now.getTime() + istOffset);
-      
-      // Find next Sunday at noon IST
-      const nextSunday = new Date(nowIST);
-      const daysUntilSunday = (7 - nowIST.getDay()) % 7;
-      
-      if (daysUntilSunday === 0 && nowIST.getHours() >= 12) {
-        // If it's Sunday and past noon, get next Sunday
-        nextSunday.setDate(nowIST.getDate() + 7);
-      } else {
-        nextSunday.setDate(nowIST.getDate() + daysUntilSunday);
-      }
-      
-      nextSunday.setHours(12, 0, 0, 0); // Set to noon
-      
-      const difference = nextSunday.getTime() - nowIST.getTime();
-      
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((difference / 1000 / 60) % 60);
-        const seconds = Math.floor((difference / 1000) % 60);
-        
-        setTimeLeft({ days, hours, minutes, seconds });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <main className="min-h-screen flex flex-col bg-background">
-      {/* Header - Updated to match image */}
-      <header className="w-full py-4 px-6 md:px-10 flex justify-between items-center bg-[#fefefe] shadow-sm sticky top-0 z-50 border-b-2 border-gray-200">
-        <div className="flex items-center gap-4">
-          <div className="w-px h-8 bg-gray-300"></div>
-          <Link href="/" className="text-2xl font-serif font-light text-gray-800 transition hover:opacity-80 tracking-wide">
-            Table 4 Six
-          </Link>
-          <div className="w-px h-8 bg-gray-300"></div>
-        </div>
-        <nav className="hidden md:flex gap-8 items-center">
-          <Link href="/about" className="font-medium text-gray-700 hover:text-gray-900 transition">About</Link>
-          <Link href="/blog" className="font-medium text-gray-700 hover:text-gray-900 transition">Blog</Link>
-          <Link href="/login" className="font-medium text-gray-700 hover:text-gray-900 transition">Login</Link>
-          <Link href="/questionnaire" className="bg-[#d73502] hover:bg-[#b82d02] text-white font-medium px-4 py-2 rounded transition-colors">
-            Sign Up
+      {/* Header - Consistent with new theme */}
+      <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <Link href="/" className="text-2xl font-display font-semibold text-accent transition hover:opacity-80">
+          Table 4 Six
+        </Link>
+        <nav className="hidden md:flex gap-6 items-center">
+          <Link href="/about" className="font-medium text-gray-700 hover:text-accent transition">About</Link>
+          <Link href="/faq" className="font-medium text-gray-700 hover:text-accent transition">FAQ</Link>
+          <Link href="/questionnaire" className="btn btn-primary shadow-md hover:shadow-lg">
+            Join a Brunch
           </Link>
         </nav>
         <button className="md:hidden focus:outline-none p-2">
@@ -75,164 +23,51 @@ export default function Home() {
         </button>
       </header>
 
-      {/* Hero Section - Updated to match design */}
-      <section className="flex-1 flex flex-col justify-center items-center px-6 py-16 md:py-24 text-center bg-[#8b9556] min-h-screen text-black font-sans">
-        {/* Location Pin */}
-        <div className="flex items-center gap-2 mb-8 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span className="text-sm font-medium">Mumbai</span>
-        </div>
-
-        {/* Main Heading */}
-        <div className="mb-8">
-          <p className="text-lg font-medium mb-2 tracking-wide font-sans text-black">EVERY SUNDAY</p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black italic mb-6 leading-tight text-black font-sans tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-            STRANGERS MEET<br />
-            FOR BRUNCH.
+      {/* Hero Section - Themed */}
+      <section className="flex-1 flex flex-col md:flex-row animate-fade-in bg-neutral-light">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-start px-6 md:px-16 py-16 md:py-24 text-left">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight text-[var(--foreground)] animate-fade-in-up">
+            <span className="text-accent">Meaningful Connections</span><br /> Over Sunday Brunch
           </h1>
+          <p className="text-lg sm:text-xl mb-8 max-w-xl text-[var(--foreground)] leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            In a world of fleeting scrolls, Table 4 Six offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
+          </p>
+          <div className="mb-10 text-lg italic text-[var(--foreground)] animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            &quot;Because the best stories begin when strangers meet over a meal.&quot;
+          </div>
+          <Link href="/questionnaire" className="btn btn-accent text-lg py-3 px-8 shadow-xl hover:shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            Find Your Table
+          </Link>
         </div>
-
-        {/* Description */}
-        <p className="text-lg mb-8 max-w-lg leading-relaxed font-sans text-black">
-          Book your seat now and <strong>meet 6 strangers over brunch</strong>, all matched by our personality algorithm.
-        </p>
-
-        {/* Book Your Seat Button */}
-        <button className="bg-[#d73502] hover:bg-[#b82d02] text-white font-semibold py-4 px-12 rounded-full text-lg mb-12 transition-colors shadow-lg font-sans border-2 border-[#b82d02]">
-          Book Your Seat
-        </button>
-
-        {/* Countdown Timer */}
-        <div className="text-center">
-          <p className="text-lg font-medium mb-4 font-sans text-black">Next brunch in</p>
-          <div className="flex gap-4 justify-center">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
-                {timeLeft.days}
-              </div>
-              <p className="text-xs mt-1 font-sans text-black">days</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
-                {timeLeft.hours}
-              </div>
-              <p className="text-xs mt-1 font-sans text-black">hours</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
-                {timeLeft.minutes}
-              </div>
-              <p className="text-xs mt-1 font-sans text-black">mins</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
-                {timeLeft.seconds}
-              </div>
-              <p className="text-xs mt-1 font-sans text-black">secs</p>
-            </div>
+        <div className="w-full md:w-1/2 relative min-h-[350px] md:min-h-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="absolute inset-0 md:rounded-bl-[5rem] overflow-hidden">
+            <PlaceholderImage text="Warm Brunch Setting" bgColor="var(--primary)" textColor="var(--foreground)" />
+            <div className="absolute inset-0 bg-gradient-to-br from-neutral-light/30 via-transparent to-neutral-light/30"></div>
           </div>
         </div>
       </section>
 
-      {/* How It Works - Updated to horizontal layout */}
-      <section className="py-20 px-6 md:px-16 bg-[#f5f1eb]">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
-            HOW DOES IT <em className="italic font-bold">WORK?</em>
-          </h2>
-          <p className="text-lg mb-4 text-black">It's dining, made effortless.</p>
-          <p className="text-lg mb-16 text-black font-semibold">We plan everything, just show up!</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-7xl mx-auto">
-            {/* Step 1 */}
-            <div className="relative bg-[#ff9b47] rounded-2xl p-6 flex flex-col justify-center min-h-[300px] overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <PlaceholderImage text="People taking personality test" bgColor="transparent" textColor="transparent" />
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
-                  1
+      {/* How It Works - Themed */}
+      <section className="py-20 px-6 md:px-16 bg-neutral-medium/40">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-16 text-center text-[var(--foreground)]">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+            {[ 
+              { title: "Share Your Vibe", desc: "Fill out our quick, insightful questionnaire. It helps us understand your personality and what makes a great conversation for you.", imgText: "Questionnaire Icon", color: "var(--secondary)" },
+              { title: "We Curate the Table", desc: "Our team handpicks a small group of 6 individuals with complementary energies and a shared curiosity for connection.", imgText: "Matching Icon", color: "var(--accent)" },
+              { title: "Enjoy Your Sunday", desc: "Show up to a welcoming brunch spot, ready for good food, great company, and the simple joy of a Sunday well spent.", imgText: "Brunch Table Icon", color: "var(--primary)" }
+            ].map((item, index) => (
+              <div key={index} className="bg-background p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold mb-6 text-3xl shadow-md" style={{backgroundColor: item.color}}>
+                  {index + 1}
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-black">Take our quick personality test</h3>
-                <p className="text-black text-sm leading-relaxed">
-                  Complete a quick personality test and let our algorithm do the rest.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="relative bg-[#2dd4bf] rounded-2xl p-6 flex flex-col justify-center min-h-[300px] overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <PlaceholderImage text="Group of 5 people dining" bgColor="transparent" textColor="transparent" />
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
-                  2
+                <h3 className="text-2xl font-display font-semibold mb-3 text-[var(--foreground)]">{item.title}</h3>
+                <p className="text-[var(--foreground)] leading-relaxed mb-6 flex-grow">{item.desc}</p>
+                <div className="mt-auto h-40 w-full relative rounded-lg overflow-hidden shadow-inner">
+                  <PlaceholderImage text={item.imgText} bgColor={item.color} textColor={index === 1 ? "white" : "var(--foreground)"} />
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-black">We match you with 6 strangers</h3>
-                <p className="text-black text-sm leading-relaxed">
-                  Our algorithm selects 6 compatible humans for an engaging evening and meaningful conversations.
-                </p>
               </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative bg-[#f472b6] rounded-2xl p-6 flex flex-col justify-center min-h-[300px] overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <PlaceholderImage text="Restaurant table setup" bgColor="transparent" textColor="transparent" />
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
-                  3
-                </div>
-                <h3 className="text-lg font-bold mb-3 text-black">We book and organize</h3>
-                <p className="text-black text-sm leading-relaxed">
-                  We provide everything you need to have a great night: insights into your group and your restaurant details.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="relative bg-[#059669] rounded-2xl p-6 flex flex-col justify-center min-h-[300px] overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <PlaceholderImage text="People playing ice breaker games" bgColor="transparent" textColor="transparent" />
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
-                  4
-                </div>
-                <h3 className="text-lg font-bold mb-3 text-white">Show up, dive into a unique experience</h3>
-                <p className="text-white text-sm leading-relaxed">
-                  Break the ice with our game and create genuine connections with like-minded strangers.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="relative bg-[#ff9b47] rounded-2xl p-6 flex flex-col justify-center min-h-[300px] overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <PlaceholderImage text="People connecting and chatting" bgColor="transparent" textColor="transparent" />
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
-                  5
-                </div>
-                <h3 className="text-lg font-bold mb-3 text-black">Rate your experience, stay connected</h3>
-                <p className="text-black text-sm leading-relaxed">
-                  Choose who you want to stay connected with. If it's mutual, start chatting and keep the conversation flowing.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Sign Up Button */}
-          <div className="mt-16">
-            <Link href="/questionnaire" className="bg-[#d73502] hover:bg-[#b82d02] text-white font-semibold py-4 px-12 rounded-full text-lg transition-colors shadow-lg">
-              Sign Up Now
-            </Link>
+            ))}
           </div>
         </div>
       </section>
