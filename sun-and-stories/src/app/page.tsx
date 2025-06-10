@@ -4,6 +4,69 @@ import Link from 'next/link';
 import PlaceholderImage from '@/components/PlaceholderImage';
 import { useEffect, useState } from 'react';
 
+// Animated Text Component for the hero title
+function AnimatedText() {
+  const phrases = [
+    { first: "PATHS", second: "INTERSECT" },
+    { first: "SOULS", second: "CONVERGE" },  
+    { first: "HEARTS", second: "UNITE" }
+  ];
+  
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    const currentPhrase = phrases[currentPhraseIndex];
+    const fullText = `${currentPhrase.first} ${currentPhrase.second}`;
+    
+    if (isTyping) {
+      if (currentText.length < fullText.length) {
+        const timeout = setTimeout(() => {
+          setCurrentText(fullText.slice(0, currentText.length + 1));
+        }, 100); // Typing speed - faster
+        return () => clearTimeout(timeout);
+      } else {
+        // Finished typing, wait before starting to delete
+        const timeout = setTimeout(() => {
+          setIsTyping(false);
+        }, 4000); // Wait 4 seconds after typing completes
+        return () => clearTimeout(timeout);
+      }
+    } else {
+      if (currentText.length > 0) {
+        const timeout = setTimeout(() => {
+          setCurrentText(currentText.slice(0, -1));
+        }, 50); // Faster deleting speed
+        return () => clearTimeout(timeout);
+      } else {
+        // Finished deleting, move to next phrase
+        const timeout = setTimeout(() => {
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+          setIsTyping(true);
+        }, 200); // Shorter wait before next phrase
+        return () => clearTimeout(timeout);
+      }
+    }
+  }, [currentText, isTyping, currentPhraseIndex, phrases]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  return (
+    <span className="inline-block min-h-[1.2em]">
+      {currentText}
+      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>|</span>
+    </span>
+  );
+}
+
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -51,29 +114,19 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col bg-background">
-      {/* Header - Consistent with new theme */}
-      <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-[#fefefe] backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-serif font-light text-gray-800 transition hover:opacity-80 tracking-wide">
-          Table 4 Six
+      {/* Header - Centered Table 4 Six */}
+      <header className="w-full py-4 px-6 md:px-10 flex justify-center items-center bg-[#CD853F] sticky top-0 z-50 border-b-2 border-black">
+        <Link href="/" className="text-3xl font-serif font-bold text-white transition hover:opacity-90 tracking-wide" style={{ textShadow: '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000' }}>
+          <span className="italic font-extrabold">Table</span>
+          <span className="mx-2 text-2xl">4</span>
+          <span className="italic font-extrabold">Six</span>
         </Link>
-        <nav className="hidden md:flex gap-6 items-center">
-          <Link href="/about" className="font-medium text-gray-700 hover:text-accent transition">About</Link>
-          <Link href="/faq" className="font-medium text-gray-700 hover:text-accent transition">FAQ</Link>
-          <Link href="/questionnaire" className="btn btn-primary shadow-md hover:shadow-lg">
-            Join a Brunch
-          </Link>
-        </nav>
-        <button className="md:hidden focus:outline-none p-2">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-gray-600">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
       </header>
 
       {/* Hero Section - Updated to match design */}
-      <section className="flex-1 flex flex-col justify-center items-center px-6 py-16 md:py-24 text-center bg-[#8b9556] min-h-screen text-white font-sans">
+      <section className="flex-1 flex flex-col justify-center items-center px-6 py-16 md:py-24 text-center bg-[#8b9556] min-h-screen text-white font-sans border-b border-black">
         {/* Location Pin */}
-        <div className="flex items-center gap-2 mb-8 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800">
+        <div className="flex items-center gap-2 mb-8 px-4 py-2 bg-white rounded-full shadow-sm text-gray-800 border border-black">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
             <circle cx="12" cy="10" r="3"/>
@@ -85,45 +138,45 @@ export default function Home() {
         <div className="mb-8">
           <p className="text-lg font-medium mb-2 tracking-wide font-sans">EVERY SUNDAY</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold italic mb-6 leading-tight font-sans">
-            STRANGERS MEET<br />
-            FOR BRUNCH.
+            <AnimatedText /><br />
+            OVER BRUNCH.
           </h1>
         </div>
 
         {/* Description */}
         <p className="text-lg mb-8 max-w-lg leading-relaxed font-sans">
-          Book your seat now and <strong>meet 5 strangers over brunch</strong>, all matched by our personality algorithm.
+          Reserve your seat for an <strong>intellectual odyssey with 6 fascinating souls</strong>, curated by our algorithmic intuition for extraordinary conversations.
         </p>
 
         {/* Book Your Seat Button */}
-        <button className="bg-[#d73502] hover:bg-[#b82d02] text-white font-semibold py-4 px-12 rounded-full text-lg mb-12 transition-colors shadow-lg font-sans">
-          Book Your Seat
-        </button>
+        <Link href="/questionnaire" className="bg-[#CD853F] hover:bg-[#B87355] text-white font-semibold py-4 px-12 rounded-full text-lg mb-12 transition-colors shadow-lg font-sans border border-black inline-block">
+          Claim Your Chair
+        </Link>
 
         {/* Countdown Timer */}
         <div className="text-center">
           <p className="text-lg font-medium mb-4 font-sans">Next brunch in</p>
           <div className="flex gap-4 justify-center">
             <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
+              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border border-black">
                 {timeLeft.days}
               </div>
               <p className="text-xs mt-1 font-sans">days</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
+              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border border-black">
                 {timeLeft.hours}
               </div>
               <p className="text-xs mt-1 font-sans">hours</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
+              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border border-black">
                 {timeLeft.minutes}
               </div>
               <p className="text-xs mt-1 font-sans">mins</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border-2 border-gray-200">
+              <div className="w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center font-bold text-xl border border-black">
                 {timeLeft.seconds}
               </div>
               <p className="text-xs mt-1 font-sans">secs</p>
@@ -132,40 +185,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works - Themed */}
-      <section className="py-20 px-6 md:px-16 bg-neutral-medium/40">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-16 text-center text-[var(--foreground)]">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+      {/* How It Works - Updated to match image */}
+      <section className="py-20 px-6 md:px-16 bg-[#F5F5DC] border-b border-black">
+        <div className="max-w-7xl mx-auto text-center">
+                     <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+             HOW DOES IT <em className="italic">WORK?</em>
+           </h2>
+           <p className="text-xl mb-4 text-gray-800">A choreographed dance of minds and palates.</p>
+           <p className="text-xl mb-16 text-gray-800">We orchestrate the symphony, you simply arrive and immerse.</p>
+          
+          <div className="flex flex-col lg:flex-row gap-6 justify-center items-stretch mb-12">
             {[ 
-              { title: "Share Your Vibe", desc: "Fill out our quick, insightful questionnaire. It helps us understand your personality and what makes a great conversation for you.", imgText: "Questionnaire Icon", color: "var(--secondary)" },
-              { title: "We Curate the Table", desc: "Our team handpicks a small group of 6 individuals with complementary energies and a shared curiosity for connection.", imgText: "Matching Icon", color: "var(--accent)" },
-              { title: "Enjoy Your Sunday", desc: "Show up to a welcoming brunch spot, ready for good food, great company, and the simple joy of a Sunday well spent.", imgText: "Brunch Table Icon", color: "var(--primary)" }
+                             { 
+                 title: "Unveil your intellectual essence", 
+                 desc: "Complete our enigmatic psyche mapping—let the algorithm decode your conversational DNA.", 
+                 bgColor: "#F4A460",
+                 bgImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')"
+               },
+               { 
+                 title: "We curate your constellation", 
+                 desc: "Our digital oracle selects 5 kindred spirits—each a puzzle piece in your perfect conversational mosaic.", 
+                 bgColor: "#20B2AA",
+                 bgImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYiIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIj48Y2lyY2xlIGN4PSIxNSIgY3k9IjE1IiByPSI4IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2IpIi8+PC9zdmc+')"
+               },
+               { 
+                 title: "We craft the stage", 
+                 desc: "Every detail orchestrated: your venue of discovery awaits, complete with the sacred geometry of your gathering.", 
+                 bgColor: "#F08080",
+                 bgImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYyIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj48cG9seWdvbiBwb2ludHM9IjEwLDIgMTgsMTggMiwxOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjA4Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNjKSIvPjwvc3ZnPg==')"
+               },
+               { 
+                 title: "Enter the realm of connection", 
+                 desc: "Cross the threshold into meaningful discourse—where strangers transform into unexpected allies of the mind.", 
+                 bgColor: "#20B2AA",
+                 bgImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjI1Ij48cmVjdCB4PSIxMiIgeT0iMTIiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4yIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNkKSIvPjwvc3ZnPg==')"
+               },
+               { 
+                 title: "Weave your web of intrigue", 
+                 desc: "Choose your new conspirators of conversation. When the feeling is mutual, the dialogue continues beyond the table.", 
+                 bgColor: "#F4A460",
+                 bgImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjE1IiBoZWlnaHQ9IjE1Ij48Y2lyY2xlIGN4PSI3LjUiIGN5PSI3LjUiIHI9IjIiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii4xNSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjZSkiLz48L3N2Zz4=')"
+               }
             ].map((item, index) => (
-              <div key={index} className="bg-background p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
-                <div className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold mb-6 text-3xl shadow-md" style={{backgroundColor: item.color}}>
-                  {index + 1}
-                </div>
-                <h3 className="text-2xl font-display font-semibold mb-3 text-[var(--foreground)]">{item.title}</h3>
-                <p className="text-[var(--foreground)] leading-relaxed mb-6 flex-grow">{item.desc}</p>
-                <div className="mt-auto h-40 w-full relative rounded-lg overflow-hidden shadow-inner">
-                  <PlaceholderImage text={item.imgText} bgColor={item.color} textColor={index === 1 ? "white" : "var(--foreground)"} />
+              <div key={index} 
+                className="relative overflow-hidden rounded-3xl shadow-lg flex-1 min-h-[400px] max-w-[280px] mx-auto lg:mx-0 flex flex-col" 
+                style={{
+                  backgroundColor: item.bgColor,
+                  backgroundImage: item.bgImage,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}>
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="relative z-10 p-6 flex flex-col h-full">
+                  <div className="w-12 h-12 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 border-2 border-white/30">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-6 text-white leading-tight">{item.title}</h3>
+                  <p className="text-white/90 leading-relaxed text-base mt-auto">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
+          
+                     <button className="bg-[#CD853F] hover:bg-[#B87355] text-white font-bold py-4 px-12 rounded-full text-lg transition-colors shadow-lg border border-black">
+             Begin Your Journey
+           </button>
         </div>
       </section>
 
       {/* Testimonials section - Themed */}
-      <section className="py-20 px-6 md:px-16 bg-background">
+      <section className="py-20 px-6 md:px-16 bg-background border-b border-black">
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-center text-[var(--foreground)]">What Our Guests Say</h2>
         <p className="text-center mb-16 max-w-xl mx-auto text-lg text-[var(--foreground)] leading-relaxed">Real stories from a community built on connection.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {[ 
-            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-            { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
+            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn't have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
+            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can't wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+            { quote: "Table 4 Six is my new favorite Sunday ritual. It's the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-neutral-dark/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-neutral-light/60 flex flex-col animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
               <p className="italic mb-6 text-lg text-[var(--foreground)] flex-grow">&quot;{testimonial.quote}&quot;</p>
@@ -183,28 +279,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured in section - Subtle Theming */}
-      <section className="py-16 px-6 md:px-16 bg-neutral-medium/30">
-        <h3 className="text-center text-xl font-semibold mb-12 text-[var(--foreground)]">As Seen In</h3>
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 max-w-4xl mx-auto">
-          {[ "Mid-Day", "The Mumbai Foodie", "LBB Mumbai", "Homegrown" ].map((feature, index) => (
-            <div key={index} className="opacity-70 hover:opacity-100 transition h-10 flex items-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-              <PlaceholderImage text={feature} bgColor="transparent" textColor="var(--text-light)" className="font-medium text-lg"/>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Join CTA section - Themed */}
-      <section className="py-24 px-6 md:px-16 relative bg-gradient-to-br from-primary/20 via-neutral-light to-secondary/20">
+
+      {/* Join CTA section - Olive Green Theme */}
+      <section className="py-24 px-6 md:px-16 relative bg-[#8b9556] text-white border-b border-black">
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-[var(--foreground)] animate-fade-in-up">Ready to Join the Table?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto text-[var(--foreground)] leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Your seat at a table of new friends and fascinating conversations is just a few clicks away. 
-            Take 5 minutes for a chance at a Sunday you won&apos;t forget.
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white animate-fade-in-up">Ready to Enter the Circle?</h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto text-white/90 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            Your invitation to an exclusive gathering of curious minds awaits. 
+            Step into a realm where every conversation becomes an adventure of the intellect.
           </p>
-          <Link href="/questionnaire" className="btn btn-accent text-xl py-4 px-10 shadow-xl hover:shadow-2xl animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            Apply for Sunday Brunch
+          <Link href="/questionnaire" className="bg-[#CD853F] hover:bg-[#B87355] text-white font-bold py-4 px-12 rounded-full text-xl transition-colors shadow-xl hover:shadow-2xl animate-fade-in-up border border-black" style={{ animationDelay: '0.4s' }}>
+            Accept the Invitation
           </Link>
         </div>
       </section>
