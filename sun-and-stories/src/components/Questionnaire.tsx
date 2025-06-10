@@ -398,7 +398,7 @@ export default function Questionnaire() {
       {/* Header */}
       <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <Link href="/" className="text-2xl font-display font-semibold text-accent transition hover:opacity-80">
-          Sun & Stories
+          Table 4 Six
         </Link>
         <div className="text-sm font-medium text-gray-600">
           Question {currentQuestionIndex + 1} / {questions.length}

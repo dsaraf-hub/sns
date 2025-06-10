@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Sun & Stories | Connecting Strangers Over Sunday Brunch",
-  description: "Join a handpicked group of strangers for meaningful conversations over Sunday brunch in Mumbai.",
+  title: "Table 4 Six | Connecting Strangers Over Sunday Brunch",
+  description: "Join a handpicked group of strangers for meaningful conversations over Sunday brunch in Mumbai with Table 4 Six.",
 };
 
 export default function RootLayout({

@@ -28,10 +28,10 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row gap-10 items-center mb-16">
             <div className="md:w-1/2">
               <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-[var(--foreground)]">
-                About <span className="text-accent">Sun & Stories</span>
+                About <span className="text-accent">Table 4 Six</span>
               </h1>
               <p className="text-lg mb-6 text-[var(--foreground)] leading-relaxed">
-                In a world of constant scrolling, Sun &amp; Stories invites you to pause and connect. Each Sunday, we curate intimate tables where strangers become friends over a shared meal.
+                In a world of constant scrolling, Table 4 Six invites you to pause and connect. Each Sunday, we curate intimate tables where strangers become friends over a shared meal.
               </p>
             </div>
             <div className="md:w-1/2 w-full rounded-xl overflow-hidden shadow-lg relative">
@@ -52,7 +52,7 @@ export default function AboutPage() {
               What started as a small brunch among friends in 2023 sparked a movement: genuine connection over shared meals. We witnessed magic as strangers opened up, exchanged stories, and left with lasting friendships.
             </p>
             <p className="text-[var(--foreground)] leading-relaxed">
-              Sun &amp; Stories was born to recreate that magic every Sunday in Mumbai, handpicking six individuals to spark conversations that wouldn&apos;t happen otherwise.
+              Table 4 Six was born to recreate that magic every Sunday in Mumbai, handpicking six individuals to spark conversations that wouldn&apos;t happen otherwise.
             </p>
           </section>
           
@@ -90,7 +90,7 @@ export default function AboutPage() {
       {/* Footer */}
       <footer className="bg-neutral-medium/30 py-8 px-6 md:px-16 border-t border-neutral-dark/10">
         <div className="max-w-4xl mx-auto text-center text-sm text-[var(--foreground)]">
-          © {new Date().getFullYear()} Sun & Stories. Curating connections, one brunch at a time.
+          © {new Date().getFullYear()} Table 4 Six. Curating connections, one brunch at a time.
         </div>
       </footer>
     </div>

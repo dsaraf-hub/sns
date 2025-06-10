@@ -1,10 +1,10 @@
-# Sun & Stories
+# Table 4 Six
 
 A web platform designed to connect strangers over meaningful conversations during Sunday brunch in Mumbai.
 
 ## Website Overview
 
-Sun & Stories is a unique platform that brings together a handpicked group of strangers every Sunday to enjoy a shared meal and engage in meaningful conversations. The platform focuses on creating authentic connections without any agenda or networking pressure, allowing participants to unplug and connect over brunch.
+Table 4 Six is a unique platform that brings together a handpicked group of strangers every Sunday to enjoy a shared meal and engage in meaningful conversations. The platform focuses on creating authentic connections without any agenda or networking pressure, allowing participants to unplug and connect over brunch.
 
 ## Architecture
 
@@ -17,7 +17,7 @@ The platform is built using modern web technologies to ensure a seamless and eng
 
 ## UI Design
 
-The design of Sun & Stories embraces a warm color palette with golden tones, soft blues, and coral accents to create a welcoming and inviting atmosphere. Custom fonts are used to enhance the visual appeal and readability. The user interface is designed to be simple and intuitive, focusing on user-friendliness and accessibility.
+The design of Table 4 Six embraces a warm color palette with golden tones, soft blues, and coral accents to create a welcoming and inviting atmosphere. Custom fonts are used to enhance the visual appeal and readability. The user interface is designed to be simple and intuitive, focusing on user-friendliness and accessibility.
 
 ## Getting Started
 
@@ -30,8 +30,8 @@ The design of Sun & Stories embraces a warm color palette with golden tones, sof
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/sun-and-stories.git
-cd sun-and-stories
+git clone https://github.com/yourusername/table-4-six.git
+cd table-4-six
 ```
 
 2. Install dependencies:
@@ -53,7 +53,7 @@ yarn dev
 ## Project Structure
 
 ```
-sun-and-stories/
+table-4-six/
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx             # Homepage
@@ -76,4 +76,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For any inquiries, please contact hello@sunandstories.com
+For any inquiries, please contact hello@table4six.com
