@@ -7,7 +7,7 @@ export default function ConfirmationPage() {
       {/* Header */}
       <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <Link href="/" className="text-2xl font-display font-semibold text-accent hover:opacity-80 transition">
-          Sun & Stories
+          Table 4 Six
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
           <Link href="/" className="font-medium text-[var(--foreground)] hover:text-accent transition">Home</Link>
@@ -38,7 +38,7 @@ export default function ConfirmationPage() {
           </h1>
           
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-text-light leading-relaxed">
-            Thank you for filling out our questionnaire! We&apos;re thrilled you&apos;re interested in joining a Sun & Stories brunch. 
+            Thank you for filling out our questionnaire! We&apos;re thrilled you&apos;re interested in joining a Table 4 Six brunch. 
             Our team is now carefully reviewing responses to curate balanced and engaging groups.
           </p>
 
@@ -82,7 +82,7 @@ export default function ConfirmationPage() {
             <h2 className="text-2xl font-display font-semibold mb-6 text-secondary-dark text-center">Crafting Connections: Our Curation Philosophy</h2>
             <div className="space-y-4 text-text-light leading-relaxed">
               <p>
-                At Sun &amp; Stories, we believe the magic lies in the mix. We don&apos;t just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-gray-700">genuine connection and stimulating conversation</strong>.
+                At Table 4 Six, we believe the magic lies in the mix. We don&apos;t just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-gray-700">genuine connection and stimulating conversation</strong>.
               </p>
               <p>
                 Our goal is to create <strong className="font-medium text-gray-700">balanced groups with diverse perspectives</strong>. This means bringing together individuals who might not typically cross paths but who share an openness to new experiences and a desire for authentic interaction. We consider factors like your expressed interests, communication style, and what you hope to gain from the experience.
@@ -108,11 +108,11 @@ export default function ConfirmationPage() {
 
           <p className="text-md mb-8 text-text-light">
             If you don&apos;t hear from us for this Sunday, don&apos;t worry! We host brunches regularly and will keep your profile for future matching opportunities.
-            <br />For any questions, reach out to <a href="mailto:hello@sunandstories.com" className="text-accent hover:underline font-semibold">hello@sunandstories.com</a>.
+            <br />For any questions, reach out to <a href="mailto:hello@table4six.com" className="text-accent hover:underline font-semibold">hello@table4six.com</a>.
           </p>
           
           <Link href="/" className="btn btn-accent text-lg py-3 px-8 shadow-lg">
-            Explore More About Sun & Stories
+            Explore More About Table 4 Six
           </Link>
         </div>
       </main>
@@ -120,7 +120,7 @@ export default function ConfirmationPage() {
       {/* Footer */}
       <footer className="w-full py-8 px-6 text-center bg-background border-t border-neutral-dark/20">
         <p className="text-sm text-text-light">
-          © {new Date().getFullYear()} Sun & Stories. Curating connections, one brunch at a time.
+          © {new Date().getFullYear()} Table 4 Six. Curating connections, one brunch at a time.
         </p>
       </footer>
     </div>

@@ -4,8 +4,8 @@ import Image from 'next/image';
 export default function FAQPage() {
   const faqs = [
     {
-      question: "What exactly is Sun & Stories?",
-      answer: "Sun & Stories is a platform that connects strangers for Sunday brunch in Mumbai. Each Sunday, we create groups of 6 people who've never met before to enjoy delicious food and meaningful conversations in a carefully selected location."
+      question: "What exactly is Table 4 Six?",
+      answer: "Table 4 Six is a platform that connects strangers for Sunday brunch in Mumbai. Each Sunday, we create groups of 6 people who've never met before to enjoy delicious food and meaningful conversations in a carefully selected location."
     },
     {
       question: "How does the matching process work?",
@@ -25,7 +25,7 @@ export default function FAQPage() {
     },
     {
       question: "Is this a dating service?",
-      answer: "No, Sun & Stories is not a dating platform. We're focused on meaningful conversations and new friendships. While connections may naturally develop, our goal is to create a pressure-free environment for authentic interactions."
+      answer: "No, Table 4 Six is not a dating platform. We're focused on meaningful conversations and new friendships. While connections may naturally develop, our goal is to create a pressure-free environment for authentic interactions."
     },
     {
       question: "What kind of people typically attend?",
@@ -69,7 +69,7 @@ export default function FAQPage() {
         <div className="max-w-4xl mx-auto text-center">
           <Image src="https://images.unsplash.com/photo-1499960049225-af8013f47abc?q=80&w=2070&auto=format&fit=crop" alt="Brunch table" layout="fill" objectFit="cover" className="mx-auto rounded-xl shadow-md h-48 object-cover mb-6" />
           <h1 className="text-4xl md:text-5xl font-display font-bold text-[var(--foreground)] mb-4">Frequently Asked <span className="text-accent">Questions</span></h1>
-          <p className="text-lg text-[var(--foreground)]">Everything you need to know about Sun & Stories and our Sunday brunches.</p>
+          <p className="text-lg text-[var(--foreground)]">Everything you need to know about Table 4 Six and our Sunday brunches.</p>
         </div>
       </section>
       
@@ -94,7 +94,7 @@ export default function FAQPage() {
               If you didn&apos;t find the answer you were looking for, feel free to reach out to us directly. 
             </p>
             <div className="flex flex-col md:flex-row gap-6">
-              <a href="mailto:hello@sunandstories.com" className="btn btn-primary inline-flex items-center">
+              <a href="mailto:hello@table4six.com" className="btn btn-primary inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                 </svg>
@@ -115,7 +115,7 @@ export default function FAQPage() {
       <footer className="bg-neutral-medium/30 py-8 px-6 md:px-16 border-t border-neutral-dark/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-[var(--foreground)]">
           <div>
-            <div className="text-2xl font-display font-bold mb-4 text-accent">Sun & Stories</div>
+            <div className="text-2xl font-display font-bold mb-4 text-accent">Table 4 Six</div>
             <p className="mb-4 max-w-xs">Crafting authentic brunch experiences and connections in Mumbai.</p>
           </div>
           <div>
@@ -129,12 +129,12 @@ export default function FAQPage() {
           </div>
           <div>
             <h3 className="font-semibold mb-4 text-[var(--foreground)]">Contact</h3>
-            <p className="mb-2"><a href="mailto:hello@sunandstories.com" className="hover:text-accent transition">hello@sunandstories.com</a></p>
+            <p className="mb-2"><a href="mailto:hello@table4six.com" className="hover:text-accent transition">hello@table4six.com</a></p>
             <p>Mumbai, India</p>
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-neutral-dark/10 text-center text-xs text-[var(--foreground)]/70">
-          © {new Date().getFullYear()} Sun & Stories. Curating conversation, one brunch at a time.
+          © {new Date().getFullYear()} Table 4 Six. Curating conversation, one brunch at a time.
         </div>
       </footer>
     </div>

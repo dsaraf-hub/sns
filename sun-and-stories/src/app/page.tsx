@@ -7,7 +7,7 @@ export default function Home() {
       {/* Header - Consistent with new theme */}
       <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <Link href="/" className="text-2xl font-display font-semibold text-accent transition hover:opacity-80">
-          Sun & Stories
+          Table 4 Six
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
           <Link href="/about" className="font-medium text-gray-700 hover:text-accent transition">About</Link>
@@ -30,7 +30,7 @@ export default function Home() {
             <span className="text-accent">Meaningful Connections</span><br /> Over Sunday Brunch
           </h1>
           <p className="text-lg sm:text-xl mb-8 max-w-xl text-[var(--foreground)] leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            In a world of fleeting scrolls, Sun &amp; Stories offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
+            In a world of fleeting scrolls, Table 4 Six offers a pause: genuine conversations, new faces, and shared meals. Each Sunday, we gather handpicked strangers to unplug, connect, and discover the joy of the unexpected.
           </p>
           <div className="mb-10 text-lg italic text-[var(--foreground)] animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             &quot;Because the best stories begin when strangers meet over a meal.&quot;
@@ -80,7 +80,7 @@ export default function Home() {
           {[ 
             { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
             { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-            { quote: "Sun &amp; Stories is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
+            { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-neutral-dark/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-neutral-light/60 flex flex-col animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
               <p className="italic mb-6 text-lg text-[var(--foreground)] flex-grow">&quot;{testimonial.quote}&quot;</p>
@@ -128,7 +128,7 @@ export default function Home() {
       <footer className="bg-neutral-dark/5 py-12 px-6 md:px-16 border-t border-neutral-dark/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-[var(--foreground)]">
           <div>
-            <div className="text-2xl font-display font-semibold mb-4 text-accent">Sun & Stories</div>
+            <div className="text-2xl font-display font-semibold mb-4 text-accent">Table 4 Six</div>
             <p className="mb-4 max-w-xs leading-relaxed text-sm">
               Crafting memorable Sunday brunches that spark connection and conversation in the heart of Mumbai.
             </p>
@@ -156,7 +156,7 @@ export default function Home() {
             <h3 className="font-semibold text-lg mb-4 text-[var(--foreground)]">Get in Touch</h3>
             <p className="mb-2 flex items-center gap-2 text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <a href="mailto:hello@sunandstories.com" className="hover:text-accent transition">hello@sunandstories.com</a>
+              <a href="mailto:hello@table4six.com" className="hover:text-accent transition">hello@table4six.com</a>
             </p>
             <p className="flex items-center gap-2 text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -165,7 +165,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-10 pt-8 border-t border-neutral-dark/10 text-center text-xs text-[var(--foreground)]/80">
-          © {new Date().getFullYear()} Sun & Stories. Designed with ❤️ in Mumbai.
+          © {new Date().getFullYear()} Table 4 Six. Designed with ❤️ in Mumbai.
         </div>
       </footer>
     </main>
