@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState, useMemo } from 'react';
 
 // Animated Text Component for the hero title
@@ -95,13 +96,13 @@ export default function Home() {
           {/* Logo */}
           <div className="flex-1 flex justify-start">
             <Link href="/" className="flex items-center">
-              <img src="/logo.png" alt="Table 4 Six Logo" className="h-20 md:h-24 w-auto ml-4" />
+              <Image src="/logo.png" alt="Table 4 Six Logo" width={96} height={96} className="h-20 md:h-24 w-auto ml-4" />
             </Link>
           </div>
           
           {/* Center - Mumbai Skyline */}
           <div className="flex-1 justify-center hidden md:flex">
-            <img src="/mumbai-skyline.png" alt="Mumbai Skyline" className="h-16 md:h-20" />
+            <Image src="/mumbai-skyline.png" alt="Mumbai Skyline" width={240} height={80} className="h-16 md:h-20" />
           </div>
           
           {/* Navigation */}
@@ -191,7 +192,7 @@ export default function Home() {
           
           <div className="max-w-4xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             <p className="text-lg text-black leading-relaxed font-montserrat">
-              Our selection process involves a rigorous evaluation of each establishment's culinary excellence, 
+              Our selection process involves a rigorous evaluation of each establishment&apos;s culinary excellence, 
               ambiance, service quality, and overall dining experience. We consider factors such as ingredient 
               sourcing, chef expertise, menu diversity, dietary accommodations, and customer satisfaction ratings. 
               Every restaurant in our network has been personally visited by our team and meets our exacting standards 
@@ -234,7 +235,7 @@ export default function Home() {
               },
               { 
                 title: "Build lasting connections", 
-                desc: "Choose your conversation partners. When it's mutual, the dialogue continues beyond brunch.", 
+                desc: "Choose your conversation partners. When it&apos;s mutual, the dialogue continues beyond brunch.", 
                 bgColor: "#D2B48C"
               }
             ].map((item, index) => (
@@ -267,9 +268,9 @@ export default function Home() {
         <p className="text-center mb-16 max-w-xl mx-auto text-lg text-black leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {[ 
-            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn't have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can't wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-            { quote: "Table 4 Six is my new favorite Sunday ritual. It's the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
+            { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
+            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+            { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white flex flex-col animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
               <p className="italic mb-6 text-lg text-black flex-grow">&quot;{testimonial.quote}&quot;</p>
