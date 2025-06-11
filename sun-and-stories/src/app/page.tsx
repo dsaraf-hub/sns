@@ -268,7 +268,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {[ 
             { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn't have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can't wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+            { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
             { quote: "Table 4 Six is my new favorite Sunday ritual. It's the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
           ].map((testimonial, index) => (
             <div key={index} className="p-8 border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white flex flex-col animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
