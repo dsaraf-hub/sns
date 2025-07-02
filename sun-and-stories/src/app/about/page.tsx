@@ -45,7 +45,7 @@ export default function AboutPage() {
               <em className="italic">TABLE 4 SIX</em>
             </h1>
             <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Born from a simple question: "What if strangers could become friends over Sunday brunch?"
+              Born from a simple question: &ldquo;What if strangers could become friends over Sunday brunch?&rdquo;
             </p>
           </div>
 
@@ -57,15 +57,15 @@ export default function AboutPage() {
             
             <div className="space-y-6 text-lg leading-relaxed font-montserrat">
               <p className="text-white/90">
-                July 2023. Three college friends — <strong>Arjun</strong>, <strong>Priya</strong>, and <strong>Vikram</strong> — sat in their usual Bandra café, scrolling phones and complaining: "There's nothing interesting to do in Mumbai anymore."
+                July 2023. Three college friends — <strong>Arjun</strong>, <strong>Priya</strong>, and <strong>Vikram</strong> — sat in their usual Bandra café, scrolling phones and complaining: &ldquo;There&rsquo;s nothing interesting to do in Mumbai anymore.&rdquo;
               </p>
               
               <p className="text-white/90">
-                Arjun missed the spontaneous connections from his London days. Priya met fascinating people at work but never socially. Vikram wondered: "What if we could recreate that travel magic right here?"
+                Arjun missed the spontaneous connections from his London days. Priya met fascinating people at work but never socially. Vikram wondered: &ldquo;What if we could recreate that travel magic right here?&rdquo;
               </p>
               
               <p className="text-white/90">
-                The idea was simple: invite three strangers to Sunday brunch. They posted: <em>"Three strangers wanted for Sunday brunch. Come curious, leave connected."</em>
+                The idea was simple: invite three strangers to Sunday brunch. They posted: <em>&ldquo;Three strangers wanted for Sunday brunch. Come curious, leave connected.&rdquo;</em>
               </p>
               
               <p className="text-white/90">
@@ -88,14 +88,14 @@ export default function AboutPage() {
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-xl">
                 <h3 className="text-2xl font-bold mb-4 text-white">The Experience</h3>
                 <p className="text-white/80 leading-relaxed font-montserrat">
-                  Every Sunday, six carefully matched strangers gather at Mumbai's finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
+                  Every Sunday, six carefully matched strangers gather at Mumbai&rsquo;s finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
                 </p>
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-xl">
                 <h3 className="text-2xl font-bold mb-4 text-white">The Philosophy</h3>
                 <p className="text-white/80 leading-relaxed font-montserrat">
-                  We believe that Mumbai's greatest treasure isn't its skyline or its food — it's its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
+                  We believe that Mumbai&rsquo;s greatest treasure isn&rsquo;t its skyline or its food — it&rsquo;s its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
                 </p>
               </div>
             </div>
