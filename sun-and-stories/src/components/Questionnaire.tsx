@@ -306,13 +306,13 @@ export default function Questionnaire() {
     
     return (
       <div className={`w-full ${transitionClass}`}>
-        <h2 className="text-3xl md:text-4xl font-display font-semibold mb-10 text-center text-gray-700">{question}</h2>
+        <h2 className="text-3xl md:text-4xl font-display font-semibold mb-10 text-center text-white">{question}</h2>
         
         {type === 'text' || type === 'email' || type === 'instagram' ? (
           <input
             type={type === 'email' ? 'email' : 'text'}
             id={id}
-            className="w-full p-4 border-2 border-neutral-dark rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-accent text-lg shadow-sm placeholder:text-text-light" // Updated class
+            className="w-full p-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-lg shadow-sm"
             placeholder={placeholder}
             value={answers[id] || ''}
             onChange={(e) => handleInputChange(e.target.value)}
@@ -322,39 +322,43 @@ export default function Questionnaire() {
             {options.map((option) => (
               <div 
                 key={option.value}
-                className={`questionnaire-option flex items-center ${
-                  answers[id] === option.value ? 'option-selected' : 'radio-option-hover' // Apply radio-option-hover here
+                className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                  answers[id] === option.value 
+                    ? 'border-white bg-white/20 backdrop-blur-sm' 
+                    : 'border-white/30 bg-white/5 hover:bg-white/10'
                 }`}
                 onClick={() => handleInputChange(option.value)}
               >
                 <div 
                   className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 transition-all duration-200 ${
-                    answers[id] === option.value ? 'border-accent bg-accent' : 'border-neutral-dark bg-white'
+                    answers[id] === option.value ? 'border-white bg-white' : 'border-white/60 bg-transparent'
                   }`}
                 >
                   {answers[id] === option.value && (
-                    <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3.5 h-3.5 text-black" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   )}
                 </div>
-                <span className="text-lg font-medium">{option.label}</span>
+                <span className="text-lg font-medium text-white">{option.label}</span>
               </div>
             ))}
           </div>
         ) : type === 'scale' ? (
           <div>
             <div className="flex justify-between mb-3 px-1">
-              <span className="scale-label scale-label-left">{scaleLabels?.min || '1'}</span>
-              <span className="scale-label scale-label-right">{scaleLabels?.max || '10'}</span>
+              <span className="text-sm text-white/80 font-medium">{scaleLabels?.min || '1'}</span>
+              <span className="text-sm text-white/80 font-medium">{scaleLabels?.max || '10'}</span>
             </div>
             <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                 <button
                   key={value}
                   type="button"
-                  className={`scale-button ${
-                    parseInt(answers[id] || '0') === value ? 'scale-button-selected' : ''
+                  className={`h-12 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium ${
+                    parseInt(answers[id] || '0') === value 
+                      ? 'border-white bg-white text-black' 
+                      : 'border-white/30 bg-white/5 hover:bg-white/10 text-white'
                   }`}
                   onClick={() => handleInputChange(value.toString())}
                 >
@@ -373,7 +377,6 @@ export default function Questionnaire() {
     if (!header) return null;
     // Map section index to real image URLs
     const headerImages: Record<number, string> = {
-      0: 'https://images.unsplash.com/photo-1528150177503-8f58dc9669c8?q=80&w=2070&auto=format&fit=crop', // get to know you
       3: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=2070&auto=format&fit=crop', // budget/location oscafe
       5: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop', // personality vibes
       13: 'https://images.unsplash.com/photo-1549921296-3c9f59aa73e7?q=80&w=2070&auto=format&fit=crop', // emotional scale mood
@@ -382,11 +385,11 @@ export default function Questionnaire() {
     const imgUrl = headerImages[currentQuestionIndex];
     return (
       <div className="mb-8 text-center animate-fade-in-up">
-        <h2 className="text-2xl md:text-3xl font-display font-semibold text-[var(--foreground)] mb-2">{header.title}</h2>
-        {header.subtitle && <p className="text-[var(--foreground)] opacity-70 mb-4">{header.subtitle}</p>}
+        <h2 className="text-2xl md:text-3xl font-display font-semibold text-white mb-2">{header.title}</h2>
+        {header.subtitle && <p className="text-white/80 mb-4">{header.subtitle}</p>}
         {imgUrl && (
-          <div className="mt-4 w-full h-40 md:h-56 overflow-hidden rounded-xl shadow-md">
-            <Image src={imgUrl} alt={header.title} layout="fill" objectFit="cover" className="w-full h-full object-cover" />
+          <div className="mt-4 w-full h-40 md:h-56 overflow-hidden rounded-xl shadow-md relative border border-white/20">
+            <Image src={imgUrl} alt={header.title} fill style={{ objectFit: 'cover' }} className="w-full h-full object-cover" />
           </div>
         )}
       </div>
@@ -394,42 +397,53 @@ export default function Questionnaire() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background"> {/* White background for the page */}
-      {/* Header */}
-      <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-display font-semibold text-accent transition hover:opacity-80">
-          Table 4 Six
-        </Link>
-        <div className="text-sm font-medium text-gray-600">
-          Question {currentQuestionIndex + 1} / {questions.length}
+    <div className="min-h-screen flex flex-col">
+      {/* Header - Same style as landing page */}
+      <header className="w-full py-4 px-6 md:px-10 flex justify-between items-center bg-transparent sticky top-0 z-50">
+        <div className="flex-1 flex justify-start">
+          <Link href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-24 md:h-32 w-auto ml-4" />
+          </Link>
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="text-white font-medium bg-black/30 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full">
+            Question {currentQuestionIndex + 1} / {questions.length}
+          </div>
+        </div>
+        <div className="flex-1 flex justify-end">
+          <nav className="flex items-center text-white">
+            <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
+          </nav>
         </div>
       </header>
       
-      {/* Progress bar container (moved above main content area for better visibility) */}
-      <div className="w-full px-6 md:px-10 py-4">
-        <div className="progress-bar-container">
-          <div 
-            className="progress-bar-fill"
-            style={{ width: `${progress}%` }}
-          ></div>
+      {/* Progress bar container with landing page styling */}
+      <div className="w-full px-6 md:px-16 py-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white/20 backdrop-blur-sm rounded-full h-2 overflow-hidden">
+            <div 
+              className="bg-white h-full rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
         </div>
       </div>
 
-      {/* Questionnaire content area - Centered */}
-      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-        <div className="w-full max-w-2xl bg-background p-6 sm:p-8 md:p-10 rounded-xl shadow-xl">
+      {/* Questionnaire content area - Landing page style */}
+      <main className="flex-1 flex flex-col items-center justify-center p-6 md:p-16">
+        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl">
           {renderSectionHeader()}
           {renderQuestion()}
           
-          {/* Navigation buttons */}
-          <div className="flex justify-between mt-12 pt-6 border-t border-neutral-dark/20">
+          {/* Navigation buttons - Landing page style */}
+          <div className="flex justify-between mt-12 pt-6 border-t border-white/20">
             <button
               onClick={handlePreviousQuestion}
               disabled={currentQuestionIndex === 0}
-              className={`btn btn-outline ${
+              className={`bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-full transition-colors ${
                 currentQuestionIndex === 0
                   ? 'opacity-50 cursor-not-allowed'
-                  : 'hover:bg-accent-dark'
+                  : ''
               }`}
             >
               Back
@@ -442,7 +456,7 @@ export default function Questionnaire() {
                   : handleNextQuestion
               }
               disabled={loading || !answers[currentQuestion.id]}
-              className={`btn btn-accent ${
+              className={`bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-colors ${
                 !answers[currentQuestion.id]
                   ? 'opacity-60 cursor-not-allowed'
                   : '' // Normal hover state is handled by .btn-accent:hover
