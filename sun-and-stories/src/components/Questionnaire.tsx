@@ -467,7 +467,7 @@ export default function Questionnaire() {
     
     return (
       <div className={`w-full ${transitionClass}`}>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-semibold mb-8 md:mb-10 text-center text-white leading-tight px-2">{question}</h2>
+        <h2 className="text-2xl sm:text-3xl font-display font-semibold mb-6 md:mb-8 text-center text-white leading-tight px-2">{question}</h2>
         
         {type === 'text' || type === 'email' || type === 'instagram' ? (
           <input
@@ -479,11 +479,11 @@ export default function Questionnaire() {
             onChange={(e) => handleInputChange(e.target.value)}
           />
         ) : type === 'radio' ? (
-          <div className="space-y-3 md:space-y-4">
+          <div className="space-y-3">
             {options.map((option) => (
               <div 
                 key={option.value}
-                className={`flex items-center p-3 md:p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                   answers[id] === option.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm' 
                     : 'border-white/30 bg-white/5 hover:bg-white/10'
@@ -516,7 +516,7 @@ export default function Questionnaire() {
                 <button
                   key={value}
                   type="button"
-                  className={`h-10 md:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium text-sm md:text-base ${
+                  className={`h-10 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium text-sm md:text-base ${
                     parseInt(answers[id] || '0') === value 
                       ? 'border-white bg-white text-black' 
                       : 'border-white/30 bg-white/5 hover:bg-white/10 text-white'
@@ -533,7 +533,7 @@ export default function Questionnaire() {
             {ticketOptions.map((ticket) => (
               <div 
                 key={ticket.value}
-                className={`relative p-4 md:p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                className={`relative p-4 rounded-2xl border cursor-pointer transition-all duration-200 ${
                   answers[id] === ticket.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm shadow-lg' 
                     : 'border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/15'
@@ -588,7 +588,7 @@ export default function Questionnaire() {
             {restaurantOptions.map((restaurant) => (
               <div 
                 key={restaurant.value}
-                className={`relative p-4 md:p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                className={`relative p-4 rounded-2xl border cursor-pointer transition-all duration-200 ${
                   answers[id] === restaurant.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm shadow-lg' 
                     : 'border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/15'
@@ -695,8 +695,8 @@ export default function Questionnaire() {
       </div>
 
       {/* Questionnaire content area - Landing page style */}
-      <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-16">
-        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 rounded-2xl shadow-2xl">
           {renderSectionHeader()}
           {renderQuestion()}
           

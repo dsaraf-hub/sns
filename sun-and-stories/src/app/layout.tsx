@@ -5,12 +5,14 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
+  display: 'swap',
 });
 
 const greatVibes = Great_Vibes({
@@ -23,6 +25,7 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -37,9 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${playfair.variable} ${greatVibes.variable} ${montserrat.variable} antialiased`}
-      >
+      <body suppressHydrationWarning={true} className={`${inter.variable} ${playfair.variable} ${greatVibes.variable} ${montserrat.variable} antialiased`}>
         {children}
       </body>
     </html>

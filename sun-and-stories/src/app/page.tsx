@@ -129,6 +129,8 @@ export default function Home() {
             <nav className="flex items-center text-white">
               <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
               <div className="h-6 w-px bg-white/40 mx-2"></div>
+              <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
+              <div className="h-6 w-px bg-white/40 mx-2"></div>
               <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
                 Join Now
               </Link>
@@ -145,6 +147,13 @@ export default function Home() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
+                </Link>
+                <Link 
+                  href="/faq" 
+                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  FAQ
                 </Link>
                 <Link 
                   href="/questionnaire" 
