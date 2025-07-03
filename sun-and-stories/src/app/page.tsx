@@ -54,38 +54,7 @@ export default function Home() {
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const workSteps = [
-    {
-      number: 1,
-      title: "TELL US MORE ABOUT YOU",
-      description: "Take a quick personality quiz, so we can match you with a group that vibes with your energy.",
-      image: "/step1.jpg"
-    },
-    {
-      number: 2,
-      title: "PICK YOUR DINING DATE",
-      description: "Choose from curated dining events near you—because good conversations start over great meals!",
-      image: "/step2.jpg"
-    },
-    {
-      number: 3,
-      title: "GET MATCHED WITH LIKE-MINDED INDIVIDUALS",
-      description: "Our algorithm connects you with five others for an exciting social dining experience.",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop"
-    },
-    {
-      number: 4,
-      title: "DINE, LAUGH & CONNECT",
-      description: "Meet up, break the ice, and let the conversations (and connections) flow naturally!",
-      image: "/step4.jpg"
-    },
-    {
-      number: 5,
-      title: "STAY CONNECTED & KEEP STEPPING OUT",
-      description: "Choose who you want to stay connected with and keep the conversation flowing.",
-      image: "/step5.jpg"
-    }
-  ];
+
 
   useEffect(() => {
     const calculateTimeLeft = () => {

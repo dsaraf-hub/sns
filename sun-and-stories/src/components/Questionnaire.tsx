@@ -6,9 +6,42 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 // Razorpay type declarations
+interface RazorpayResponse {
+  payment_id: string;
+  order_id?: string;
+  signature?: string;
+}
+
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  image: string;
+  handler: (response: RazorpayResponse) => void;
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  notes: {
+    location: string;
+    restaurant_preference: string;
+  };
+  theme: {
+    color: string;
+  };
+  modal: {
+    ondismiss: () => void;
+  };
+}
+
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: new (options: RazorpayOptions) => {
+      open: () => void;
+    };
   }
 }
 
@@ -329,45 +362,46 @@ export default function Questionnaire() {
     */
   };
 
-  const initializePayment = () => {
-    const options = {
-      key: 'rzp_test_1234567890', // Replace with your Razorpay key
-      amount: 39900, // Amount in paise (₹399 = 39900 paise)
-      currency: 'INR',
-      name: 'Table 4 Six',
-      description: 'Table4Six Experience Ticket',
-      image: '/logo.png',
-      handler: function (response: any) {
-        console.log('Payment successful:', response);
-        // Handle successful payment
-        handlePaymentSuccess(response);
-      },
-      prefill: {
-        name: answers.name || '',
-        email: '', // Add email field to questionnaire if needed
-        contact: '', // Add phone field to questionnaire if needed
-      },
-      notes: {
-        location: answers.location || '',
-        restaurant_preference: answers.restaurant_preference || '',
-      },
-      theme: {
-        color: '#FF6B35'
-      },
-      modal: {
-        ondismiss: function() {
-          console.log('Payment cancelled');
-          setLoading(false);
-          // Optionally show a message or allow retry
-        }
-      }
-    };
+  // Commented out for demo - uncomment for actual Razorpay integration
+  // const initializePayment = () => {
+  //   const options: RazorpayOptions = {
+  //     key: 'rzp_test_1234567890', // Replace with your Razorpay key
+  //     amount: 39900, // Amount in paise (₹399 = 39900 paise)
+  //     currency: 'INR',
+  //     name: 'Table 4 Six',
+  //     description: 'Table4Six Experience Ticket',
+  //     image: '/logo.png',
+  //     handler: function (response: RazorpayResponse) {
+  //       console.log('Payment successful:', response);
+  //       // Handle successful payment
+  //       handlePaymentSuccess(response);
+  //     },
+  //     prefill: {
+  //       name: answers.name || '',
+  //       email: '', // Add email field to questionnaire if needed
+  //       contact: '', // Add phone field to questionnaire if needed
+  //     },
+  //     notes: {
+  //       location: answers.location || '',
+  //       restaurant_preference: answers.restaurant_preference || '',
+  //     },
+  //     theme: {
+  //       color: '#FF6B35'
+  //     },
+  //     modal: {
+  //       ondismiss: function() {
+  //         console.log('Payment cancelled');
+  //         setLoading(false);
+  //         // Optionally show a message or allow retry
+  //       }
+  //     }
+  //   };
 
-    const rzp = new (window as any).Razorpay(options);
-    rzp.open();
-  };
+  //   const rzp = new window.Razorpay(options);
+  //   rzp.open();
+  // };
 
-  const handlePaymentSuccess = (response: any) => {
+  const handlePaymentSuccess = (response: RazorpayResponse) => {
     console.log('Payment Response:', response);
     // Here you would typically:
     // 1. Verify payment on your backend

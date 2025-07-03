@@ -127,7 +127,7 @@ export default function FAQPage() {
               STILL HAVE <em className="italic">QUESTIONS?</em>
             </h2>
             <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Can't find what you're looking for? We're here to help you get started on your Table 4 Six journey.
+              Can&apos;t find what you&apos;re looking for? We&apos;re here to help you get started on your Table 4 Six journey.
             </p>
             
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
