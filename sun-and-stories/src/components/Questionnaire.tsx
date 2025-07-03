@@ -122,7 +122,7 @@ const questions: Question[] = [
       { value: 'cozy', label: 'A cozy soul wrapped in a blanket' },
       { value: 'spontaneous', label: 'Out making spontaneous plans' },
       { value: 'between', label: 'Somewhere in between' },
-      { value: 'playlist', label: 'depending on my playlist' },
+      { value: 'playlist', label: 'Depending on my playlist' },
     ],
     required: true,
   },
@@ -133,7 +133,7 @@ const questions: Question[] = [
     options: [
       { value: 'funny', label: 'The funny one' },
       { value: 'smart', label: 'The smart one' },
-      { value: 'observant', label: 'The observant one,' },
+      { value: 'observant', label: 'The observant one' },
       { value: 'unexpected', label: 'The unexpected twist' },
       { value: 'wildcard', label: 'Honestly, a wildcard' },
     ],
@@ -145,9 +145,9 @@ const questions: Question[] = [
     question: 'If your life was a fashion statement, it would be:',
     options: [
       { value: 'effortless', label: 'Effortless linen with a bold scent' },
-      { value: 'vintage', label: 'Vintage tee with new sneakers,' },
-      { value: 'all_black', label: 'All black but emotionally colorful,' },
-      { value: 'cozy', label: 'Cozy hoodie, deep thinker mode,' },
+      { value: 'vintage', label: 'Vintage tee with new sneakers' },
+      { value: 'all_black', label: 'All black but emotionally colorful' },
+      { value: 'cozy', label: 'Cozy hoodie, deep thinker mode' },
       { value: 'tailored', label: 'Tailored chaos — unpredictable but always works' },
     ],
     required: true,
@@ -159,7 +159,7 @@ const questions: Question[] = [
     options: [
       { value: 'indulgent', label: 'Loaded and indulgent (pancakes, waffles, mimosas)' },
       { value: 'fresh', label: 'Fresh and mindful (greens, juices, balance)' },
-      { value: 'comfort', label: 'Classic comfort food (eggs, toast, coffee),' },
+      { value: 'comfort', label: 'Classic comfort food (eggs, toast, coffee)' },
       { value: 'surprise', label: 'A bit of everything – I like surprises' },
     ],
     required: true,
@@ -188,7 +188,7 @@ const questions: Question[] = [
   {
     id: 'humor',
     type: 'radio',
-    question: 'How important is humour in your life?',
+    question: 'How important is humor in your life?',
     options: [
       { value: 'everything', label: 'It\'s everything — it\'s how I connect' },
       { value: 'quiet', label: 'I enjoy it, but I\'m more on the quiet side' },
@@ -467,23 +467,23 @@ export default function Questionnaire() {
     
     return (
       <div className={`w-full ${transitionClass}`}>
-        <h2 className="text-3xl md:text-4xl font-display font-semibold mb-10 text-center text-white">{question}</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-semibold mb-8 md:mb-10 text-center text-white leading-tight px-2">{question}</h2>
         
         {type === 'text' || type === 'email' || type === 'instagram' ? (
           <input
             type={type === 'email' ? 'email' : 'text'}
             id={id}
-            className="w-full p-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-lg shadow-sm"
+            className="w-full p-3 md:p-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-base md:text-lg shadow-sm"
             placeholder={placeholder}
             value={answers[id] || ''}
             onChange={(e) => handleInputChange(e.target.value)}
           />
         ) : type === 'radio' ? (
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {options.map((option) => (
               <div 
                 key={option.value}
-                className={`flex items-center p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                className={`flex items-center p-3 md:p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
                   answers[id] === option.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm' 
                     : 'border-white/30 bg-white/5 hover:bg-white/10'
@@ -491,32 +491,32 @@ export default function Questionnaire() {
                 onClick={() => handleInputChange(option.value)}
               >
                 <div 
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 transition-all duration-200 ${
+                  className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0 transition-all duration-200 ${
                     answers[id] === option.value ? 'border-white bg-white' : 'border-white/60 bg-transparent'
                   }`}
                 >
                   {answers[id] === option.value && (
-                    <svg className="w-3.5 h-3.5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-black" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   )}
                 </div>
-                <span className="text-lg font-medium text-white">{option.label}</span>
+                <span className="text-base md:text-lg font-medium text-white leading-relaxed">{option.label}</span>
               </div>
             ))}
           </div>
         ) : type === 'scale' ? (
           <div>
-            <div className="flex justify-between mb-3 px-1">
-              <span className="text-sm text-white/80 font-medium">{scaleLabels?.min || '1'}</span>
-              <span className="text-sm text-white/80 font-medium">{scaleLabels?.max || '10'}</span>
+            <div className="flex justify-between mb-4 px-1">
+              <span className="text-sm md:text-base text-white/80 font-medium">{scaleLabels?.min || '1'}</span>
+              <span className="text-sm md:text-base text-white/80 font-medium">{scaleLabels?.max || '10'}</span>
             </div>
-            <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+            <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 md:gap-3">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                 <button
                   key={value}
                   type="button"
-                  className={`h-12 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium ${
+                  className={`h-10 md:h-12 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium text-sm md:text-base ${
                     parseInt(answers[id] || '0') === value 
                       ? 'border-white bg-white text-black' 
                       : 'border-white/30 bg-white/5 hover:bg-white/10 text-white'
@@ -533,7 +533,7 @@ export default function Questionnaire() {
             {ticketOptions.map((ticket) => (
               <div 
                 key={ticket.value}
-                className={`relative p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                className={`relative p-4 md:p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
                   answers[id] === ticket.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm shadow-lg' 
                     : 'border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/15'
@@ -562,20 +562,20 @@ export default function Questionnaire() {
 
                 {/* Ticket content */}
                 <div className="text-white">
-                  <h3 className="text-2xl font-bold mb-3">{ticket.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3">{ticket.title}</h3>
                   
                   <div className="flex items-baseline gap-3 mb-4">
-                    <span className="text-4xl font-bold">{ticket.price}</span>
+                    <span className="text-3xl md:text-4xl font-bold">{ticket.price}</span>
                     {ticket.originalPrice && (
-                      <span className="text-lg text-white/70 line-through">{ticket.originalPrice}</span>
+                      <span className="text-base md:text-lg text-white/70 line-through">{ticket.originalPrice}</span>
                     )}
                   </div>
                   
                   <div className="space-y-2">
                     {ticket.description.map((desc, index) => (
                       <div key={index} className="flex items-start gap-2">
-                        <span className="text-white/90 text-lg">•</span>
-                        <span className="text-white/90 text-lg leading-relaxed">{desc}</span>
+                        <span className="text-white/90 text-base md:text-lg flex-shrink-0">•</span>
+                        <span className="text-white/90 text-base md:text-lg leading-relaxed">{desc}</span>
                       </div>
                     ))}
                   </div>
@@ -588,7 +588,7 @@ export default function Questionnaire() {
             {restaurantOptions.map((restaurant) => (
               <div 
                 key={restaurant.value}
-                className={`relative p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                className={`relative p-4 md:p-6 rounded-2xl border cursor-pointer transition-all duration-200 ${
                   answers[id] === restaurant.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm shadow-lg' 
                     : 'border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/15'
@@ -625,17 +625,17 @@ export default function Questionnaire() {
 
                 {/* Restaurant content */}
                 <div className="text-white">
-                  <h3 className="text-2xl font-bold mb-3">{restaurant.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3">{restaurant.title}</h3>
                   
                   <div className="flex items-baseline gap-3 mb-4">
-                    <span className="text-lg font-bold">{restaurant.price}</span>
+                    <span className="text-base md:text-lg font-bold">{restaurant.price}</span>
                   </div>
                   
                   <div className="space-y-2">
                     {restaurant.description.map((desc, index) => (
                       <div key={index} className="flex items-start gap-2">
-                        <span className="text-white/90 text-lg">✓</span>
-                        <span className="text-white/90 text-lg leading-relaxed">{desc}</span>
+                        <span className="text-white/90 text-base md:text-lg flex-shrink-0">✓</span>
+                        <span className="text-white/90 text-base md:text-lg leading-relaxed">{desc}</span>
                       </div>
                     ))}
                   </div>
@@ -659,11 +659,11 @@ export default function Questionnaire() {
     };
     const imgUrl = headerImages[currentQuestionIndex];
     return (
-      <div className="mb-8 text-center animate-fade-in-up">
-        <h2 className="text-2xl md:text-3xl font-display font-semibold text-white mb-2">{header.title}</h2>
-        {header.subtitle && <p className="text-white/80 mb-4">{header.subtitle}</p>}
+      <div className="mb-6 md:mb-8 text-center animate-fade-in-up">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-display font-semibold text-white mb-2 px-2">{header.title}</h2>
+        {header.subtitle && <p className="text-white/80 mb-4 text-sm md:text-base px-2">{header.subtitle}</p>}
         {imgUrl && (
-          <div className="mt-4 w-full h-40 md:h-56 overflow-hidden rounded-xl shadow-md relative border border-white/20">
+          <div className="mt-4 w-full h-32 md:h-40 lg:h-56 overflow-hidden rounded-xl shadow-md relative border border-white/20">
             <Image src={imgUrl} alt={header.title} fill style={{ objectFit: 'cover' }} className="w-full h-full object-cover" />
           </div>
         )}
@@ -674,16 +674,16 @@ export default function Questionnaire() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header - Centered logo design */}
-      <header className="w-full py-6 px-6 md:px-10 flex flex-col items-center bg-transparent">
-        <div className="mb-4">
+      <header className="w-full py-4 md:py-6 px-4 md:px-10 flex flex-col items-center bg-transparent">
+        <div className="mb-3 md:mb-4">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-24 md:h-32 w-auto" />
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-20 md:h-24 lg:h-32 w-auto" />
           </Link>
         </div>
       </header>
       
       {/* Progress bar container with landing page styling */}
-      <div className="w-full px-6 md:px-16 py-6">
+      <div className="w-full px-4 md:px-16 py-4 md:py-6">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white/20 backdrop-blur-sm rounded-full h-2 overflow-hidden">
             <div 
@@ -695,17 +695,17 @@ export default function Questionnaire() {
       </div>
 
       {/* Questionnaire content area - Landing page style */}
-      <main className="flex-1 flex flex-col items-center justify-center p-6 md:p-16">
-        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-16">
+        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl">
           {renderSectionHeader()}
           {renderQuestion()}
           
           {/* Navigation buttons - Landing page style */}
-          <div className="flex justify-between mt-12 pt-6 border-t border-white/20">
+          <div className="flex justify-between mt-8 md:mt-12 pt-4 md:pt-6 border-t border-white/20 gap-4">
             <button
               onClick={handlePreviousQuestion}
               disabled={currentQuestionIndex === 0}
-              className={`bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-full transition-colors ${
+              className={`bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-full transition-colors text-sm md:text-base ${
                 currentQuestionIndex === 0
                   ? 'opacity-50 cursor-not-allowed'
                   : ''
@@ -721,7 +721,7 @@ export default function Questionnaire() {
                   : handleNextQuestion
               }
               disabled={loading || !answers[currentQuestion.id]}
-              className={`bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-colors ${
+              className={`bg-white text-black hover:bg-white/90 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-full transition-colors text-sm md:text-base ${
                 !answers[currentQuestion.id]
                   ? 'opacity-60 cursor-not-allowed'
                   : '' // Normal hover state is handled by .btn-accent:hover
@@ -748,26 +748,26 @@ export default function Questionnaire() {
       {/* Payment Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-black/30 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl shadow-2xl max-w-md w-full">
+          <div className="bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/30">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-white">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-2">Complete Your Payment</h3>
-              <p className="text-white/80 mb-6">Secure your Table4Six experience</p>
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Complete Your Payment</h3>
+              <p className="text-white/80 mb-6 text-sm md:text-base">Secure your Table4Six experience</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-xl mb-6 border border-white/20">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-white/80">Table4Six Ticket</span>
-                <span className="font-bold">₹399</span>
+                <span className="text-white/80 text-sm md:text-base">Table4Six Ticket</span>
+                <span className="font-bold text-sm md:text-base">₹399</span>
               </div>
-              <div className="flex justify-between items-center text-sm text-white/60">
+              <div className="flex justify-between items-center text-xs md:text-sm text-white/60">
                 <span>Location: {answers.location === 'sobo' ? 'SoBo' : 'West Mumbai'}</span>
               </div>
-              <div className="flex justify-between items-center text-sm text-white/60">
+              <div className="flex justify-between items-center text-xs md:text-sm text-white/60">
                 <span>Restaurant: {answers.restaurant_preference?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
               </div>
             </div>
@@ -782,7 +782,7 @@ export default function Questionnaire() {
                   }, 2000);
                 }}
                 disabled={loading}
-                className="w-full bg-white text-black hover:bg-white/90 font-semibold py-3 px-6 rounded-full transition-all"
+                className="w-full bg-white text-black hover:bg-white/90 font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
               >
                 {loading ? 'Processing Payment...' : 'Pay ₹399'}
               </button>
@@ -792,7 +792,7 @@ export default function Questionnaire() {
                   setShowPaymentModal(false);
                   setLoading(false);
                 }}
-                className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-6 rounded-full transition-all"
+                className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
               >
                 Cancel
               </button>
