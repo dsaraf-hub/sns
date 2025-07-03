@@ -11,26 +11,15 @@ export default function AboutPage() {
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
     }}>
-      {/* Header - Same style as landing page */}
-      <header className="w-full py-4 px-6 md:px-10 flex justify-between items-center bg-transparent sticky top-0 z-50">
-        <div className="flex-1 flex justify-start">
+      {/* Header - Centered logo design */}
+      <header className="w-full py-6 px-6 md:px-10 flex flex-col items-center bg-transparent sticky top-0 z-50">
+        <div className="mb-4">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-24 md:h-32 w-auto ml-4" />
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-24 md:h-32 w-auto" />
           </Link>
         </div>
-        <div className="flex-1 flex justify-center">
-          <div className="text-white font-medium bg-black/30 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full">
-            Our Story
-          </div>
-        </div>
-        <div className="flex-1 flex justify-end">
-          <nav className="flex items-center text-white">
-            <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
-            <div className="h-6 w-px bg-white/40 mx-2"></div>
-            <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
-              Join Now
-            </Link>
-          </nav>
+        <div className="text-white font-medium bg-black/30 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full">
+          Our Story
         </div>
       </header>
       
