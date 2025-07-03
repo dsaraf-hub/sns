@@ -53,10 +53,15 @@ export default function Home() {
   });
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     const calculateTimeLeft = () => {
       const now = new Date();
       const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
@@ -91,7 +96,7 @@ export default function Home() {
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isClient]);
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -193,6 +198,7 @@ export default function Home() {
           {/* Countdown Timer */}
           <div className="text-center px-4">
             <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch in</p>
+            {isClient ? (
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-black/30 backdrop-blur-sm border border-white/20 text-white rounded-full flex items-center justify-center font-bold text-lg md:text-xl font-montserrat">
@@ -219,6 +225,7 @@ export default function Home() {
                 <p className="text-xs mt-1 font-montserrat">secs</p>
               </div>
             </div>
+            ) : null}
           </div>
         </section>
       </div>
@@ -249,7 +256,7 @@ export default function Home() {
 
         {/* How It Works - Redesigned with elegant cards */}
         <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
-          <div className="max-w-7xl mx-auto text-center">
+          <div className="max-w-7xl mx-auto text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW DOES IT <em className="italic">WORK?</em>
             </h2>
@@ -314,7 +321,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="text-center text-white/60 text-sm mt-4">Swipe to see all steps</p>
+              {/* <p className="text-center text-white/60 text-sm mt-4">Swipe to see all steps</p> */}
             </div>
 
             {/* Desktop Grid */}
@@ -449,7 +456,7 @@ export default function Home() {
             <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
             
             {/* Mobile Carousel */}
-            <div className="md:hidden">
+            <div className="md:hidden relative z-10">
               <div className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
                 {[ 
                   { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
