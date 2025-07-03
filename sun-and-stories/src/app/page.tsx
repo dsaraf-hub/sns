@@ -185,16 +185,16 @@ export default function Home() {
         </header>
 
         {/* Hero Section - Updated to match design */}
-        <section className="flex-1 flex flex-col justify-center items-center px-4 md:px-6 py-8 md:py-16 text-center text-white font-sans">
+        <section className="flex-1 flex flex-col justify-center items-center px-4 md:px-6 py-4 md:py-8 text-center text-white font-sans">
           {/* Mobile Logo - centered above Mumbai */}
-          <div className="md:hidden mb-8">
+          <div className="md:hidden mb-6">
             <Link href="/" className="flex items-center justify-center">
-              <Image src="/logo.png" alt="Table 4 Six Logo" width={160} height={160} className="h-28 w-auto" />
+              <Image src="/logo.png" alt="Table 4 Six Logo" width={160} height={160} className="h-24 w-auto" />
             </Link>
           </div>
 
           {/* Location Pin */}
-          <div className="flex items-center gap-2 mb-8 px-4 py-2 bg-black/30 backdrop-blur-sm border border-white/20 rounded-full shadow-sm text-white">
+          <div className="flex items-center gap-2 mb-6 px-4 py-2 bg-black/30 backdrop-blur-sm border border-white/20 rounded-full shadow-sm text-white">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
@@ -203,27 +203,27 @@ export default function Home() {
           </div>
 
           {/* Main Heading */}
-          <div className="mb-6 md:mb-8">
+          <div className="mb-4 md:mb-6">
             <p className="text-base md:text-lg font-medium mb-2 tracking-wide font-montserrat">EVERY SUNDAY</p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold italic mb-4 md:mb-6 leading-tight text-shadow-lg px-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold italic mb-3 md:mb-4 leading-tight text-shadow-lg px-2">
               <AnimatedText /><br />
               <span style={{ fontFamily: 'Times New Roman, serif' }}>MEET FOR BRUNCH.</span>
             </h1>
           </div>
 
           {/* Description */}
-          <p className="text-sm md:text-base mb-6 md:mb-8 max-w-2xl leading-relaxed font-montserrat text-shadow px-4">
+          <p className="text-sm md:text-base mb-4 md:mb-6 max-w-2xl leading-relaxed font-montserrat text-shadow px-4">
             Six intriguing individuals. One <strong>unforgettable</strong> brunch.
           </p>
 
           {/* Book Your Seat Button */}
-          <Link href="/questionnaire" className="bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 text-white font-semibold py-3 px-6 md:px-8 rounded-full text-sm md:text-base mb-8 md:mb-12 transition-colors shadow-sm inline-block font-montserrat">
+          <Link href="/questionnaire" className="bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 text-white font-semibold py-3 px-6 md:px-8 rounded-full text-sm md:text-base mb-6 md:mb-8 transition-colors shadow-sm inline-block font-montserrat">
             Join the Table
           </Link>
 
           {/* Countdown Timer */}
           <div className="text-center px-4">
-            <p className="text-base md:text-lg font-medium mb-4 font-montserrat">Next brunch in</p>
+            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch in</p>
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-black/30 backdrop-blur-sm border border-white/20 text-white rounded-full flex items-center justify-center font-bold text-lg md:text-xl font-montserrat">
@@ -279,7 +279,7 @@ export default function Home() {
         </section>
 
         {/* How It Works - Redesigned with elegant cards */}
-        <section className="py-12 md:py-20 px-4 md:px-16 texture-section">
+        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW DOES IT <em className="italic">WORK?</em>
@@ -290,8 +290,8 @@ export default function Home() {
             {/* Step Cards - Matching the design */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
               {/* Step 1 */}
-              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                <div className="relative h-48 overflow-hidden">
+              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.3s' }}>
+                <div className="relative h-64 overflow-hidden">
                   <Image 
                     src="/step1.jpg" 
                     alt="Tell us more about you"
@@ -302,19 +302,19 @@ export default function Home() {
                     1
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="p-3">
                   <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
                     TELL US MORE<br />ABOUT YOU
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-sm leading-relaxed">
                     Take a quick personality quiz, so we can match you with a group that vibes with your energy.
                   </p>
                 </div>
               </div>
 
               {/* Step 2 */}
-              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <div className="relative h-48 overflow-hidden">
+              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.4s' }}>
+                <div className="relative h-64 overflow-hidden">
                   <Image 
                     src="/step2.jpg" 
                     alt="Pick your dining date"
@@ -325,19 +325,19 @@ export default function Home() {
                     2
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="p-3">
                   <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
                     PICK YOUR DINING DATE
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-sm leading-relaxed">
                     Choose from curated dining events near you—because good conversations start over great meals!
                   </p>
                 </div>
               </div>
 
               {/* Step 3 */}
-              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                <div className="relative h-48 overflow-hidden">
+              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.5s' }}>
+                <div className="relative h-64 overflow-hidden">
                   <Image 
                     src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop" 
                     alt="Get matched with like-minded individuals"
@@ -348,19 +348,19 @@ export default function Home() {
                     3
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="p-3">
                   <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
                     GET MATCHED WITH LIKE-<br />MINDED INDIVIDUALS
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-sm leading-relaxed">
                     Our algorithm connects you with five others for an exciting social dining experience.
                   </p>
                 </div>
               </div>
 
               {/* Step 4 */}
-              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                <div className="relative h-48 overflow-hidden">
+              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.6s' }}>
+                <div className="relative h-64 overflow-hidden">
                   <Image 
                     src="/step4.jpg" 
                     alt="Dine, laugh & connect"
@@ -371,19 +371,19 @@ export default function Home() {
                     4
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="p-3">
                   <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
                     DINE, LAUGH & CONNECT
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-sm leading-relaxed">
                     Meet up, break the ice, and let the conversations (and connections) flow naturally!
                   </p>
                 </div>
               </div>
 
               {/* Step 5 */}
-              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-                <div className="relative h-48 overflow-hidden">
+              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.7s' }}>
+                <div className="relative h-64 overflow-hidden">
                   <Image 
                     src="/step5.jpg" 
                     alt="Stay connected & keep stepping out"
@@ -394,23 +394,27 @@ export default function Home() {
                     5
                   </div>
                 </div>
-                <div className="p-4">
+                <div className="p-3">
                   <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
                     STAY CONNECTED<br />& KEEP STEPPING OUT
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-sm leading-relaxed">
                     Choose who you want to stay connected with and keep the conversation flowing.
                   </p>
                 </div>
               </div>
             </div>
           </div>
+          {/* Gradient fade at the bottom for smooth transition */}
+          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-100" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
         </section>
 
         {/* Sections with background image */}
         <div className="hero-section-alt">
           {/* Testimonials section - Updated for background */}
-          <section className="py-12 md:py-20 px-4 md:px-16">
+          <section className="py-12 md:py-20 px-4 md:px-16 relative">
+            {/* Top fade overlay for smooth transition from above section */}
+            <div className="pointer-events-none absolute left-0 right-0 top-0 h-40 md:h-140" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
             <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
             
