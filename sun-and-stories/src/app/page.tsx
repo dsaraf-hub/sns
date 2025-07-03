@@ -54,38 +54,7 @@ export default function Home() {
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const workSteps = [
-    {
-      number: 1,
-      title: "TELL US MORE ABOUT YOU",
-      description: "Take a quick personality quiz, so we can match you with a group that vibes with your energy.",
-      image: "/step1.jpg"
-    },
-    {
-      number: 2,
-      title: "PICK YOUR DINING DATE",
-      description: "Choose from curated dining events near you—because good conversations start over great meals!",
-      image: "/step2.jpg"
-    },
-    {
-      number: 3,
-      title: "GET MATCHED WITH LIKE-MINDED INDIVIDUALS",
-      description: "Our algorithm connects you with five others for an exciting social dining experience.",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop"
-    },
-    {
-      number: 4,
-      title: "DINE, LAUGH & CONNECT",
-      description: "Meet up, break the ice, and let the conversations (and connections) flow naturally!",
-      image: "/step4.jpg"
-    },
-    {
-      number: 5,
-      title: "STAY CONNECTED & KEEP STEPPING OUT",
-      description: "Choose who you want to stay connected with and keep the conversation flowing.",
-      image: "/step5.jpg"
-    }
-  ];
+
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -287,8 +256,69 @@ export default function Home() {
             <p className="text-base md:text-xl mb-3 md:mb-4 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
             <p className="text-base md:text-xl mb-8 md:mb-16 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
             
-            {/* Step Cards - Matching the design */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+            {/* Mobile Carousel */}
+            <div className="md:hidden">
+              <div className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
+                {[
+                  {
+                    number: 1,
+                    title: "TELL US MORE ABOUT YOU",
+                    description: "Take a quick personality quiz, so we can match you with a group that vibes with your energy.",
+                    image: "/step1.jpg"
+                  },
+                  {
+                    number: 2,
+                    title: "PICK YOUR DINING DATE", 
+                    description: "Choose from curated dining events near you—because good conversations start over great meals!",
+                    image: "/step2.jpg"
+                  },
+                  {
+                    number: 3,
+                    title: "GET MATCHED WITH LIKE-MINDED INDIVIDUALS",
+                    description: "Our algorithm connects you with five others for an exciting social dining experience.",
+                    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop"
+                  },
+                  {
+                    number: 4,
+                    title: "DINE, LAUGH & CONNECT",
+                    description: "Meet up, break the ice, and let the conversations (and connections) flow naturally!",
+                    image: "/step4.jpg"
+                  },
+                  {
+                    number: 5,
+                    title: "STAY CONNECTED & KEEP STEPPING OUT",
+                    description: "Choose who you want to stay connected with and keep the conversation flowing.",
+                    image: "/step5.jpg"
+                  }
+                ].map((step, index) => (
+                  <div key={index} className="how-it-works-card group flex-shrink-0 w-72 snap-center animate-fade-in-up" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
+                    <div className="relative h-48 overflow-hidden">
+                      <Image 
+                        src={step.image}
+                        alt={step.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                        {step.number}
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-center text-white/60 text-sm mt-4">Swipe to see all steps</p>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
               {/* Step 1 */}
               <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.3s' }}>
                 <div className="relative h-64 overflow-hidden">

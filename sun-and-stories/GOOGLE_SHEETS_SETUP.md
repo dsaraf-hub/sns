@@ -9,26 +9,21 @@
 
 ```
 A1: Timestamp
-B1: Name
-C1: Email
-D1: Age Range
-E1: Instagram Handle
-F1: Personality Type
-G1: Social Energy
-H1: Weekend Preference
-I1: Conversation Style
-J1: Food Adventure
-K1: Budget Range
-L1: Location Preference
-M1: Group Dynamic
-N1: Networking Interest
-O1: Activity Preference
-P1: Communication Style
-Q1: Spontaneity Level
-R1: Social Goals
-S1: Experience Expectation
-T1: Follow Up Interest
-U1: Additional Info
+B1: Location
+C1: Name
+D1: Age
+E1: Social Handle
+F1: Sunday Vibe
+G1: Personality Type
+H1: Fashion Statement
+I1: Dream Brunch Plate
+J1: Alcohol Preference
+K1: Introversion Level
+L1: Humor Importance
+M1: Workout Preference
+N1: Motivation
+O1: Ticket
+P1: Restaurant Preference
 ```
 
 ## 🔑 Step 2: Get Google Sheets API Access
@@ -120,6 +115,27 @@ NEXT_PUBLIC_GOOGLE_API_KEY=AIzaSyBnV7cqcHwMpy-CoOVBoBEBJm6JUHmMDJM
 - **Sharing**: Share with team members via Google Sheets sharing
 - **Charts**: Insert > Chart for data visualization
 
+## 📈 Data Structure
+
+Your sheet will capture the following information for each response:
+
+1. **Timestamp** - When the form was submitted
+2. **Location** - Preferred brunch location (SoBo / West Mumbai)
+3. **Name** - User's full name
+4. **Age** - User's age or how young they feel
+5. **Social Handle** - Instagram/LinkedIn (optional)
+6. **Sunday Vibe** - How they spend Sundays
+7. **Personality Type** - Self-described personality (funny/smart/observant/etc.)
+8. **Fashion Statement** - Life as fashion choice
+9. **Dream Brunch Plate** - Food preferences
+10. **Alcohol Preference** - Drinking preference during brunch
+11. **Introversion Level** - Scale of 1-10
+12. **Humor Importance** - How important humor is to them
+13. **Workout Preference** - Exercise habits
+14. **Motivation** - Why they're joining Table 4 Six
+15. **Ticket** - Selected Table4Six ticket option
+16. **Restaurant Preference** - Selected dining preference (Bottomless Brunch, Gourmet Dining, or Local Favourites)
+
 ## 🔒 Security Best Practices
 
 - **Never commit `.env.local`** to your git repository
@@ -167,13 +183,16 @@ NEXT_PUBLIC_GOOGLE_API_KEY=AIzaSyBnV7cqcHwMpy-CoOVBoBEBJm6JUHmMDJM
 
 Once working, consider:
 - Setting up data validation in Google Sheets
-- Creating charts and dashboards
+- Creating charts and dashboards for response analysis
 - Setting up email notifications for new responses
 - Connecting to other tools via Zapier or Google Apps Script
+- Creating automated matching algorithms based on responses
 
 ## 💡 Pro Tips
 
 - **Freeze the header row**: View > Freeze > 1 row
 - **Format columns**: Use data validation for consistent entries
-- **Create filters**: Data > Create a filter for easy sorting
-- **Backup data**: Regularly export your data as backup 
+- **Create filters**: Data > Create a filter for easy sorting and analysis
+- **Backup data**: Regularly export your data as backup
+- **Color coding**: Use conditional formatting to highlight interesting patterns
+- **Pivot tables**: Create pivot tables to analyze personality trends and preferences 
