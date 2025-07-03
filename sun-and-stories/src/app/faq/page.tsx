@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function FAQPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   const faqs = [
     {
       question: "What exactly is Table 4 Six?",
@@ -46,97 +51,109 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      {/* Header */}
-      <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-display font-semibold text-accent hover:opacity-80 transition">
-          Sun & Stories
-        </Link>
-        <nav className="hidden md:flex gap-6 items-center">
-          <Link href="/about" className="font-medium text-[var(--foreground)] hover:text-accent transition">About</Link>
-          <Link href="/faq" className="font-medium text-[var(--foreground)] hover:text-accent transition">FAQ</Link>
-          <Link href="/questionnaire" className="btn btn-primary">Join a Brunch</Link>
-        </nav>
-        <button className="md:hidden p-2 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-[var(--foreground)]">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+    <div className="min-h-screen" style={{ 
+      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/background2.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
+      {/* Header - Same style as about page */}
+      <header className="w-full py-6 px-6 md:px-10 flex flex-col items-center bg-transparent sticky top-0 z-50">
+        <div className="mb-4">
+          <Link href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-24 md:h-32 w-auto" />
+          </Link>
+        </div>
+        <div className="text-white font-medium bg-black/30 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full">
+          Frequently Asked Questions
+        </div>
       </header>
       
-      {/* Hero banner */}
-      <section className="bg-neutral-light py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <Image src="https://images.unsplash.com/photo-1499960049225-af8013f47abc?q=80&w=2070&auto=format&fit=crop" alt="Brunch table" layout="fill" objectFit="cover" className="mx-auto rounded-xl shadow-md h-48 object-cover mb-6" />
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-[var(--foreground)] mb-4">Frequently Asked <span className="text-accent">Questions</span></h1>
-          <p className="text-lg text-[var(--foreground)]">Everything you need to know about Table 4 Six and our Sunday brunches.</p>
-        </div>
-      </section>
-      
-      {/* FAQ Content */}
-      <main className="flex-1 py-12 px-6 md:px-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-neutral-light p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-[var(--foreground)] mb-2 flex items-center gap-3">
-                  <span className="w-6 h-6 flex items-center justify-center bg-accent/20 text-accent rounded-full">?</span>
-                  {faq.question}
-                </h3>
-                <p className="pl-8 text-[var(--foreground)] leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col items-center justify-center p-6 md:p-16">
+        <div className="w-full max-w-4xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl">
           
-          <div className="mt-12 pt-8 border-t border-neutral-dark/10">
-            <h2 className="text-2xl font-display font-bold mb-6 text-[var(--foreground)]">Still have questions?</h2>
-            <p className="mb-8 text-[var(--foreground)]">
-              If you didn&apos;t find the answer you were looking for, feel free to reach out to us directly. 
+          {/* Hero Section */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white" style={{ fontFamily: 'Times New Roman, serif' }}>
+              FREQUENTLY ASKED<br />
+              <em className="italic">QUESTIONS</em>
+            </h1>
+            <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              Everything you need to know about joining Table 4 Six and our Sunday brunches in Mumbai.
             </p>
-            <div className="flex flex-col md:flex-row gap-6">
-              <a href="mailto:hello@table4six.com" className="btn btn-primary inline-flex items-center">
+          </div>
+
+          {/* FAQ Section */}
+          <section className="mb-16">
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
+                <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/15">
+                  <button
+                    className="w-full p-6 text-left flex justify-between items-center"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  >
+                    <h3 className="text-xl font-semibold text-white font-montserrat pr-4">
+                      {faq.question}
+                    </h3>
+                    <div className="flex-shrink-0">
+                      <svg 
+                        className={`w-6 h-6 text-white transition-transform duration-200 ${openFaq === index ? 'rotate-45' : ''}`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${openFaq === index ? 'max-h-96 pb-6' : 'max-h-0'}`}>
+                    <div className="px-6">
+                      <div className="border-t border-white/20 pt-4">
+                        <p className="text-white/90 leading-relaxed font-montserrat">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Contact Section */}
+          <section className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white" style={{ fontFamily: 'Times New Roman, serif' }}>
+              STILL HAVE <em className="italic">QUESTIONS?</em>
+            </h2>
+            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              Can't find what you're looking for? We're here to help you get started on your Table 4 Six journey.
+            </p>
+            
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+              <a 
+                href="mailto:hello@table4six.com" 
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-full transition-colors inline-flex items-center font-montserrat"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                 </svg>
                 Email Us
               </a>
-              <Link href="/questionnaire" className="btn btn-accent inline-flex items-center">
+              <Link 
+                href="/questionnaire" 
+                className="bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-colors inline-flex items-center font-montserrat"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                 </svg>
                 Join Next Brunch
               </Link>
             </div>
-          </div>
+          </section>
+          
         </div>
       </main>
-      
-      {/* Footer */}
-      <footer className="bg-neutral-medium/30 py-8 px-6 md:px-16 border-t border-neutral-dark/10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-[var(--foreground)]">
-          <div>
-            <div className="text-2xl font-display font-bold mb-4 text-accent">Table 4 Six</div>
-            <p className="mb-4 max-w-xs">Crafting authentic brunch experiences and connections in Mumbai.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-4 text-[var(--foreground)]">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-accent transition block py-1">About Us</Link></li>
-              <li><Link href="/faq" className="hover:text-accent transition block py-1">FAQ</Link></li>
-              <li><Link href="/privacy" className="hover:text-accent transition block py-1">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-accent transition block py-1">Terms & Conditions</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-4 text-[var(--foreground)]">Contact</h3>
-            <p className="mb-2"><a href="mailto:hello@table4six.com" className="hover:text-accent transition">hello@table4six.com</a></p>
-            <p>Mumbai, India</p>
-          </div>
-        </div>
-        <div className="mt-10 pt-6 border-t border-neutral-dark/10 text-center text-xs text-[var(--foreground)]/70">
-          © {new Date().getFullYear()} Table 4 Six. Curating conversation, one brunch at a time.
-        </div>
-      </footer>
     </div>
   );
-} 
+}

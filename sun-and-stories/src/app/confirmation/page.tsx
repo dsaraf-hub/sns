@@ -3,48 +3,63 @@ import Image from 'next/image';
 
 export default function ConfirmationPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/background.jpg"
+          alt="Background"
+          fill
+          style={{ objectFit: 'cover' }}
+          className="w-full h-full"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
+
       {/* Header */}
-      <header className="w-full py-5 px-6 md:px-10 flex justify-between items-center bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <Link href="/" className="text-2xl font-display font-semibold text-accent hover:opacity-80 transition">
-          Table 4 Six
+      <header className="relative z-10 w-full py-6 px-6 md:px-10 flex justify-between items-center">
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-20 md:h-24 w-auto" />
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
-          <Link href="/" className="font-medium text-[var(--foreground)] hover:text-accent transition">Home</Link>
-          <Link href="/about" className="font-medium text-[var(--foreground)] hover:text-accent transition">About</Link>
-          <Link href="/faq" className="font-medium text-[var(--foreground)] hover:text-accent transition">FAQ</Link>
-          <Link href="/questionnaire" className="btn btn-primary">Join a Brunch</Link>
+          <Link href="/" className="font-medium text-white hover:text-white/80 transition">Home</Link>
+          <Link href="/about" className="font-medium text-white hover:text-white/80 transition">About</Link>
+          <Link href="/faq" className="font-medium text-white hover:text-white/80 transition">FAQ</Link>
+          <Link href="/questionnaire" className="bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/30 text-white font-semibold py-2 px-6 rounded-full transition-all">
+            Join a Brunch
+          </Link>
         </nav>
         <button className="md:hidden p-2 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-[var(--foreground)]">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-white">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-        <div className="w-full max-w-3xl bg-background p-6 sm:p-10 md:p-12 rounded-xl shadow-2xl text-center animate-fade-in-up">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+        <div className="w-full max-w-4xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl text-center">
           
-          {/* Success Icon - Themed */}
-          <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-success/30">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="var(--success)" className="w-10 h-10">
+          {/* Success Icon */}
+          <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-white/30">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-gray-800">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
             You&apos;re In! (Almost!)
           </h1>
           
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-text-light leading-relaxed">
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
             Thank you for filling out our questionnaire! We&apos;re thrilled you&apos;re interested in joining a Table 4 Six brunch. 
             Our team is now carefully reviewing responses to curate balanced and engaging groups.
           </p>
 
-          {/* What Happens Next - Themed & Updated */}
-          <div className="bg-neutral-medium/50 p-6 md:p-8 rounded-lg mb-10 text-left border border-neutral-dark/20">
-            <h2 className="text-2xl font-display font-semibold mb-6 text-gray-700 text-center">What Happens Next?</h2>
+          {/* What Happens Next */}
+          <div className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl mb-10 text-left border border-white/20">
+            <h2 className="text-2xl font-display font-semibold mb-6 text-white text-center">What Happens Next?</h2>
             <ol className="space-y-5">
               {[ 
                 { 
@@ -65,27 +80,27 @@ export default function ConfirmationPage() {
                 }
               ].map((item, index) => (
                 <li key={index} className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 mt-1 shadow-md font-bold text-lg">
+                  <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center flex-shrink-0 mt-1 shadow-md font-bold text-lg">
                     {index + 1}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-gray-700 mb-1">{item.title}</h3>
-                    <p className="text-text-light text-sm leading-relaxed">{item.desc}</p>
+                    <h3 className="font-semibold text-lg text-white mb-1">{item.title}</h3>
+                    <p className="text-white/80 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </li>
               ))}
             </ol>
           </div>
 
-          {/* Our Curation Philosophy - New Section */}
-          <div className="bg-background p-6 md:p-8 rounded-lg mb-10 text-left border-2 border-secondary/30">
-            <h2 className="text-2xl font-display font-semibold mb-6 text-secondary-dark text-center">Crafting Connections: Our Curation Philosophy</h2>
-            <div className="space-y-4 text-text-light leading-relaxed">
+          {/* Our Curation Philosophy */}
+          <div className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl mb-10 text-left border border-white/20">
+            <h2 className="text-2xl font-display font-semibold mb-6 text-white text-center">Crafting Connections: Our Curation Philosophy</h2>
+            <div className="space-y-4 text-white/90 leading-relaxed">
               <p>
-                At Table 4 Six, we believe the magic lies in the mix. We don&apos;t just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-gray-700">genuine connection and stimulating conversation</strong>.
+                At Table 4 Six, we believe the magic lies in the mix. We don&apos;t just randomly group people; we thoughtfully curate each table to foster <strong className="font-medium text-white">genuine connection and stimulating conversation</strong>.
               </p>
               <p>
-                Our goal is to create <strong className="font-medium text-gray-700">balanced groups with diverse perspectives</strong>. This means bringing together individuals who might not typically cross paths but who share an openness to new experiences and a desire for authentic interaction. We consider factors like your expressed interests, communication style, and what you hope to gain from the experience.
+                Our goal is to create <strong className="font-medium text-white">balanced groups with diverse perspectives</strong>. This means bringing together individuals who might not typically cross paths but who share an openness to new experiences and a desire for authentic interaction. We consider factors like your expressed interests, communication style, and what you hope to gain from the experience.
               </p>
               <p>
                 Think of it as a recipe for a great Sunday: a dash of similarity for common ground, a pinch of difference for exciting new flavors, and a whole lot of respect and curiosity.
@@ -95,33 +110,35 @@ export default function ConfirmationPage() {
           
           {/* Visual Section */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-            <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <Image src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" alt="Thoughtful Matching" layout="fill" objectFit="cover" />
+            <div className="h-40 sm:h-48 rounded-xl overflow-hidden shadow-lg border border-white/20">
+              <Image src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" alt="Thoughtful Matching" width={400} height={300} className="w-full h-full object-cover" />
             </div>
-            <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <Image src="https://images.unsplash.com/photo-1523289333742-bea4f06ad6b2?q=80&w=2070&auto=format&fit=crop" alt="Diverse Conversations" layout="fill" objectFit="cover" />
+            <div className="h-40 sm:h-48 rounded-xl overflow-hidden shadow-lg border border-white/20">
+              <Image src="https://images.unsplash.com/photo-1523289333742-bea4f06ad6b2?q=80&w=2070&auto=format&fit=crop" alt="Diverse Conversations" width={400} height={300} className="w-full h-full object-cover" />
             </div>
-            <div className="h-40 sm:h-48 rounded-lg overflow-hidden shadow-md">
-              <Image src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=2070&auto=format&fit=crop" alt="Authentic Connections" layout="fill" objectFit="cover" />
+            <div className="h-40 sm:h-48 rounded-xl overflow-hidden shadow-lg border border-white/20">
+              <Image src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=2070&auto=format&fit=crop" alt="Authentic Connections" width={400} height={300} className="w-full h-full object-cover" />
             </div>
           </div>
 
-          <p className="text-md mb-8 text-text-light">
+          <p className="text-md mb-8 text-white/90">
             If you don&apos;t hear from us for this Sunday, don&apos;t worry! We host brunches regularly and will keep your profile for future matching opportunities.
-            <br />For any questions, reach out to <a href="mailto:hello@table4six.com" className="text-accent hover:underline font-semibold">hello@table4six.com</a>.
+            <br />For any questions, reach out to <a href="mailto:hello@table4six.com" className="text-white hover:text-white/80 underline font-semibold">hello@table4six.com</a>.
           </p>
           
-          <Link href="/" className="btn btn-accent text-lg py-3 px-8 shadow-lg">
+          <Link href="/" className="bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-all shadow-lg">
             Explore More About Table 4 Six
           </Link>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="w-full py-8 px-6 text-center bg-background border-t border-neutral-dark/20">
-        <p className="text-sm text-text-light">
-          © {new Date().getFullYear()} Table 4 Six. Curating connections, one brunch at a time.
-        </p>
+      <footer className="relative z-10 w-full py-8 px-6 text-center">
+        <div className="bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl p-6 max-w-4xl mx-auto">
+          <p className="text-sm text-white/80">
+            © {new Date().getFullYear()} Table 4 Six. Curating connections, one brunch at a time.
+          </p>
+        </div>
       </footer>
     </div>
   );

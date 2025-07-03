@@ -1,11 +1,51 @@
-Copy and paste this header row into your Google Sheet (Row 1):
+# Google Sheets Template - Column Headers
 
-Timestamp	Name	Email	Age Range	Instagram Handle	Personality Type	Social Energy	Weekend Preference	Conversation Style	Food Adventure	Budget Range	Location Preference	Group Dynamic	Networking Interest	Activity Preference	Communication Style	Spontaneity Level	Social Goals	Experience Expectation	Follow Up Interest	Additional Info
+Copy and paste these headers into Row 1 of your Google Sheet (A1 to P1):
 
-Instructions:
-1. Go to sheets.google.com
-2. Create a new blank spreadsheet
-3. Select cell A1
-4. Copy the line above and paste it into A1
-5. The headers will automatically spread across columns A-U
-6. Follow the setup guide in GOOGLE_SHEETS_SETUP.md for API configuration 
+Timestamp	Location	Name	Age	Social Handle	Sunday Vibe	Personality Type	Fashion Statement	Dream Brunch Plate	Alcohol Preference	Introversion Level	Humor Importance	Workout Preference	Motivation	Ticket	Restaurant Preference
+
+## Individual Column Setup:
+
+A1: Timestamp
+B1: Location
+C1: Name
+D1: Age
+E1: Social Handle
+F1: Sunday Vibe
+G1: Personality Type
+H1: Fashion Statement
+I1: Dream Brunch Plate
+J1: Alcohol Preference
+K1: Introversion Level
+L1: Humor Importance
+M1: Workout Preference
+N1: Motivation
+O1: Ticket
+P1: Restaurant Preference
+
+## Expected Data Types:
+
+- Timestamp: Auto-generated date/time
+- Location: "SoBo" or "West Mumbai"
+- Name: Text
+- Age: Number or text (e.g., "25" or "25 but feel 22")
+- Social Handle: Text (Instagram/LinkedIn handle)
+- Sunday Vibe: Text (how they spend Sundays)
+- Personality Type: Text (funny, smart, observant, etc.)
+- Fashion Statement: Text (life as fashion choice)
+- Dream Brunch Plate: Text (food preferences)
+- Alcohol Preference: Text (drinking preference)
+- Introversion Level: Number (1-10 scale)
+- Humor Importance: Text (importance of humor)
+- Workout Preference: Text (exercise habits)
+- Motivation: Text (why joining Table 4 Six)
+- Ticket: Text (selected Table4Six ticket option)
+- Restaurant Preference: Text (selected dining preference - Bottomless Brunch, Gourmet Dining, or Local Favourites)
+
+## Quick Setup Instructions:
+
+1. Create new Google Sheet
+2. Copy the tab-separated headers above and paste into Row 1
+3. Make sheet public (Anyone with link can view)
+4. Copy the Sheet ID from the URL
+5. Add to your .env.local file 
