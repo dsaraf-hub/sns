@@ -443,7 +443,7 @@ export default function Home() {
             </div>
           </div>
           {/* Gradient fade at the bottom for smooth transition */}
-          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-100" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
+          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-20 md:h-250" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 10%, transparent 100%)'}}></div>
         </section>
 
         {/* Sections with background image */}
@@ -451,7 +451,7 @@ export default function Home() {
           {/* Testimonials section - Updated for background */}
           <section className="py-12 md:py-20 px-4 md:px-16 relative">
             {/* Top fade overlay for smooth transition from above section */}
-            <div className="pointer-events-none absolute left-0 right-0 top-0 h-40 md:h-140" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
+            <div className="pointer-events-none absolute left-0 right-0 top-0 h-20 md:h-280" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 10%, transparent 100%)'}}></div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
             <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
             
