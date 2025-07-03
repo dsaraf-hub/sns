@@ -1,0 +1,11 @@
+Copy and paste this header row into your Google Sheet (Row 1):
+
+Timestamp	Name	Email	Age Range	Instagram Handle	Personality Type	Social Energy	Weekend Preference	Conversation Style	Food Adventure	Budget Range	Location Preference	Group Dynamic	Networking Interest	Activity Preference	Communication Style	Spontaneity Level	Social Goals	Experience Expectation	Follow Up Interest	Additional Info
+
+Instructions:
+1. Go to sheets.google.com
+2. Create a new blank spreadsheet
+3. Select cell A1
+4. Copy the line above and paste it into A1
+5. The headers will automatically spread across columns A-U
+6. Follow the setup guide in GOOGLE_SHEETS_SETUP.md for API configuration 

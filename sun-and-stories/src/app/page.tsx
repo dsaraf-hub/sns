@@ -256,11 +256,11 @@ export default function Home() {
 
       <div className="content-section">
         {/* Carefully Curated Restaurants Section */}
-        <section className="restaurants-section py-12 md:py-20 px-4 md:px-16 mt-8 md:mt-16">
+        <section className="restaurants-section py-12 md:py-20 px-4 md:px-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW WE SELECT OUR<br />
-              <em className="italic">RESTAURANTS</em>
+              <em className="italic">RESTAURANTS?</em>
             </h2>
             <p className="text-base md:text-xl mb-6 md:mb-8 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
               We handpick restaurants using carefully tailored criteria to guarantee you the finest dining experiences.
@@ -279,64 +279,136 @@ export default function Home() {
         </section>
 
         {/* How It Works - Redesigned with elegant cards */}
-        <section className="py-12 md:py-20 px-4 md:px-16 bg-[#E8E4C9]">
+        <section className="py-12 md:py-20 px-4 md:px-16 texture-section">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW DOES IT <em className="italic">WORK?</em>
             </h2>
-            <p className="text-base md:text-xl mb-3 md:mb-4 text-black animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
-            <p className="text-base md:text-xl mb-8 md:mb-16 text-black animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
+            <p className="text-base md:text-xl mb-3 md:mb-4 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
+            <p className="text-base md:text-xl mb-8 md:mb-16 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
             
-            {/* Mobile Carousel */}
-            <div className="md:hidden">
-              <div className="flex overflow-x-auto gap-4 pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
-                {workSteps.map((step, index) => (
-                  <div key={index} className="square-step-card group flex-shrink-0 w-72 snap-center animate-fade-in-up" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
-                    <Image 
-                        src={step.image} 
-                        alt={step.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div className="relative z-10 flex flex-col h-full p-5 text-white">
-                        <div className="square-step-number">{step.number}</div>
-                        <div className="mt-auto">
-                            <h3 className="square-step-title">{step.title}</h3>
-                            <p className="square-step-description">{step.description}</p>
-                        </div>
-                    </div>
+            {/* Step Cards - Matching the design */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+              {/* Step 1 */}
+              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                <div className="relative h-48 overflow-hidden">
+                  <Image 
+                    src="/step1.jpg" 
+                    alt="Tell us more about you"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    1
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop Grid */}
-            <div className="hidden md:grid grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-              {workSteps.map((step, index) => (
-                <div key={index} className="square-step-card group animate-fade-in-up" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
-                    <Image 
-                        src={step.image} 
-                        alt={step.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div className="relative z-10 flex flex-col h-full p-5 text-white">
-                        <div className="square-step-number">{step.number}</div>
-                        <div className="mt-auto">
-                            <h3 className="square-step-title">{step.title}</h3>
-                            <p className="square-step-description">{step.description}</p>
-                        </div>
-                    </div>
                 </div>
-              ))}
+                <div className="p-4">
+                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                    TELL US MORE<br />ABOUT YOU
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Take a quick personality quiz, so we can match you with a group that vibes with your energy.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                <div className="relative h-48 overflow-hidden">
+                  <Image 
+                    src="/step2.jpg" 
+                    alt="Pick your dining date"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    2
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                    PICK YOUR DINING DATE
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Choose from curated dining events near you—because good conversations start over great meals!
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                <div className="relative h-48 overflow-hidden">
+                  <Image 
+                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop" 
+                    alt="Get matched with like-minded individuals"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    3
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                    GET MATCHED WITH LIKE-<br />MINDED INDIVIDUALS
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Our algorithm connects you with five others for an exciting social dining experience.
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                <div className="relative h-48 overflow-hidden">
+                  <Image 
+                    src="/step4.jpg" 
+                    alt="Dine, laugh & connect"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    4
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                    DINE, LAUGH & CONNECT
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Meet up, break the ice, and let the conversations (and connections) flow naturally!
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 5 */}
+              <div className="how-it-works-card group animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+                <div className="relative h-48 overflow-hidden">
+                  <Image 
+                    src="/step5.jpg" 
+                    alt="Stay connected & keep stepping out"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    5
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
+                    STAY CONNECTED<br />& KEEP STEPPING OUT
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Choose who you want to stay connected with and keep the conversation flowing.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Sections with background image */}
-        <div className="hero-section">
+        <div className="hero-section-alt">
           {/* Testimonials section - Updated for background */}
           <section className="py-12 md:py-20 px-4 md:px-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
@@ -351,14 +423,14 @@ export default function Home() {
                   { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
                 ].map((testimonial, index) => (
                   <div key={index} className="testimonial-card flex-shrink-0 w-80 snap-center animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
-                    <p className="italic mb-6 text-lg text-gray-800 flex-grow">&quot;{testimonial.quote}&quot;</p>
-                    <div className="flex items-center mt-auto pt-4 border-t border-gray-200">
+                    <p className="italic mb-6 text-lg text-white flex-grow">&quot;{testimonial.quote}&quot;</p>
+                    <div className="flex items-center mt-auto pt-4 border-t border-white/20">
                       <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
                         {testimonial.initials}
                       </div>
                       <div>
-                        <div className="font-semibold text-lg text-gray-800">{testimonial.name}</div>
-                        <div className="text-sm text-gray-600">{testimonial.location}</div>
+                        <div className="font-semibold text-lg text-white">{testimonial.name}</div>
+                        <div className="text-sm text-white/80">{testimonial.location}</div>
                       </div>
                     </div>
                   </div>
@@ -374,14 +446,14 @@ export default function Home() {
                 { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
               ].map((testimonial, index) => (
                 <div key={index} className="testimonial-card animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
-                  <p className="italic mb-6 text-lg text-gray-800 flex-grow">&quot;{testimonial.quote}&quot;</p>
-                  <div className="flex items-center mt-auto pt-4 border-t border-gray-200">
+                  <p className="italic mb-6 text-lg text-white flex-grow">&quot;{testimonial.quote}&quot;</p>
+                  <div className="flex items-center mt-auto pt-4 border-t border-white/20">
                     <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
                       {testimonial.initials}
                     </div>
                     <div>
-                      <div className="font-semibold text-lg text-gray-800">{testimonial.name}</div>
-                      <div className="text-sm text-gray-600">{testimonial.location}</div>
+                      <div className="font-semibold text-lg text-white">{testimonial.name}</div>
+                      <div className="text-sm text-white/80">{testimonial.location}</div>
                     </div>
                   </div>
                 </div>

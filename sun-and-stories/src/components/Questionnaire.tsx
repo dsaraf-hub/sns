@@ -297,8 +297,73 @@ export default function Questionnaire() {
   
   const handleSubmit = async () => {
     setLoading(true);
+    
+    try {
+      // Submit to Google Sheets (you'll need to add your API key and sheet ID)
+      await submitToGoogleSheets(answers);
+      console.log('Successfully submitted to Google Sheets:', answers);
+    } catch (error) {
+      console.error('Error submitting to Google Sheets:', error);
+      // Continue to confirmation page even if submission fails
+    }
+    
     await new Promise(resolve => setTimeout(resolve, 1500));
     router.push('/confirmation');
+  };
+
+  // Google Sheets submission function
+  const submitToGoogleSheets = async (answers: Record<string, string>) => {
+    const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
+    const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+
+    if (!SHEET_ID || !API_KEY) {
+      console.warn('Google Sheets credentials not configured');
+      return;
+    }
+
+    // Prepare the row data in the order of your sheet columns
+    const rowData = [
+      new Date().toISOString(), // Timestamp
+      answers.name || '',
+      answers.email || '',
+      answers.ageRange || '',
+      answers.instagram || '',
+      answers.personalityType || '',
+      answers.socialEnergy || '',
+      answers.weekendPreference || '',
+      answers.conversationStyle || '',
+      answers.foodAdventure || '',
+      answers.budgetRange || '',
+      answers.locationPreference || '',
+      answers.groupDynamic || '',
+      answers.networkingInterest || '',
+      answers.activityPreference || '',
+      answers.communicationStyle || '',
+      answers.spontaneityLevel || '',
+      answers.socialGoals || '',
+      answers.experienceExpectation || '',
+      answers.followUpInterest || '',
+      answers.additionalInfo || '',
+    ];
+
+    const response = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1:append?valueInputOption=RAW&key=${API_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          values: [rowData]
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets submission failed: ${response.statusText}`);
+    }
+
+    return response.json();
   };
 
   const renderQuestion = () => {
