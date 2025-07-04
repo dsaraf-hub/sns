@@ -55,6 +55,40 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
+  // --- HOW IT WORKS DATA ---
+  const howItWorksSteps = useMemo(() => [
+    {
+      step: 1,
+      image: '/step1.jpg',
+      title: 'Tell Us More About You',
+      description: 'Take a quick personality quiz, so we can match you with a group that vibes with your energy.'
+    },
+    {
+      step: 2,
+      image: '/step2.jpg',
+      title: 'Pick Your Dining Date',
+      description: 'Choose from curated dining events near you—because good conversations start over great meals!'
+    },
+    {
+      step: 3,
+      image: '/step3.jpg',
+      title: 'Get Matched with Like-Minded Individuals',
+      description: 'Our algorithm connects you with five others for an exciting social dining experience.'
+    },
+    {
+      step: 4,
+      image: '/step4.jpg',
+      title: 'Dine, Laugh & Connect',
+      description: 'Meet up, break the ice, and let the conversations (and connections) flow naturally!'
+    },
+    {
+      step: 5,
+      image: '/step5.jpg',
+      title: 'Stay Connected & Keep Stepping Out',
+      description: 'Choose who you want to stay connected with and keep the conversation flowing.'
+    }
+  ], []);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -240,19 +274,52 @@ export default function Home() {
       </div>
 
       <div className="content-section">
-        {/* Carefully Curated Restaurants Section */}
+        {/* How It Works Section - Now first */}
         <section className="restaurants-section py-12 md:py-20 px-4 md:px-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
+              HOW DOES IT <em className="italic">WORK?</em>
+            </h2>
+            <p className="text-base md:text-xl mb-8 md:mb-12 text-black max-w-3xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
+              We\'ve designed a simple, seamless process to connect you with new people over a shared meal. Here’s the journey from signing up to saying cheers at brunch.
+            </p>
+            
+            {/* --- REPLACED BULLET LIST WITH CARD LAYOUT --- */}
+            <div className="max-w-full mx-auto animate-fade-in-up flex flex-row flex-nowrap gap-4 md:gap-4 overflow-x-auto md:overflow-visible justify-start md:justify-center mt-8 scrollbar-hide pl-4 md:pl-0" style={{ animationDelay: '0.4s' }}>
+              {howItWorksSteps.map(step => (
+                <div
+                  key={step.step}
+                  className="how-it-works-card relative bg-white/20 backdrop-blur-md overflow-hidden flex-shrink-0 w-72 sm:w-64 md:w-60 lg:w-60 flex flex-col"
+                >
+                  <div className="relative h-48 w-full">
+                    <Image src={step.image} alt={step.title} fill className="object-cover" />
+                    <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold">
+                      {step.step}
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1 text-black">
+                    <h3 className="font-bold mb-2 font-montserrat text-black uppercase tracking-wide text-sm">{step.title}</h3>
+                    <p className="text-sm leading-relaxed font-montserrat text-black/80">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Carefully Curated Restaurants Section - Now second with texture */}
+        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW WE SELECT OUR<br />
               <em className="italic">RESTAURANTS?</em>
             </h2>
-            <p className="text-base md:text-xl mb-6 md:mb-8 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
+            <p className="text-base md:text-xl mb-6 md:mb-8 text-white max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
               We handpick restaurants using carefully tailored criteria to guarantee you the finest dining experiences.
             </p>
             
             <div className="max-w-4xl mx-auto animate-fade-in-up px-4" style={{ animationDelay: '0.4s' }}>
-              <p className="text-sm md:text-lg text-black leading-relaxed font-montserrat">
+              <p className="text-sm md:text-lg text-white/90 leading-relaxed font-montserrat">
                 Our selection process involves a rigorous evaluation of each establishment&apos;s culinary excellence, 
                 ambiance, service quality, and overall dining experience. We consider factors such as ingredient 
                 sourcing, chef expertise, menu diversity, dietary accommodations, and customer satisfaction ratings. 
@@ -261,198 +328,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </section>
-
-        {/* How It Works - Redesigned with elegant cards */}
-        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
-          <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
-              HOW DOES IT <em className="italic">WORK?</em>
-            </h2>
-            <p className="text-base md:text-xl mb-3 md:mb-4 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
-            <p className="text-base md:text-xl mb-8 md:mb-16 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
-            
-            {/* Mobile Carousel */}
-            <div className="md:hidden">
-              <div className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
-                {[
-                  {
-                    number: 1,
-                    title: "TELL US MORE ABOUT YOU",
-                    description: "Take a quick personality quiz, so we can match you with a group that vibes with your energy.",
-                    image: "/step1.jpg"
-                  },
-                  {
-                    number: 2,
-                    title: "PICK YOUR DINING DATE", 
-                    description: "Choose from curated dining events near you—because good conversations start over great meals!",
-                    image: "/step2.jpg"
-                  },
-                  {
-                    number: 3,
-                    title: "GET MATCHED WITH LIKE-MINDED INDIVIDUALS",
-                    description: "Our algorithm connects you with five others for an exciting social dining experience.",
-                    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop"
-                  },
-                  {
-                    number: 4,
-                    title: "DINE, LAUGH & CONNECT",
-                    description: "Meet up, break the ice, and let the conversations (and connections) flow naturally!",
-                    image: "/step4.jpg"
-                  },
-                  {
-                    number: 5,
-                    title: "STAY CONNECTED & KEEP STEPPING OUT",
-                    description: "Choose who you want to stay connected with and keep the conversation flowing.",
-                    image: "/step5.jpg"
-                  }
-                ].map((step, index) => (
-                  <div key={index} className="how-it-works-card group flex-shrink-0 w-72 snap-center animate-fade-in-up" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
-                    <div className="relative h-48 overflow-hidden">
-                      <Image 
-                        src={step.image}
-                        alt={step.title}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                        {step.number}
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                        {step.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {/* <p className="text-center text-white/60 text-sm mt-4">Swipe to see all steps</p> */}
-            </div>
-
-            {/* Desktop Grid */}
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-              {/* Step 1 */}
-              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.3s' }}>
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src="/step1.jpg" 
-                    alt="Tell us more about you"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                    1
-                  </div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                    TELL US MORE<br />ABOUT YOU
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">
-                    Take a quick personality quiz, so we can match you with a group that vibes with your energy.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.4s' }}>
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src="/step2.jpg" 
-                    alt="Pick your dining date"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                    2
-                  </div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                    PICK YOUR DINING DATE
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">
-                    Choose from curated dining events near you—because good conversations start over great meals!
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.5s' }}>
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2069&auto=format&fit=crop" 
-                    alt="Get matched with like-minded individuals"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                    3
-                  </div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                    GET MATCHED WITH LIKE-<br />MINDED INDIVIDUALS
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">
-                    Our algorithm connects you with five others for an exciting social dining experience.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.6s' }}>
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src="/step4.jpg" 
-                    alt="Dine, laugh & connect"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                    4
-                  </div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                    DINE, LAUGH & CONNECT
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">
-                    Meet up, break the ice, and let the conversations (and connections) flow naturally!
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 5 */}
-              <div className="how-it-works-card group animate-fade-in-up p-6" style={{ animationDelay: '0.7s' }}>
-                <div className="relative h-64 overflow-hidden">
-                  <Image 
-                    src="/step5.jpg" 
-                    alt="Stay connected & keep stepping out"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
-                    5
-                  </div>
-                </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-orange-500 text-sm mb-2 uppercase tracking-wide">
-                    STAY CONNECTED<br />& KEEP STEPPING OUT
-                  </h3>
-                  <p className="text-gray-200 text-sm leading-relaxed">
-                    Choose who you want to stay connected with and keep the conversation flowing.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Gradient fade at the bottom for smooth transition */}
-          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-300" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 30%, transparent 100%)'}}></div>
+          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-170" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 25%, transparent 100%)'}}></div>
         </section>
 
         {/* Sections with background image */}
@@ -460,7 +336,7 @@ export default function Home() {
           {/* Testimonials section - Updated for background */}
           <section className="py-12 md:py-20 px-4 md:px-16 relative">
             {/* Top fade overlay for smooth transition from above section */}
-            <div className="pointer-events-none absolute left-0 right-0 top-0 h-50 md:h-300" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 18%, transparent 100%)'}}></div>
+            <div className="pointer-events-none absolute left-0 right-0 top-0 h-50 md:h-300" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
             <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
             <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
