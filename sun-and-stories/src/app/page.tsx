@@ -259,37 +259,14 @@ export default function Home() {
       </div>
 
       <div className="content-section">
-        {/* Carefully Curated Restaurants Section */}
+        {/* How It Works - Redesigned with elegant cards */}
         <section className="restaurants-section py-12 md:py-20 px-4 md:px-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
-              HOW WE SELECT OUR<br />
-              <em className="italic">RESTAURANTS?</em>
-            </h2>
-            <p className="text-base md:text-xl mb-6 md:mb-8 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
-              We handpick restaurants using carefully tailored criteria to guarantee you the finest dining experiences.
-            </p>
-            
-            <div className="max-w-4xl mx-auto animate-fade-in-up px-4" style={{ animationDelay: '0.4s' }}>
-              <p className="text-sm md:text-lg text-black leading-relaxed font-montserrat">
-                Our selection process involves a rigorous evaluation of each establishment&apos;s culinary excellence, 
-                ambiance, service quality, and overall dining experience. We consider factors such as ingredient 
-                sourcing, chef expertise, menu diversity, dietary accommodations, and customer satisfaction ratings. 
-                Every restaurant in our network has been personally visited by our team and meets our exacting standards 
-                for creating the perfect backdrop for meaningful conversations and memorable Sunday brunches.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works - Redesigned with elegant cards */}
-        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
-          <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW DOES IT <em className="italic">WORK?</em>
             </h2>
-            <p className="text-base md:text-xl mb-3 md:mb-4 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
-            <p className="text-base md:text-xl mb-8 md:mb-16 text-white animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
+            <p className="text-base md:text-xl mb-3 md:mb-4 text-black animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.1s' }}>A choreographed dance of minds and palates.</p>
+            <p className="text-base md:text-xl mb-8 md:mb-16 text-black animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>We orchestrate the symphony, you simply arrive and immerse.</p>
             
             {/* Mobile Carousel */}
             <div className="md:hidden">
@@ -469,6 +446,29 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Carefully Curated Restaurants Section */}
+        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
+              HOW WE SELECT OUR<br />
+              <em className="italic">RESTAURANTS?</em>
+            </h2>
+            <p className="text-base md:text-xl mb-6 md:mb-8 text-white max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
+              We handpick restaurants using carefully tailored criteria to guarantee you the finest dining experiences.
+            </p>
+            
+            <div className="max-w-4xl mx-auto animate-fade-in-up px-4" style={{ animationDelay: '0.4s' }}>
+              <p className="text-sm md:text-lg text-white leading-relaxed font-montserrat">
+                Our selection process involves a rigorous evaluation of each establishment&apos;s culinary excellence, 
+                ambiance, service quality, and overall dining experience. We consider factors such as ingredient 
+                sourcing, chef expertise, menu diversity, dietary accommodations, and customer satisfaction ratings. 
+                Every restaurant in our network has been personally visited by our team and meets our exacting standards 
+                for creating the perfect backdrop for meaningful conversations and memorable Sunday brunches.
+              </p>
+                        </div>
           </div>
           {/* Gradient fade at the bottom for smooth transition */}
           <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-300" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 30%, transparent 100%)'}}></div>
