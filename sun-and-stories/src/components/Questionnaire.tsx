@@ -332,12 +332,13 @@ export default function Questionnaire() {
     setLoading(true);
     
     try {
-      // Submit to Google Sheets (you'll need to add your API key and sheet ID)
+      // Submit to Google Sheets
       await submitToGoogleSheets(answers);
-      console.log('Successfully submitted to Google Sheets:', answers);
+      console.log('✅ Successfully submitted to Google Sheets:', answers);
     } catch (error) {
-      console.error('Error submitting to Google Sheets:', error);
+      console.error('❌ Error submitting to Google Sheets:', error);
       // Continue to payment even if submission fails
+      // In production, you might want to show a warning to the user
     }
     
     // Open payment gateway
@@ -414,52 +415,45 @@ export default function Questionnaire() {
 
   // Google Sheets submission function
   const submitToGoogleSheets = async (answers: Record<string, string>) => {
-    const SHEET_ID = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
-    const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+    console.log('📊 Submitting to Google Sheets via API route...');
 
-    if (!SHEET_ID || !API_KEY) {
-      console.warn('Google Sheets credentials not configured');
-      return;
-    }
-
-    // Prepare the row data in the order of your sheet columns
-    const rowData = [
-      new Date().toISOString(), // Timestamp
-      answers.location || '',
-      answers.name || '',
-      answers.age || '',
-      answers.social || '',
-      answers.sunday_vibe || '',
-      answers.personality_type || '',
-      answers.fashion || '',
-      answers.brunch_plate || '',
-      answers.alcohol || '',
-      answers.introversion || '',
-      answers.humor || '',
-      answers.workout || '',
-      answers.motivation || '',
-      answers.ticket || '',
-      answers.restaurant_preference || '',
-    ];
-
-    const response = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1:append?valueInputOption=RAW&key=${API_KEY}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          values: [rowData]
-        })
-      }
-    );
+    const response = await fetch('/api/submit-questionnaire', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        location: answers.location || '',
+        name: answers.name || '',
+        age: answers.age || '',
+        social: answers.social || '',
+        sunday_vibe: answers.sunday_vibe || '',
+        personality_type: answers.personality_type || '',
+        fashion: answers.fashion || '',
+        brunch_plate: answers.brunch_plate || '',
+        alcohol: answers.alcohol || '',
+        introversion: answers.introversion || '',
+        humor: answers.humor || '',
+        workout: answers.workout || '',
+        motivation: answers.motivation || '',
+        ticket: answers.ticket || '',
+        restaurant_preference: answers.restaurant_preference || '',
+      })
+    });
 
     if (!response.ok) {
-      throw new Error(`Google Sheets submission failed: ${response.statusText}`);
+      const errorData = await response.json();
+      console.error('API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorData
+      });
+      throw new Error(`Questionnaire submission failed: ${response.status} ${response.statusText}`);
     }
 
-    return response.json();
+    const result = await response.json();
+    console.log('📈 API response:', result);
+    return result;
   };
 
   const renderQuestion = () => {
