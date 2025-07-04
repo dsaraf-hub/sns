@@ -359,7 +359,7 @@ export default function Home() {
               {howItWorksSteps.map(step => (
                 <div
                   key={step.step}
-                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-72 sm:w-64 md:w-60 lg:w-60 h-96 border border-black rounded-2xl"
+                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-60 h-96 border border-black rounded-2xl"
                 >
                   {/* Background Image */}
                   <Image 
@@ -373,7 +373,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/30"></div>
                   
                   {/* Step number in top corner */}
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold text-lg z-10">
+                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold text-lg z-10">
                     {step.step}
                   </div>
                   
