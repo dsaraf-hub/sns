@@ -317,9 +317,22 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Mumbai Skyline Section */}
+        <section className="w-full pt-0 md:pt-6 px-8 md:px-0" style={{ backgroundColor: '#fffcf5' }}>
+          <div className="relative h-48 md:h-64 w-full">
+            <Image
+              src="/mumbai-skyline.png"
+              alt="A panoramic view of the Mumbai skyline at dusk"
+              layout="fill"
+              objectFit="contain"
+              quality={100}
+            />
+          </div>
+        </section>
+
         {/* Carefully Curated Restaurants Section - Now second with texture */}
-        <section className="py-12 md:py-20 px-4 md:px-16 texture-section relative">
-          <div className="max-w-7xl mx-auto text-center relative z-10">
+        <section className="px-4 md:px-16 pb-12 md:pb-20 texture-section relative">
+          <div className="max-w-7xl mx-auto text-center relative z-10 pt-12 md:pt-20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW WE SELECT OUR<br />
               <em className="italic">RESTAURANTS?</em>
@@ -338,7 +351,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-170" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 25%, transparent 100%)'}}></div>
+          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-170" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 5%, transparent 100%)'}}></div>
         </section>
 
         {/* Sections with background image */}
@@ -346,7 +359,7 @@ export default function Home() {
           {/* Testimonials section - Updated for background */}
           <section className="py-12 md:py-20 px-4 md:px-16 relative">
             {/* Top fade overlay for smooth transition from above section */}
-            <div className="pointer-events-none absolute left-0 right-0 top-0 h-50 md:h-300" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 15%, transparent 100%)'}}></div>
+            <div className="pointer-events-none absolute left-0 right-0 top-0 h-50 md:h-300" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 5%, transparent 100%)'}}></div>
             <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
             <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
