@@ -523,7 +523,7 @@ h1, h2, h3, h4, h5 {
 
 /* How It Works Cards - Glass design matching Join The Table button */
 .how-it-works-card {
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid black;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
@@ -542,7 +542,6 @@ h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem;
   font-weight: bold;
-  color: white;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -551,7 +550,6 @@ h1, h2, h3, h4, h5 {
 
 .how-it-works-card p {
   font-family: 'Montserrat', sans-serif;
-  color: rgba(255, 255, 255, 0.9);
   font-size: 0.8rem;
   line-height: 1.6;
 }

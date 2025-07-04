@@ -68,8 +68,6 @@ export default function AboutPage() {
           <nav className="flex items-center text-white">
             <Link href="/" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">Home</Link>
             <div className="h-6 w-px bg-white/40 mx-2"></div>
-            <Link href="/what-is-table4six" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">What is Table4Six?</Link>
-            <div className="h-6 w-px bg-white/40 mx-2"></div>
             <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
               Join Now
             </Link>
@@ -88,13 +86,6 @@ export default function AboutPage() {
                 Home
               </Link>
               <Link 
-                href="/what-is-table4six" 
-                className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                What is Table4Six?
-              </Link>
-              <Link 
                 href="/questionnaire" 
                 className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -109,53 +100,94 @@ export default function AboutPage() {
       {/* Main Content */}
       <main className="relative z-10 p-4 md:p-8">
         <div className="w-full max-w-4xl mx-auto bg-black/40 backdrop-blur-lg border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl space-y-12 md:space-y-16 mt-8">
+          
           {/* Hero Section */}
-            <section className="text-center">
-              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
-                THE STORY OF <em className="italic">TABLE 4 SIX</em>
+          <section className="text-center">
+            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
+              WHAT IS <em className="italic">TABLE 4 SIX?</em>
             </h1>
-              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Born from a simple question: &ldquo;What if strangers could become friends over Sunday brunch?&rdquo;
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              More than brunch. More than dining. It&apos;s where strangers become friends, one Sunday at a time.
             </p>
-            </section>
+          </section>
 
-          {/* Origin Story */}
-            <section>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-white text-center">
-              THE MUMBAI <em className="italic">BEGINNING</em>
-            </h2>
-              <div className="space-y-6 text-base md:text-lg leading-relaxed font-montserrat text-white/90">
-                <p>
-                  July 2023. Three college friends — <strong>Arjun</strong>, <strong>Priya</strong>, and <strong>Vikram</strong> — sat in their usual Bandra café, scrolling phones and complaining: &ldquo;There&apos;s nothing interesting to do in Mumbai anymore.&rdquo;
+          {/* The Concept */}
+          <section>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">The Experience</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  Every Sunday, six carefully matched strangers gather at Mumbai&apos;s finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
                 </p>
-                <p>
-                Arjun missed the spontaneous connections from his London days. Priya met fascinating people at work but never socially. Vikram wondered: &ldquo;What if we could recreate that travel magic right here?&rdquo;
-              </p>
-                <p>
-                The idea was simple: invite three strangers to Sunday brunch. They posted: <em>&ldquo;Three strangers wanted for Sunday brunch. Come curious, leave connected.&rdquo;</em>
-              </p>
-                <p>
-                That first brunch lasted four hours. Six strangers became friends, sharing dreams, struggles, and hidden Mumbai spots. The magic was undeniable.
-              </p>
-                <p>
-                By December 2023, <strong>Table 4 Six</strong> had grown into a weekly ritual, transforming Sunday brunches into adventures of human connection across Mumbai.
-              </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">The Philosophy</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  We believe that Mumbai&apos;s greatest treasure isn&apos;t its skyline or its food — it&apos;s its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
+                </p>
+              </div>
             </div>
           </section>
 
+          {/* How It Works in Detail */}
+          <section>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-white text-center">
+              HOW DOES IT <em className="italic">WORK?</em>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">1</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Tell Us About You</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Take our thoughtful questionnaire that goes beyond the surface to understand your personality, interests, and what makes you tick.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">2</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Get Matched</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Our algorithm pairs you with five other fascinating individuals who complement your energy and share your curiosity about connecting with new people.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">3</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Join the Table</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Meet at a carefully selected restaurant, break bread with your new tablemates, and let the magic of genuine conversation unfold naturally.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Our Promise */}
+          <section>
+            <div className="text-center">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl max-w-3xl mx-auto">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">Our Promise</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  Every table is thoughtfully curated. Every restaurant is personally vetted. Every Sunday offers a chance to discover not just new friends, but new perspectives on life in this incredible city we call home.
+                </p>
+              </div>
+            </div>
+          </section>
 
           {/* Call to Action */}
           <section className="text-center">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">
-              READY TO JOIN <em className="italic">THE TABLE?</em>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">
+              READY TO <em className="italic">EXPERIENCE</em> IT?
             </h2>
-              <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Your next great friendship might be just one Sunday brunch away. 
-              Take the leap, trust the process, and let us introduce you to the extraordinary people of Mumbai.
+            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              Join hundreds of Mumbaikars who&apos;ve discovered that the best conversations happen over Sunday brunch with the right people.
             </p>
-              <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
-                Join Now
-              </Link>
+            <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
+              Join Your First Table
+            </Link>
           </section>
         </div>
       </main>
@@ -185,7 +217,6 @@ export default function AboutPage() {
             <h3 className="font-semibold text-lg mb-4 text-white">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="text-gray-300 hover:text-white transition block py-1">About Us</Link></li>
-              <li><Link href="/what-is-table4six" className="text-gray-300 hover:text-white transition block py-1">What is Table4Six?</Link></li>
               <li><Link href="/faq" className="text-gray-300 hover:text-white transition block py-1">FAQ</Link></li>
               <li><Link href="/privacy" className="text-gray-300 hover:text-white transition block py-1">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-gray-300 hover:text-white transition block py-1">Terms & Conditions</Link></li>

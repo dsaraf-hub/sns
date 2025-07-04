@@ -173,8 +173,6 @@ export default function Home() {
             <nav className="flex items-center text-white">
               <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
               <div className="h-6 w-px bg-white/40 mx-2"></div>
-              <Link href="/what-is-table4six" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">What is Table4Six?</Link>
-              <div className="h-6 w-px bg-white/40 mx-2"></div>
               <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
               <div className="h-6 w-px bg-white/40 mx-2"></div>
               <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
@@ -193,13 +191,6 @@ export default function Home() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
-                </Link>
-                <Link 
-                  href="/what-is-table4six" 
-                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  What is Table4Six?
                 </Link>
                 <Link 
                   href="/faq" 
@@ -477,7 +468,6 @@ export default function Home() {
               <h3 className="font-semibold text-lg mb-4 text-white">Quick Links</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/about" className="text-gray-300 hover:text-white transition block py-1">About Us</Link></li>
-                <li><Link href="/what-is-table4six" className="text-gray-300 hover:text-white transition block py-1">What is Table4Six?</Link></li>
                 <li><Link href="/faq" className="text-gray-300 hover:text-white transition block py-1">FAQ</Link></li>
                 <li><Link href="/privacy" className="text-gray-300 hover:text-white transition block py-1">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="text-gray-300 hover:text-white transition block py-1">Terms & Conditions</Link></li>

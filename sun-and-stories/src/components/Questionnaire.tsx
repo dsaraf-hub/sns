@@ -418,11 +418,11 @@ export default function Questionnaire() {
     console.log('📊 Submitting to Google Sheets via API route...');
 
     const response = await fetch('/api/submit-questionnaire', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
         location: answers.location || '',
         name: answers.name || '',
         age: answers.age || '',
@@ -438,7 +438,7 @@ export default function Questionnaire() {
         motivation: answers.motivation || '',
         ticket: answers.ticket || '',
         restaurant_preference: answers.restaurant_preference || '',
-      })
+        })
     });
 
     if (!response.ok) {
