@@ -116,7 +116,7 @@ export default function WhatIsTable4SixPage() {
               WHAT IS <em className="italic">TABLE 4 SIX?</em>
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              More than brunch. More than dining. It's where strangers become friends, one Sunday at a time.
+              More than brunch. More than dining. It&apos;s where strangers become friends, one Sunday at a time.
             </p>
           </section>
 
