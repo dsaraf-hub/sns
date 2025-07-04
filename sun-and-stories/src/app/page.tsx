@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 
 // Animated Text Component for the hero title
 function AnimatedText() {
   const phrases = useMemo(() => [
-    { first: "KINDRED", second: "UNKNOWNS" },
+    { first: "UNKNOWN", second: "FRIENDS" },
     { first: "CURIOUS", second: "MINDS" },  
     { first: "", second: "NEWCOMERS" }
   ], []);
@@ -54,6 +54,7 @@ export default function Home() {
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const testimonialCarouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -98,6 +99,15 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [isClient]);
 
+  // Initialize testimonial carousel to start at the middle (original items)
+  useEffect(() => {
+    if (testimonialCarouselRef.current) {
+      const itemWidth = 320 + 24; // card width (320px) + gap (24px)
+      const totalItems = 3; // original number of testimonials
+      testimonialCarouselRef.current.scrollLeft = itemWidth * totalItems;
+    }
+  }, []);
+
   return (
     <main className="min-h-screen flex flex-col">
       <div className="hero-section">
@@ -129,6 +139,8 @@ export default function Home() {
             <nav className="flex items-center text-white">
               <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
               <div className="h-6 w-px bg-white/40 mx-2"></div>
+              <Link href="/what-is-table4six" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">What is Table4Six?</Link>
+              <div className="h-6 w-px bg-white/40 mx-2"></div>
               <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
               <div className="h-6 w-px bg-white/40 mx-2"></div>
               <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
@@ -147,6 +159,13 @@ export default function Home() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
+                </Link>
+                <Link 
+                  href="/what-is-table4six" 
+                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  What is Table4Six?
                 </Link>
                 <Link 
                   href="/faq" 
@@ -196,7 +215,7 @@ export default function Home() {
 
           {/* Description */}
           <p className="text-sm md:text-base mb-4 md:mb-6 max-w-2xl leading-relaxed font-montserrat text-shadow px-4">
-            Six intriguing individuals. One <strong>unforgettable</strong> brunch.
+            Six intriguing individuals.<br className="md:hidden" /> One <strong>unforgettable</strong> brunch.
           </p>
 
           {/* Book Your Seat Button */}
@@ -467,13 +486,40 @@ export default function Home() {
             
             {/* Mobile Carousel */}
             <div className="md:hidden">
-              <div className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory">
-                {[ 
+              <div 
+                ref={testimonialCarouselRef}
+                className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory"
+                onScroll={(e) => {
+                  const container = e.target as HTMLElement;
+                  const itemWidth = 320 + 24; // card width (320px) + gap (24px)
+                  const totalItems = 3; // original number of testimonials
+                  
+                  // When scrolled past the last real item, seamlessly jump to the first real item
+                  if (container.scrollLeft >= itemWidth * totalItems * 2) {
+                    container.scrollLeft = itemWidth * totalItems;
+                  }
+                  // When scrolled before the first real item, seamlessly jump to the last real item
+                  else if (container.scrollLeft <= 0) {
+                    container.scrollLeft = itemWidth * totalItems;
+                  }
+                }}
+              >
+                {/* Create infinite loop: [duplicates] [originals] [duplicates] */}
+                {[
+                  // Last set (for seamless left scroll)
+                  { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
+                  { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+                  { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" },
+                  // Original set (main items)
+                  { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
+                  { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
+                  { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" },
+                  // First set (for seamless right scroll)
                   { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
                   { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
                   { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
                 ].map((testimonial, index) => (
-                  <div key={index} className="testimonial-card flex-shrink-0 w-80 snap-center animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
+                  <div key={index} className="testimonial-card flex-shrink-0 w-80 snap-center animate-fade-in-up" style={{animationDelay: `${0.2 + (index % 3) * 0.1}s`}}>
                     <p className="italic mb-6 text-lg text-white flex-grow">&quot;{testimonial.quote}&quot;</p>
                     <div className="flex items-center mt-auto pt-4 border-t border-white/20">
                       <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
@@ -555,6 +601,7 @@ export default function Home() {
               <h3 className="font-semibold text-lg mb-4 text-white">Quick Links</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/about" className="text-gray-300 hover:text-white transition block py-1">About Us</Link></li>
+                <li><Link href="/what-is-table4six" className="text-gray-300 hover:text-white transition block py-1">What is Table4Six?</Link></li>
                 <li><Link href="/faq" className="text-gray-300 hover:text-white transition block py-1">FAQ</Link></li>
                 <li><Link href="/privacy" className="text-gray-300 hover:text-white transition block py-1">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="text-gray-300 hover:text-white transition block py-1">Terms & Conditions</Link></li>
