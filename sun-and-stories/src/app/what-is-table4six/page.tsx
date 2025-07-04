@@ -126,13 +126,13 @@ export default function WhatIsTable4SixPage() {
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
                 <h3 className="text-2xl font-display font-bold mb-4 text-white">The Experience</h3>
                 <p className="text-white/80 leading-relaxed font-montserrat">
-                  Every Sunday, six carefully matched strangers gather at Mumbai's finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
+                  Every Sunday, six carefully matched strangers gather at Mumbai&apos;s finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
                 </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
                 <h3 className="text-2xl font-display font-bold mb-4 text-white">The Philosophy</h3>
                 <p className="text-white/80 leading-relaxed font-montserrat">
-                  We believe that Mumbai's greatest treasure isn't its skyline or its food — it's its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
+                  We believe that Mumbai&apos;s greatest treasure isn&apos;t its skyline or its food — it&apos;s its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
                 </p>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function WhatIsTable4SixPage() {
               READY TO <em className="italic">EXPERIENCE</em> IT?
             </h2>
             <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Join hundreds of Mumbaikars who've discovered that the best conversations happen over Sunday brunch with the right people.
+              Join hundreds of Mumbaikars who&apos;ve discovered that the best conversations happen over Sunday brunch with the right people.
             </p>
             <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
               Join Your First Table
