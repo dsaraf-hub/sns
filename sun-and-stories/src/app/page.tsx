@@ -63,31 +63,31 @@ export default function Home() {
     {
       step: 1,
       image: '/step1.jpg',
-      title: 'Tell Us More About You',
+      title: 'Tell Us About You',
       description: 'Take a quick personality quiz, so we can match you with a group that vibes with your energy.'
     },
     {
       step: 2,
       image: '/step2.jpg',
-      title: 'Pick Your Dining Date',
+      title: 'Pick Your Date',
       description: 'Choose from curated dining events near you—because good conversations start over great meals!'
     },
     {
       step: 3,
       image: '/step3.jpg',
-      title: 'Get Matched with Like-Minded Individuals',
+      title: 'Get Matched',
       description: 'Our algorithm connects you with five others for an exciting social dining experience.'
     },
     {
       step: 4,
       image: '/step4.jpg',
-      title: 'Dine, Laugh & Connect',
+      title: 'Dine & Connect',
       description: 'Meet up, break the ice, and let the conversations (and connections) flow naturally!'
     },
     {
       step: 5,
       image: '/step5.jpg',
-      title: 'Stay Connected & Keep Stepping Out',
+      title: 'Stay Connected',
       description: 'Choose who you want to stay connected with and keep the conversation flowing.'
     }
   ], []);
@@ -359,17 +359,32 @@ export default function Home() {
               {howItWorksSteps.map(step => (
                 <div
                   key={step.step}
-                  className="how-it-works-card relative bg-white/20 backdrop-blur-md overflow-hidden flex-shrink-0 w-72 sm:w-64 md:w-60 lg:w-60 flex flex-col"
+                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-72 sm:w-64 md:w-60 lg:w-60 h-96 border border-black rounded-2xl"
                 >
-                  <div className="relative h-48 w-full">
-                    <Image src={step.image} alt={step.title} fill className="object-cover" />
-                    <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold">
-                      {step.step}
-                    </div>
+                  {/* Background Image */}
+                  <Image 
+                    src={step.image} 
+                    alt={step.title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                  
+                  {/* Dark overlay for better text readability */}
+                  <div className="absolute inset-0 bg-black/30"></div>
+                  
+                  {/* Step number in top corner */}
+                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold text-lg z-10">
+                    {step.step}
                   </div>
-                  <div className="p-6 flex flex-col flex-1 text-black">
-                    <h3 className="font-bold mb-2 font-montserrat text-black uppercase tracking-wide text-sm">{step.title}</h3>
-                    <p className="text-sm leading-relaxed font-montserrat text-black/80">{step.description}</p>
+                  
+                  {/* Text bubble at bottom */}
+                  <div className="absolute bottom-4 left-4 right-4 text-bubble backdrop-blur-sm rounded-2xl p-4 z-10">
+                    <h3 className="font-bold mb-2 font-montserrat uppercase tracking-wide text-sm leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed font-montserrat">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               ))}
