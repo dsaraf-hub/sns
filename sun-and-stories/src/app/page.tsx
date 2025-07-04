@@ -55,6 +55,8 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const testimonialCarouselRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [isStickyHeaderVisible, setIsStickyHeaderVisible] = useState(false);
 
   // --- HOW IT WORKS DATA ---
   const howItWorksSteps = useMemo(() => [
@@ -89,6 +91,21 @@ export default function Home() {
       description: 'Choose who you want to stay connected with and keep the conversation flowing.'
     }
   ], []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroHeight = heroRef.current.offsetHeight;
+        const scrollPosition = window.scrollY;
+        setIsStickyHeaderVisible(scrollPosition > heroHeight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -144,7 +161,79 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      <div className="hero-section">
+      {/* Mobile slide-out menu - moved to top level */}
+      <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`fixed left-0 top-0 h-full w-64 bg-black/90 backdrop-blur-md transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          {/* Close button at the top */}
+          <div className="flex justify-end p-4">
+            <button 
+              className="text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <div className="flex flex-col px-6 pt-4">
+            <Link 
+              href="/about" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link 
+              href="/faq" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+            <Link 
+              href="/questionnaire" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Join Now
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky Header */}
+      <div 
+        className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md shadow-lg z-50 transition-transform duration-300 ${isStickyHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      >
+        <div className="w-full h-20 flex justify-between items-center px-4 md:px-10">
+          {/* Mobile hamburger menu */}
+          <button 
+            className="text-white z-50 p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+          
+          {/* Centered Logo */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Link href="/" className="flex items-center">
+              <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-20 w-auto" />
+            </Link>
+          </div>
+
+          {/* This div is a spacer to balance the hamburger menu button */}
+          <div className="w-6 h-6"></div>
+        </div>
+      </div>
+
+      <div className="hero-section" ref={heroRef}>
         {/* Header - Responsive navigation */}
         <header className="w-full py-4 px-4 md:px-10 flex justify-between items-center bg-transparent sticky top-0 z-50">
           {/* Mobile hamburger menu */}
@@ -179,35 +268,6 @@ export default function Home() {
                 Join Now
               </Link>
             </nav>
-          </div>
-
-          {/* Mobile slide-out menu */}
-          <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-            <div className={`fixed left-0 top-0 h-full w-64 bg-black/90 backdrop-blur-md transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-              <div className="flex flex-col pt-20 px-6">
-                <Link 
-                  href="/about" 
-                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
-                </Link>
-                <Link 
-                  href="/faq" 
-                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  FAQ
-                </Link>
-                <Link 
-                  href="/questionnaire" 
-                  className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Join Now
-                </Link>
-              </div>
-            </div>
           </div>
         </header>
 
