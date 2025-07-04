@@ -345,8 +345,8 @@ export default function Home() {
 
       <div className="content-section">
         {/* How It Works Section - Now first */}
-        <section className="restaurants-section py-12 md:py-20 px-4 md:px-16">
-          <div className="max-w-7xl mx-auto text-center">
+        <section className="restaurants-section py-12 md:py-20 px-0 md:px-16">
+          <div className="max-w-7xl mx-auto text-center px-4 md:px-0">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW DOES IT <em className="italic">WORK?</em>
             </h2>
@@ -405,19 +405,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Carefully Curated Restaurants Section - Now second with texture */}
-        <section className="px-4 md:px-16 pb-12 md:pb-20 texture-section relative">
-          <div className="max-w-7xl mx-auto text-center relative z-10 pt-12 md:pt-20">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
+        {/* Carefully Curated Restaurants Section - Now with off-white background */}
+        <section className="px-4 md:px-16 pb-12 md:pb-20 py-12 md:py-20" style={{ backgroundColor: '#fffcf5' }}>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW WE SELECT OUR<br />
               <em className="italic">RESTAURANTS?</em>
             </h2>
-            <p className="text-base md:text-xl mb-6 md:mb-8 text-white max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
+            <p className="text-base md:text-xl mb-6 md:mb-8 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
               We handpick restaurants using carefully tailored criteria to guarantee you the finest dining experiences.
             </p>
             
             <div className="max-w-4xl mx-auto animate-fade-in-up px-4" style={{ animationDelay: '0.4s' }}>
-              <p className="text-sm md:text-lg text-white/90 leading-relaxed font-montserrat">
+              <p className="text-sm md:text-lg text-black leading-relaxed font-montserrat">
                 Our selection process involves a rigorous evaluation of each establishment&apos;s culinary excellence, 
                 ambiance, service quality, and overall dining experience. We consider factors such as ingredient 
                 sourcing, chef expertise, menu diversity, dietary accommodations, and customer satisfaction ratings. 
@@ -426,7 +426,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 md:h-170" style={{background: 'linear-gradient(to top, #18181b 0%, #18181b 5%, transparent 100%)'}}></div>
         </section>
 
         {/* Sections with background image */}
