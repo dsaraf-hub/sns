@@ -300,7 +300,7 @@ export default function Home() {
               HOW DOES IT <em className="italic">WORK?</em>
             </h2>
             <p className="text-base md:text-xl mb-8 md:mb-12 text-black max-w-3xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
-              We&apos;ve designed a simple, seamless process to connect you with new people over a shared meal. Here's the journey from signing up to saying cheers at brunch.
+              We&apos;ve designed a simple, seamless process to connect you with new people over a shared meal. Here&apos;s the journey from signing up to saying cheers at brunch.
             </p>
             
             {/* --- REPLACED BULLET LIST WITH CARD LAYOUT --- */}
