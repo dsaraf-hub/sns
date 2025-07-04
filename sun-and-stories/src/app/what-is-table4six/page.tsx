@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function AboutPage() {
+export default function WhatIsTable4SixPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -20,24 +20,6 @@ export default function AboutPage() {
             quality={100}
           />
         </div>
-        {/* <div className="absolute top-[100vh] left-0 w-full h-screen">
-          <Image
-            src="/background2.jpg"
-            alt="Abstract background 2"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-          />
-        </div>
-        <div className="absolute top-[200vh] left-0 w-full h-screen">
-          <Image
-            src="/background3.jpg"
-            alt="Abstract background 3"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-          />
-        </div> */}
       </div>
 
       {/* Header */}
@@ -68,7 +50,11 @@ export default function AboutPage() {
           <nav className="flex items-center text-white">
             <Link href="/" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">Home</Link>
             <div className="h-6 w-px bg-white/40 mx-2"></div>
+            <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
+            <div className="h-6 w-px bg-white/40 mx-2"></div>
             <Link href="/what-is-table4six" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">What is Table4Six?</Link>
+            <div className="h-6 w-px bg-white/40 mx-2"></div>
+            <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
             <div className="h-6 w-px bg-white/40 mx-2"></div>
             <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
               Join Now
@@ -88,11 +74,25 @@ export default function AboutPage() {
                 Home
               </Link>
               <Link 
+                href="/about" 
+                className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link 
                 href="/what-is-table4six" 
                 className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 What is Table4Six?
+              </Link>
+              <Link 
+                href="/faq" 
+                className="text-white font-semibold py-4 border-b border-white/20 font-montserrat"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                FAQ
               </Link>
               <Link 
                 href="/questionnaire" 
@@ -109,58 +109,99 @@ export default function AboutPage() {
       {/* Main Content */}
       <main className="relative z-10 p-4 md:p-8">
         <div className="w-full max-w-4xl mx-auto bg-black/40 backdrop-blur-lg border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl space-y-12 md:space-y-16 mt-8">
+          
           {/* Hero Section */}
-            <section className="text-center">
-              <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
-                THE STORY OF <em className="italic">TABLE 4 SIX</em>
+          <section className="text-center">
+            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
+              WHAT IS <em className="italic">TABLE 4 SIX?</em>
             </h1>
-              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Born from a simple question: &ldquo;What if strangers could become friends over Sunday brunch?&rdquo;
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              More than brunch. More than dining. It&apos;s where strangers become friends, one Sunday at a time.
             </p>
-            </section>
+          </section>
 
-          {/* Origin Story */}
-            <section>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-white text-center">
-              THE MUMBAI <em className="italic">BEGINNING</em>
-            </h2>
-              <div className="space-y-6 text-base md:text-lg leading-relaxed font-montserrat text-white/90">
-                <p>
-                  July 2023. Three college friends — <strong>Arjun</strong>, <strong>Priya</strong>, and <strong>Vikram</strong> — sat in their usual Bandra café, scrolling phones and complaining: &ldquo;There&apos;s nothing interesting to do in Mumbai anymore.&rdquo;
+          {/* The Concept */}
+          <section>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">The Experience</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  Every Sunday, six carefully matched strangers gather at Mumbai&apos;s finest restaurants for a curated brunch experience. No agendas, no expectations — just authentic conversation, incredible food, and the possibility of genuine connection.
                 </p>
-                <p>
-                Arjun missed the spontaneous connections from his London days. Priya met fascinating people at work but never socially. Vikram wondered: &ldquo;What if we could recreate that travel magic right here?&rdquo;
-              </p>
-                <p>
-                The idea was simple: invite three strangers to Sunday brunch. They posted: <em>&ldquo;Three strangers wanted for Sunday brunch. Come curious, leave connected.&rdquo;</em>
-              </p>
-                <p>
-                That first brunch lasted four hours. Six strangers became friends, sharing dreams, struggles, and hidden Mumbai spots. The magic was undeniable.
-              </p>
-                <p>
-                By December 2023, <strong>Table 4 Six</strong> had grown into a weekly ritual, transforming Sunday brunches into adventures of human connection across Mumbai.
-              </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">The Philosophy</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  We believe that Mumbai&apos;s greatest treasure isn&apos;t its skyline or its food — it&apos;s its people. Table 4 Six creates intentional spaces for meaningful encounters, proving that the most interesting conversations happen when strangers become friends.
+                </p>
+              </div>
             </div>
           </section>
 
+          {/* How It Works in Detail */}
+          <section>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-white text-center">
+              HOW DOES IT <em className="italic">WORK?</em>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">1</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Tell Us About You</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Take our thoughtful questionnaire that goes beyond the surface to understand your personality, interests, and what makes you tick.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">2</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Get Matched</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Our algorithm pairs you with five other fascinating individuals who complement your energy and share your curiosity about connecting with new people.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl text-center">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold">3</span>
+                </div>
+                <h3 className="text-xl font-display font-bold mb-3 text-white">Join the Table</h3>
+                <p className="text-white/80 text-sm leading-relaxed font-montserrat">
+                  Meet at a carefully selected restaurant, break bread with your new tablemates, and let the magic of genuine conversation unfold naturally.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Our Promise */}
+          <section>
+            <div className="text-center">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/20 p-6 md:p-8 rounded-xl max-w-3xl mx-auto">
+                <h3 className="text-2xl font-display font-bold mb-4 text-white">Our Promise</h3>
+                <p className="text-white/80 leading-relaxed font-montserrat">
+                  Every table is thoughtfully curated. Every restaurant is personally vetted. Every Sunday offers a chance to discover not just new friends, but new perspectives on life in this incredible city we call home.
+                </p>
+              </div>
+            </div>
+          </section>
 
           {/* Call to Action */}
           <section className="text-center">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">
-              READY TO JOIN <em className="italic">THE TABLE?</em>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 text-white">
+              READY TO <em className="italic">EXPERIENCE</em> IT?
             </h2>
-              <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Your next great friendship might be just one Sunday brunch away. 
-              Take the leap, trust the process, and let us introduce you to the extraordinary people of Mumbai.
+            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed font-montserrat">
+              Join hundreds of Mumbaikars who&apos;ve discovered that the best conversations happen over Sunday brunch with the right people.
             </p>
-              <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
-                Join Now
-              </Link>
+            <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
+              Join Your First Table
+            </Link>
           </section>
         </div>
       </main>
 
-      {/* Footer - Themed */}
+      {/* Footer */}
       <footer className="relative z-10 bg-black mt-16 py-12 px-6 md:px-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-white">
           <div>
@@ -170,16 +211,6 @@ export default function AboutPage() {
             <p className="mb-4 max-w-xs leading-relaxed text-sm text-gray-300">
               Crafting memorable Sunday brunches that spark connection and conversation in the heart of Mumbai.
             </p>
-            <div className="flex gap-3 mt-5">
-              {[1,2].map(i => ( // Placeholder for social icons
-                <a key={i} href="#" className="w-10 h-10 bg-gray-800 text-white hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    {i === 1 ? <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/> : 
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>}
-                  </svg>
-                </a>
-              ))}
-            </div>
           </div>
           <div>
             <h3 className="font-semibold text-lg mb-4 text-white">Quick Links</h3>
