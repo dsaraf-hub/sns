@@ -95,7 +95,7 @@ export default function PrivacyPage() {
         {/* Mobile Logo - centered */}
         <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Table 4 Six Logo" width={80} height={80} className="h-12 w-auto" />
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={80} height={80} className="h-20 w-auto" />
           </Link>
         </div>
 
