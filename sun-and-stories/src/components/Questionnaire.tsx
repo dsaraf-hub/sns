@@ -462,7 +462,7 @@ export default function Questionnaire() {
     
     return (
       <div className={`w-full ${transitionClass}`}>
-        <h2 className="text-2xl sm:text-3xl font-display font-semibold mb-6 md:mb-8 text-center text-white leading-tight px-2">{question}</h2>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-semibold mb-4 sm:mb-6 md:mb-8 text-center text-white leading-tight px-1 sm:px-2">{question}</h2>
         
         {type === 'text' || type === 'email' || type === 'instagram' ? (
           <input
@@ -474,11 +474,11 @@ export default function Questionnaire() {
             onChange={(e) => handleInputChange(e.target.value)}
           />
         ) : type === 'radio' ? (
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {options.map((option) => (
               <div 
                 key={option.value}
-                className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
+                className={`flex items-center p-3 sm:p-3 md:p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
                   answers[id] === option.value 
                     ? 'border-white bg-white/20 backdrop-blur-sm' 
                     : 'border-white/30 bg-white/5 hover:bg-white/10'
@@ -496,7 +496,7 @@ export default function Questionnaire() {
                     </svg>
                   )}
                 </div>
-                <span className="text-base md:text-lg font-medium text-white leading-relaxed">{option.label}</span>
+                <span className="text-sm sm:text-base md:text-lg font-medium text-white leading-relaxed">{option.label}</span>
               </div>
             ))}
           </div>
@@ -506,12 +506,12 @@ export default function Questionnaire() {
               <span className="text-sm md:text-base text-white/80 font-medium">{scaleLabels?.min || '1'}</span>
               <span className="text-sm md:text-base text-white/80 font-medium">{scaleLabels?.max || '10'}</span>
             </div>
-            <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 md:gap-3">
+            <div className="grid grid-cols-5 lg:grid-cols-10 gap-1.5 sm:gap-2 md:gap-3">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                 <button
                   key={value}
                   type="button"
-                  className={`h-10 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium text-sm md:text-base ${
+                  className={`h-12 sm:h-10 flex items-center justify-center rounded-lg border transition-all duration-200 font-medium text-sm md:text-base ${
                     parseInt(answers[id] || '0') === value 
                       ? 'border-white bg-white text-black' 
                       : 'border-white/30 bg-white/5 hover:bg-white/10 text-white'
@@ -754,30 +754,27 @@ export default function Questionnaire() {
         <div className="md:hidden w-10 h-10"></div>
       </header>
       
-      {/* Progress bar container with landing page styling */}
-      <div className="w-full px-4 md:px-16 py-8 md:py-12 mt-6 md:mt-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-white/20 backdrop-blur-sm rounded-full h-2 overflow-hidden">
+      {/* Questionnaire content area - Mobile optimized */}
+      <main className="flex-1 flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 min-h-0">
+        {/* Progress bar - Above questionnaire pane */}
+        <div className="w-full max-w-2xl mb-4 sm:mb-6">
+          <div className="bg-white/20 backdrop-blur-sm rounded-full h-1.5 sm:h-2 overflow-hidden">
             <div 
               className="bg-white h-full rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
         </div>
-      </div>
-
-      {/* Questionnaire content area - Landing page style */}
-      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 rounded-2xl shadow-2xl">
+        <div className="w-full max-w-2xl bg-black/30 backdrop-blur-sm border border-white/20 text-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-2xl my-4 sm:my-6 md:my-8">
           {renderSectionHeader()}
           {renderQuestion()}
           
-          {/* Navigation buttons - Landing page style */}
-          <div className="flex justify-between mt-8 md:mt-12 pt-4 md:pt-6 border-t border-white/20 gap-4">
+          {/* Navigation buttons - Mobile optimized */}
+          <div className="flex justify-between mt-6 sm:mt-8 md:mt-12 pt-3 sm:pt-4 md:pt-6 border-t border-white/20 gap-3 sm:gap-4">
             <button
               onClick={handlePreviousQuestion}
               disabled={currentQuestionIndex === 0}
-              className={`bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-full transition-colors text-sm md:text-base ${
+              className={`bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-2.5 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-full transition-colors text-sm md:text-base ${
                 currentQuestionIndex === 0
                   ? 'opacity-50 cursor-not-allowed'
                   : ''
@@ -793,7 +790,7 @@ export default function Questionnaire() {
                   : handleNextQuestion
               }
               disabled={loading || !answers[currentQuestion.id]}
-              className={`bg-white text-black hover:bg-white/90 font-semibold py-2.5 md:py-3 px-6 md:px-8 rounded-full transition-colors text-sm md:text-base ${
+              className={`bg-white text-black hover:bg-white/90 font-semibold py-2.5 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-full transition-colors text-sm md:text-base flex-1 max-w-xs ${
                 !answers[currentQuestion.id]
                   ? 'opacity-60 cursor-not-allowed'
                   : '' // Normal hover state is handled by .btn-accent:hover
