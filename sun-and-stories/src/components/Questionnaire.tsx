@@ -290,6 +290,7 @@ export default function Questionnaire() {
   const [loading, setLoading] = useState(false);
   const [transitionClass, setTransitionClass] = useState("animate-fade-in");
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -667,17 +668,94 @@ export default function Questionnaire() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header - Centered logo design */}
-      <header className="w-full py-4 md:py-6 px-4 md:px-10 flex flex-col items-center bg-transparent">
-        <div className="mb-3 md:mb-4">
+      {/* Mobile slide-out menu */}
+      <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`fixed left-0 top-0 h-full w-64 bg-black/90 backdrop-blur-md transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          {/* Close button at the top */}
+          <div className="flex justify-end p-4">
+            <button 
+              className="text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <div className="flex flex-col px-6 pt-4">
+            <Link 
+              href="/" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link 
+              href="/about" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link 
+              href="/faq" 
+              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Header - Standardized */}
+      <header className="w-full py-2 px-4 md:px-10 flex justify-between items-center bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+        {/* Mobile hamburger menu */}
+        <button 
+          className="md:hidden text-white z-50 p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Mobile Logo - centered */}
+        <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-20 md:h-24 lg:h-32 w-auto" />
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={80} height={80} className="h-12 w-auto" />
           </Link>
         </div>
+
+        {/* Desktop Logo - left aligned */}
+        <div className="hidden md:flex flex-1 justify-start">
+          <Link href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-16 lg:h-18 w-auto ml-4" />
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex flex-1 justify-end">
+          <nav className="flex items-center text-white">
+            <Link href="/" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">Home</Link>
+            <div className="h-6 w-px bg-white/40 mx-2"></div>
+            <Link href="/about" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">About</Link>
+            <div className="h-6 w-px bg-white/40 mx-2"></div>
+            <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
+          </nav>
+        </div>
+
+        {/* Spacer for mobile menu balance */}
+        <div className="md:hidden w-10 h-10"></div>
       </header>
       
       {/* Progress bar container with landing page styling */}
-      <div className="w-full px-4 md:px-16 py-4 md:py-6">
+      <div className="w-full px-4 md:px-16 py-8 md:py-12 mt-6 md:mt-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white/20 backdrop-blur-sm rounded-full h-2 overflow-hidden">
             <div 

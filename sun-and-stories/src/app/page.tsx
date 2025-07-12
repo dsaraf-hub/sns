@@ -150,11 +150,11 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [isClient]);
 
-  // Initialize testimonial carousel to start at the middle (original items)
+  // Initialize restaurant carousel to start at the middle (original items)
   useEffect(() => {
     if (testimonialCarouselRef.current) {
       const itemWidth = 320 + 24; // card width (320px) + gap (24px)
-      const totalItems = 3; // original number of testimonials
+      const totalItems = 6; // original number of restaurants
       testimonialCarouselRef.current.scrollLeft = itemWidth * totalItems;
     }
   }, []);
@@ -305,7 +305,7 @@ export default function Home() {
 
           {/* Book Your Seat Button */}
           <Link href="/questionnaire" className="bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 text-white font-semibold py-3 px-6 md:px-8 rounded-full text-sm md:text-base mb-6 md:mb-8 transition-colors shadow-sm inline-block font-montserrat">
-            Join the Table
+            Join the Waitlist
           </Link>
 
           {/* Countdown Timer */}
@@ -428,91 +428,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sections with background image */}
-        <div className="hero-section-alt">
-          {/* Testimonials section - Updated for background */}
-          <section className="py-12 md:py-20 px-4 md:px-16 relative">
-            {/* Top fade overlay for smooth transition from above section */}
-            <div className="pointer-events-none absolute left-0 right-0 top-0 h-50 md:h-300" style={{background: 'linear-gradient(to bottom, #18181b 0%, #18181b 5%, transparent 100%)'}}></div>
-            <div className="relative z-10">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 md:mb-6 text-center text-white animate-fade-in-up px-2">What Our Guests Say</h2>
-            <p className="text-center mb-8 md:mb-16 max-w-xl mx-auto text-sm md:text-lg text-white/90 leading-relaxed animate-fade-in-up px-4" style={{ animationDelay: '0.1s' }}>Real stories from a community built on connection.</p>
+        {/* Restaurant Picks section - Extended white background */}
+        <section className="py-12 md:py-20 px-4 md:px-16" style={{ backgroundColor: '#fffcf5' }}>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
+              OUR TOP <em className="italic">PICKS</em>
+            </h2>
+            <p className="text-base md:text-xl mb-8 md:mb-12 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
+              Handpicked restaurants where unforgettable conversations happen.
+            </p>
             
-            {/* Mobile Carousel */}
-            <div className="md:hidden">
-              <div 
-                ref={testimonialCarouselRef}
-                className="flex overflow-x-auto gap-6 pb-4 px-4 scrollbar-hide snap-x snap-mandatory"
-                onScroll={(e) => {
-                  const container = e.target as HTMLElement;
-                  const itemWidth = 320 + 24; // card width (320px) + gap (24px)
-                  const totalItems = 3; // original number of testimonials
-                  
-                  // When scrolled past the last real item, seamlessly jump to the first real item
-                  if (container.scrollLeft >= itemWidth * totalItems * 2) {
-                    container.scrollLeft = itemWidth * totalItems;
-                  }
-                  // When scrolled before the first real item, seamlessly jump to the last real item
-                  else if (container.scrollLeft <= 0) {
-                    container.scrollLeft = itemWidth * totalItems;
-                  }
-                }}
-              >
-                {/* Create infinite loop: [duplicates] [originals] [duplicates] */}
-                {[
-                  // Last set (for seamless left scroll)
-                  { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-                  { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-                  { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" },
-                  // Original set (main items)
-                  { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-                  { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-                  { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" },
-                  // First set (for seamless right scroll)
-                  { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-                  { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-                  { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
-                ].map((testimonial, index) => (
-                  <div key={index} className="testimonial-card flex-shrink-0 w-80 snap-center animate-fade-in-up" style={{animationDelay: `${0.2 + (index % 3) * 0.1}s`}}>
-                    <p className="italic mb-6 text-lg text-white flex-grow">&quot;{testimonial.quote}&quot;</p>
-                    <div className="flex items-center mt-auto pt-4 border-t border-white/20">
-                      <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
-                        {testimonial.initials}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-lg text-white">{testimonial.name}</div>
-                        <div className="text-sm text-white/80">{testimonial.location}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop Grid */}
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {[ 
-                { quote: "It was a refreshing change of pace. I met some genuinely interesting people I wouldn&apos;t have otherwise. The vibe was just right.", name: "Sneha R.", location: "Juhu, Mumbai", color: "var(--accent)", initials: "SR" },
-                { quote: "Loved the concept and the execution! The matching felt intentional, and the conversation flowed so naturally. Can&apos;t wait for the next one.", name: "Vikram A.", location: "Bandra, Mumbai", color: "var(--primary)", initials: "VA" },
-                { quote: "Table 4 Six is my new favorite Sunday ritual. It&apos;s the perfect antidote to a busy week. Great food, even better company.", name: "Anjali M.", location: "Lower Parel, Mumbai", color: "var(--secondary)", initials: "AM" }
-              ].map((testimonial, index) => (
-                <div key={index} className="testimonial-card animate-fade-in-up" style={{animationDelay: `${0.2 + index * 0.1}s`}}>
-                  <p className="italic mb-6 text-lg text-white flex-grow">&quot;{testimonial.quote}&quot;</p>
-                  <div className="flex items-center mt-auto pt-4 border-t border-white/20">
-                    <div className="w-12 h-12 rounded-full mr-4 overflow-hidden relative shadow-sm flex items-center justify-center text-white font-semibold text-xl" style={{backgroundColor: testimonial.color}}>
-                      {testimonial.initials}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-lg text-white">{testimonial.name}</div>
-                      <div className="text-sm text-white/80">{testimonial.location}</div>
-                    </div>
-                  </div>
+            {/* Restaurant Logos Grid */}
+            <div className="flex justify-start items-center gap-4 md:gap-8 max-w-6xl mx-auto animate-fade-in-up overflow-x-auto scrollbar-hide px-6 lg:justify-center lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:px-4" style={{ animationDelay: '0.4s' }}>
+              {[
+                { name: "Americano", logo: "/restaurants/americano_logo.png" },
+                { name: "Bastian", logo: "/restaurants/bastian_logo.png" },
+                { name: "The Little Door", logo: "/restaurants/littledoor_logo.png" },
+                { name: "The Daily", logo: "/restaurants/thedaily_logo.png" },
+                { name: "The Little Easy", logo: "/restaurants/thelittleeasy_logo.png" },
+                { name: "Gigi", logo: "/restaurants/gigi_logo.png" }
+              ].map((restaurant, index) => (
+                <div key={index} className={`relative ${index === 3 ? 'w-38 h-28 md:w-52 md:h-38 lg:w-80 lg:h-60' : index === 4 ? 'w-34 h-25 md:w-47 md:h-34 lg:w-72 lg:h-54' : 'w-48 h-36 md:w-64 md:h-48 lg:w-96 lg:h-72'} flex-shrink-0 lg:flex-shrink transition-transform duration-300 hover:scale-105 lg:justify-self-center`} style={{animationDelay: `${0.2 + index * 0.1}s`}}>
+                  <Image 
+                    src={restaurant.logo} 
+                    alt={`${restaurant.name} logo`} 
+                    fill 
+                    className="object-contain"
+                  />
                 </div>
               ))}
               </div>
             </div>
           </section>
 
+        {/* Sections with background image */}
+        <div className="hero-section-alt">
           {/* Join CTA section - Updated for background */}
           <section className="py-16 md:py-24 px-4 md:px-16 relative">
             <div className="relative z-10 max-w-3xl mx-auto text-center">

@@ -413,9 +413,9 @@ h1, h2, h3, h4, h5 {
   transition: width 0.5s ease-in-out;
 }
 
-/* Testimonial Cards for Background Section - Glassmorphism */
+/* Restaurant Cards for Background Section - Glassmorphism */
 .testimonial-card {
-  padding: 32px;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -424,6 +424,7 @@ h1, h2, h3, h4, h5 {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .testimonial-card:hover {
@@ -431,6 +432,85 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
   background: rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Restaurant Card Specific Styles */
+.restaurant-card {
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.restaurant-card .restaurant-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.restaurant-card .restaurant-image img {
+  transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover .restaurant-image img {
+  transform: scale(1.05);
+}
+
+.restaurant-info {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.restaurant-cuisine {
+  color: #fbbf24;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.restaurant-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.restaurant-location {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+}
+
+.restaurant-location svg {
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
 /* Square Step Cards */
