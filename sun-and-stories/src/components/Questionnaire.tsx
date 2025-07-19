@@ -828,8 +828,8 @@ export default function Questionnaire() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2">You're on the Waitlist!</h3>
-              <p className="text-white/80 mb-6 text-sm md:text-base">You'll receive an email shortly with further instructions.</p>
+              <h3 className="text-xl md:text-2xl font-bold mb-2">You&apos;re on the Waitlist!</h3>
+              <p className="text-white/80 mb-6 text-sm md:text-base">You&apos;ll receive an email shortly with further instructions.</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-xl mb-6 border border-white/20">
