@@ -188,7 +188,7 @@ Each form submission creates a new row with:
 | B | Location | Preferred brunch area | SoBo, West Mumbai |
 | C | Name | User's full name | John Doe |
 | D | Age | User's age | 28 |
-| E | Social Handle | Instagram/LinkedIn | @johndoe |
+| E | Social Handle | Instagram | @johndoe |
 | F | Sunday Vibe | Sunday personality | Cozy soul wrapped in blanket |
 | G | Personality Type | Self-description | The funny one |
 | H | Fashion Statement | Life as fashion | Comfort is key |

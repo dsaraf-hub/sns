@@ -29,7 +29,7 @@ P1: Restaurant Preference
 - Location: "SoBo" or "West Mumbai"
 - Name: Text
 - Age: Number or text (e.g., "25" or "25 but feel 22")
-- Social Handle: Text (Instagram/LinkedIn handle)
+- Social Handle: Text (Instagram handle)
 - Sunday Vibe: Text (how they spend Sundays)
 - Personality Type: Text (funny, smart, observant, etc.)
 - Fashion Statement: Text (life as fashion choice)

@@ -108,10 +108,17 @@ const questions: Question[] = [
     required: true,
   },
   {
+    id: 'email',
+    type: 'email',
+    question: 'What\'s your email address?',
+    placeholder: 'your.email@example.com',
+    required: true,
+  },
+  {
     id: 'social',
     type: 'text',
-    question: 'Drop your Instagram or LinkedIn, if you\'re cool with it.',
-    placeholder: '@yourhandle or linkedin.com/in/yourprofile',
+    question: 'Drop your Instagram, if you\'re cool with it.',
+    placeholder: '@yourhandle',
     required: false,
   },
   {
@@ -220,19 +227,12 @@ const questions: Question[] = [
     required: true,
   },
   {
-    id: 'ticket',
-    type: 'ticket',
-    question: 'Select your Table4Six ticket',
-    ticketOptions: [
-      {
-        value: 'table4six_ticket',
-        title: 'One Table4Six ticket',
-        price: '₹ 399',
-        description: [
-          'This price includes one curated Table4Six experience with a like-minded group',
-          'Meal cost to be paid at the restaurant'
-        ]
-      }
+    id: 'date',
+    type: 'radio',
+    question: 'Which date would you like to join us for brunch?',
+    options: [
+      { value: '2025-08-10', label: '10th August, 2025' },
+      { value: '2025-08-24', label: '24th August, 2025' },
     ],
     required: true,
   },
@@ -272,15 +272,34 @@ const questions: Question[] = [
     ],
     required: true,
   },
+  {
+    id: 'ticket',
+    type: 'ticket',
+    question: 'Select your Table4Six ticket',
+    ticketOptions: [
+      {
+        value: 'table4six_ticket',
+        title: 'One Table4Six ticket',
+        price: '₹ 399',
+        description: [
+          'Sign up now, Pay Later',
+          'This price includes one curated Table4Six experience with a like-minded group',
+          'Meal cost to be paid at the restaurant'
+        ]
+      }
+    ],
+    required: true,
+  },
 ];
 
 // Section headers mapping for grouping
 const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
   0: { title: "Let's get to know you", subtitle: "Tell us about your brunch preferences" },
-  4: { title: 'Your personality vibe', subtitle: "Help us understand who you are" },
-  10: { title: "Final questions", subtitle: "Almost done!" },
-  13: { title: "Choose your experience", subtitle: "Select your Table4Six ticket" },
-  14: { title: "Choose your dining experience", subtitle: "Select your restaurant preference" },
+  5: { title: 'Your personality vibe', subtitle: "Help us understand who you are" },
+  11: { title: "Final questions", subtitle: "Almost done!" },
+  14: { title: "Pick your date", subtitle: "Choose when you'd like to join us" },
+  15: { title: "Choose your dining experience", subtitle: "Select your restaurant preference" },
+  16: { title: "Choose your experience", subtitle: "Select your Table4Six ticket" },
 };
 
 export default function Questionnaire() {
@@ -336,83 +355,65 @@ export default function Questionnaire() {
       // Submit to Google Sheets
       await submitToGoogleSheets(answers);
       console.log('✅ Successfully submitted to Google Sheets:', answers);
+      
+      // Send welcome email
+      await sendWelcomeEmail(answers);
+      
+      // Show waitlist confirmation instead of payment
+      await showWaitlistConfirmation();
     } catch (error) {
       console.error('❌ Error submitting to Google Sheets:', error);
-      // Continue to payment even if submission fails
-      // In production, you might want to show a warning to the user
+      // Still try to send email and show confirmation even if sheets fails
+      try {
+        await sendWelcomeEmail(answers);
+      } catch (emailError) {
+        console.error('❌ Error sending welcome email:', emailError);
+      }
+      await showWaitlistConfirmation();
     }
-    
-    // Open payment gateway
-    await openPaymentGateway();
   };
 
-  const openPaymentGateway = async () => {
-    // For demo purposes, show a payment modal
-    // In production, you would integrate with actual payment gateway
+  const sendWelcomeEmail = async (answers: Record<string, string>) => {
+    console.log('📧 Sending welcome email...');
+
+    const response = await fetch('/api/send-welcome-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: answers.name || '',
+        email: answers.email || '',
+        date: answers.date || '',
+        location: answers.location || '',
+        restaurant_preference: answers.restaurant_preference || '',
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Email API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorData
+      });
+      throw new Error(`Email sending failed: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log('📧 Welcome email sent successfully:', result);
+    return result;
+  };
+
+  const showWaitlistConfirmation = async () => {
+    // Show waitlist confirmation modal
     setShowPaymentModal(true);
     setLoading(false);
-    
-    // Uncomment below for actual Razorpay integration
-    /*
-    // Load Razorpay script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-    script.onload = () => {
-      initializePayment();
-    };
-    document.body.appendChild(script);
-    */
   };
 
-  // Commented out for demo - uncomment for actual Razorpay integration
-  // const initializePayment = () => {
-  //   const options: RazorpayOptions = {
-  //     key: 'rzp_test_1234567890', // Replace with your Razorpay key
-  //     amount: 39900, // Amount in paise (₹399 = 39900 paise)
-  //     currency: 'INR',
-  //     name: 'Table 4 Six',
-  //     description: 'Table4Six Experience Ticket',
-  //     image: '/logo.png',
-  //     handler: function (response: RazorpayResponse) {
-  //       console.log('Payment successful:', response);
-  //       // Handle successful payment
-  //       handlePaymentSuccess(response);
-  //     },
-  //     prefill: {
-  //       name: answers.name || '',
-  //       email: '', // Add email field to questionnaire if needed
-  //       contact: '', // Add phone field to questionnaire if needed
-  //     },
-  //     notes: {
-  //       location: answers.location || '',
-  //       restaurant_preference: answers.restaurant_preference || '',
-  //     },
-  //     theme: {
-  //       color: '#FF6B35'
-  //     },
-  //     modal: {
-  //       ondismiss: function() {
-  //         console.log('Payment cancelled');
-  //         setLoading(false);
-  //         // Optionally show a message or allow retry
-  //       }
-  //     }
-  //   };
 
-  //   const rzp = new window.Razorpay(options);
-  //   rzp.open();
-  // };
 
-  const handlePaymentSuccess = (response: RazorpayResponse) => {
-    console.log('Payment Response:', response);
-    // Here you would typically:
-    // 1. Verify payment on your backend
-    // 2. Update user status in database
-    // 3. Send confirmation email
-    
-    // For now, redirect to confirmation page
-    router.push('/confirmation');
-  };
+
 
   // Google Sheets submission function
   const submitToGoogleSheets = async (answers: Record<string, string>) => {
@@ -427,6 +428,7 @@ export default function Questionnaire() {
         location: answers.location || '',
         name: answers.name || '',
         age: answers.age || '',
+        email: answers.email || '',
         social: answers.social || '',
         sunday_vibe: answers.sunday_vibe || '',
         personality_type: answers.personality_type || '',
@@ -437,8 +439,9 @@ export default function Questionnaire() {
         humor: answers.humor || '',
         workout: answers.workout || '',
         motivation: answers.motivation || '',
-        ticket: answers.ticket || '',
+        date: answers.date || '',
         restaurant_preference: answers.restaurant_preference || '',
+        ticket: answers.ticket || '',
         })
     });
 
@@ -523,6 +526,7 @@ export default function Questionnaire() {
               ))}
             </div>
           </div>
+
         ) : type === 'ticket' ? (
           <div className="space-y-4">
             {ticketOptions.map((ticket) => (
@@ -799,7 +803,7 @@ export default function Questionnaire() {
               {loading 
                 ? 'Processing...' 
                 : currentQuestionIndex === questions.length - 1 
-                  ? 'Proceed to Payment' 
+                  ? 'Join Waitlist' 
                   : 'Next Question'}
             </button>
           </div>
@@ -814,61 +818,57 @@ export default function Questionnaire() {
         </div>
       )}
 
-      {/* Payment Modal */}
+      {/* Waitlist Confirmation Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full">
             <div className="text-center mb-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/30">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-white">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-green-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-green-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2">Complete Your Payment</h3>
-              <p className="text-white/80 mb-6 text-sm md:text-base">Secure your Table4Six experience</p>
+              <h3 className="text-xl md:text-2xl font-bold mb-2">You're on the Waitlist!</h3>
+              <p className="text-white/80 mb-6 text-sm md:text-base">You'll receive an email shortly with further instructions.</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-xl mb-6 border border-white/20">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-white/80 text-sm md:text-base">Table4Six Ticket</span>
-                <span className="font-bold text-sm md:text-base">₹399</span>
+              <div className="text-center mb-3">
+                <span className="text-white/80 text-sm md:text-base font-medium">Your Brunch Details:</span>
               </div>
-              <div className="flex justify-between items-center text-xs md:text-sm text-white/60">
-                <span>Location: {answers.location === 'sobo' ? 'SoBo' : 'West Mumbai'}</span>
-              </div>
-              <div className="flex justify-between items-center text-xs md:text-sm text-white/60">
-                <span>Restaurant: {answers.restaurant_preference?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+              <div className="space-y-2 text-xs md:text-sm text-white/80">
+                <div className="flex justify-between items-center">
+                  <span>Date:</span>
+                  <span className="font-medium">{answers.date === '2025-08-10' ? '10th August, 2025' : '24th August, 2025'}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Location:</span>
+                  <span className="font-medium">{answers.location === 'sobo' ? 'SoBo' : 'West Mumbai'}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Dining Package:</span>
+                  <span className="font-medium">{answers.restaurant_preference?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Ticket Price:</span>
+                  <span className="font-medium">₹399</span>
+                </div>
               </div>
             </div>
 
             <div className="space-y-3">
               <button
                 onClick={() => {
-                  // Simulate payment processing
-                  setLoading(true);
-                  setTimeout(() => {
-                    handlePaymentSuccess({ payment_id: 'demo_' + Date.now() });
-                  }, 2000);
+                  router.push('/confirmation');
                 }}
-                disabled={loading}
                 className="w-full bg-white text-black hover:bg-white/90 font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
               >
-                {loading ? 'Processing Payment...' : 'Pay ₹399'}
-              </button>
-              
-              <button
-                onClick={() => {
-                  setShowPaymentModal(false);
-                  setLoading(false);
-                }}
-                className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
-              >
-                Cancel
+                Continue
               </button>
             </div>
 
             <p className="text-xs text-white/60 text-center mt-4">
-              🔒 This is a demo payment gateway. No actual payment will be processed.
+              ✉️ Check your email for payment instructions and event details.
             </p>
           </div>
         </div>

@@ -575,6 +575,8 @@ h1, h2, h3, h4, h5 {
   display: none;  /* Safari and Chrome */
 }
 
+
+
 /* Responsive adjustments for square cards */
 @media (max-width: 1024px) {
   .square-step-card {
@@ -615,29 +617,29 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 1 - Deep Brown Bubble */
+/* Step 1 - Bright Blue Bubble */
 .how-it-works-card:nth-child(1) .text-bubble {
-  background: linear-gradient(135deg, #3C2415 0%, #5D3A29 50%, #4A2C1A 100%);
+  background: #BFDBFE;
 }
 
-/* Step 2 - Deep Orange Bubble */
+/* Step 2 - Bright Orange Bubble */
 .how-it-works-card:nth-child(2) .text-bubble {
-  background: linear-gradient(135deg, #CC4125 0%, #E85A4F 50%, #B8391A 100%);
+  background: #FDBA74;
 }
 
-/* Step 3 - Deep Green Bubble */
+/* Step 3 - Bright Green Bubble */
 .how-it-works-card:nth-child(3) .text-bubble {
-  background: linear-gradient(135deg, #2D5016 0%, #4A7C59 50%, #355E3B 100%);
+  background: #86EFAC;
 }
 
-/* Step 4 - Deep Maroon Bubble */
+/* Step 4 - Bright Purple Bubble */
 .how-it-works-card:nth-child(4) .text-bubble {
-  background: linear-gradient(135deg, #722F37 0%, #A0434C 50%, #8B2635 100%);
+  background: #C4B5FD;
 }
 
-/* Step 5 - Deep Ochre Bubble */
+/* Step 5 - Bright Yellow Bubble */
 .how-it-works-card:nth-child(5) .text-bubble {
-  background: linear-gradient(135deg, #B8860B 0%, #DAA520 50%, #9A7209 100%);
+  background: #FDE68A;
 }
 
 /* Fixed bubble sizing and text styling */
@@ -657,8 +659,8 @@ h1, h2, h3, h4, h5 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   line-height: 1.4;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  color: black;
+  text-shadow: none;
   position: relative;
   z-index: 1;
 }
@@ -667,8 +669,8 @@ h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  color: black;
+  text-shadow: none;
   position: relative;
   z-index: 1;
 }

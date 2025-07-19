@@ -98,7 +98,7 @@ export default function TermsPage() {
             <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-16 lg:h-18 w-auto ml-4" />
           </Link>
         </div>
-
+        
         <div className="hidden md:flex flex-1 justify-end">
           <nav className="flex items-center text-white">
             <Link href="/" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">Home</Link>

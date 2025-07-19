@@ -10,6 +10,7 @@
     "test:sheets": "node scripts/test-google-sheets.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
     "google-auth-library": "^10.1.0",
     "googleapis": "^150.0.1",
     "next": "15.3.1",

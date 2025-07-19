@@ -7,6 +7,7 @@ interface QuestionnaireData {
   location: string;
   name: string;
   age: string;
+  email: string;
   social: string;
   sunday_vibe: string;
   personality_type: string;
@@ -17,8 +18,9 @@ interface QuestionnaireData {
   humor: string;
   workout: string;
   motivation: string;
-  ticket: string;
+  date: string;
   restaurant_preference: string;
+  ticket: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -56,6 +58,7 @@ export async function POST(request: NextRequest) {
       data.location || '',
       data.name || '',
       data.age || '',
+      data.email || '',
       data.social || '',
       data.sunday_vibe || '',
       data.personality_type || '',
@@ -66,8 +69,9 @@ export async function POST(request: NextRequest) {
       data.humor || '',
       data.workout || '',
       data.motivation || '',
-      data.ticket || '',
+      data.date || '',
       data.restaurant_preference || '',
+      data.ticket || '',
     ];
 
     console.log('📊 Submitting to Google Sheets...', {
@@ -78,7 +82,7 @@ export async function POST(request: NextRequest) {
     // Append the data to the sheet
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
-      range: 'Sheet1!A:P',
+      range: 'Sheet1!A:R',
       valueInputOption: 'RAW',
       requestBody: {
         values: [rowData],
