@@ -642,6 +642,40 @@ h1, h2, h3, h4, h5 {
   background: #FDE68A;
 }
 
+/* Step Number Circle Colors - Match text bubble colors */
+.how-it-works-card:nth-child(1) .step-circle {
+  background: #BFDBFE;
+}
+
+.how-it-works-card:nth-child(2) .step-circle {
+  background: #FDBA74;
+}
+
+.how-it-works-card:nth-child(3) .step-circle {
+  background: #86EFAC;
+}
+
+.how-it-works-card:nth-child(4) .step-circle {
+  background: #C4B5FD;
+}
+
+.how-it-works-card:nth-child(5) .step-circle {
+  background: #FDE68A;
+}
+
+/* Restaurant Selection Card Circle Colors - Match text bubble colors */
+.restaurant-card:nth-child(1) .selection-circle {
+  background: #DBEAFE; /* bg-blue-200 */
+}
+
+.restaurant-card:nth-child(2) .selection-circle {
+  background: #FEF3C7; /* bg-yellow-200 */
+}
+
+.restaurant-card:nth-child(3) .selection-circle {
+  background: #F9A8D4; /* bg-pink-300 */
+}
+
 /* Fixed bubble sizing and text styling */
 .text-bubble {
   height: 140px;

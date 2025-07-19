@@ -373,7 +373,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/30"></div>
                   
                   {/* Step number in top corner */}
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold text-lg z-10 border border-black/20">
+                  <div className="step-circle absolute top-4 left-4 w-10 h-10 rounded-full text-black flex items-center justify-center font-bold text-lg z-10 border border-black italic" style={{ fontFamily: 'Times New Roman, serif' }}>
                     {step.step}
                   </div>
                   
@@ -443,7 +443,7 @@ export default function Home() {
               ].map(selection => (
                 <div
                   key={selection.step}
-                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-60 h-96 border border-black rounded-2xl"
+                  className="restaurant-card relative overflow-hidden flex-shrink-0 w-60 h-96 border border-black rounded-2xl"
                 >
                   {/* Background Image */}
                   <Image 
@@ -457,7 +457,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/5"></div>
                   
                   {/* Step number in top corner */}
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold text-lg z-10 border border-black/20">
+                  <div className="selection-circle absolute top-4 left-4 w-10 h-10 rounded-full text-black flex items-center justify-center font-bold text-lg z-10 border border-black italic" style={{ fontFamily: 'Times New Roman, serif' }}>
                     {selection.step}
                   </div>
                   
