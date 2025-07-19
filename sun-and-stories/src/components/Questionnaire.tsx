@@ -68,7 +68,7 @@ type RestaurantOption = {
 
 type Question = {
   id: string;
-  type: 'text' | 'email' | 'select' | 'scale' | 'radio' | 'instagram' | 'ticket' | 'restaurant';
+  type: 'text' | 'email' | 'select' | 'scale' | 'radio' | 'instagram' | 'ticket' | 'restaurant' | 'phone';
   question: string;
   options?: QuestionOption[];
   ticketOptions?: TicketOption[];
@@ -78,6 +78,11 @@ type Question = {
   scaleLabels?: {
     min: string;
     max: string;
+  };
+  validation?: {
+    pattern?: string;
+    minLength?: number;
+    maxLength?: number;
   };
 };
 
@@ -106,6 +111,23 @@ const questions: Question[] = [
     question: 'How old are you (or how young do you feel 😁)?',
     placeholder: 'e.g., 28',
     required: true,
+    validation: {
+      pattern: '^[0-9]{2}$',
+      minLength: 2,
+      maxLength: 2
+    }
+  },
+  {
+    id: 'phone',
+    type: 'phone',
+    question: 'What\'s your phone number?',
+    placeholder: 'Enter 10-digit number',
+    required: true,
+    validation: {
+      pattern: '^[0-9]{10}$',
+      minLength: 10,
+      maxLength: 10
+    }
   },
   {
     id: 'email',
@@ -310,6 +332,7 @@ export default function Questionnaire() {
   const [transitionClass, setTransitionClass] = useState("animate-fade-in");
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -321,7 +344,53 @@ export default function Questionnaire() {
     return () => clearTimeout(timer);
   }, [currentQuestionIndex]);
   
+  const validateCurrentField = () => {
+    const { id, type, required } = currentQuestion;
+    const value = answers[id] || '';
+    let errorMessage = '';
+
+    if (required && !value) {
+      errorMessage = 'This field is required';
+    } else if (value) {
+      if (type === 'phone') {
+        if (value.length !== 10) {
+          errorMessage = 'Please enter a valid 10-digit phone number';
+        }
+      } else if (type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          errorMessage = 'Please enter a valid email address';
+        }
+      } else if (id === 'age') {
+        if (value.length !== 2 || isNaN(Number(value))) {
+          errorMessage = 'Please enter a valid age';
+        }
+      }
+    }
+
+    if (errorMessage) {
+      setFieldErrors(prev => ({
+        ...prev,
+        [id]: errorMessage
+      }));
+      return false;
+    } else {
+      // Clear any existing error for this field
+      setFieldErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[id];
+        return newErrors;
+      });
+      return true;
+    }
+  };
+
   const handleNextQuestion = () => {
+    // Validate current field before proceeding
+    if (!validateCurrentField()) {
+      return; // Don't proceed if validation fails
+    }
+
     if (currentQuestionIndex < questions.length - 1) {
       setTransitionClass("animate-fade-out"); // Assuming you have a fade-out animation
       setTimeout(() => {
@@ -342,10 +411,43 @@ export default function Questionnaire() {
   };
   
   const handleInputChange = (value: string) => {
-    setAnswers(prev => ({
-      ...prev,
-      [currentQuestion.id]: value,
-    }));
+    const { id, validation } = currentQuestion;
+    let isValid = true;
+    let processedValue = value;
+
+    // Apply validation if it exists
+    if (validation) {
+      // For age field: only allow 2 digits
+      if (id === 'age') {
+        // Remove any non-numeric characters and limit to 2 digits
+        processedValue = value.replace(/[^0-9]/g, '').slice(0, 2);
+        isValid = processedValue.length <= 2;
+      }
+      
+      // For phone field: only allow 10 digits
+      if (id === 'phone') {
+        // Remove any non-numeric characters and limit to 10 digits
+        processedValue = value.replace(/[^0-9]/g, '').slice(0, 10);
+        isValid = processedValue.length <= 10;
+      }
+    }
+
+    // Only update if validation passes
+    if (isValid) {
+      setAnswers(prev => ({
+        ...prev,
+        [id]: processedValue,
+      }));
+
+      // Clear any existing error for this field when user starts typing
+      if (fieldErrors[id]) {
+        setFieldErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[id];
+          return newErrors;
+        });
+      }
+    }
   };
   
   const handleSubmit = async () => {
@@ -428,6 +530,7 @@ export default function Questionnaire() {
         location: answers.location || '',
         name: answers.name || '',
         age: answers.age || '',
+        phone: answers.phone || '',
         email: answers.email || '',
         social: answers.social || '',
         sunday_vibe: answers.sunday_vibe || '',
@@ -462,20 +565,61 @@ export default function Questionnaire() {
 
   const renderQuestion = () => {
     const { id, type, question, options = [], ticketOptions = [], restaurantOptions = [], placeholder = '', scaleLabels } = currentQuestion;
+    const hasError = fieldErrors[id];
     
     return (
       <div className={`w-full ${transitionClass}`}>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-semibold mb-4 sm:mb-6 md:mb-8 text-center text-white leading-tight px-1 sm:px-2">{question}</h2>
         
         {type === 'text' || type === 'email' || type === 'instagram' ? (
-          <input
-            type={type === 'email' ? 'email' : 'text'}
-            id={id}
-            className="w-full p-3 md:p-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-base md:text-lg shadow-sm"
-            placeholder={placeholder}
-            value={answers[id] || ''}
-            onChange={(e) => handleInputChange(e.target.value)}
-          />
+          <div className="space-y-2">
+            <input
+              type={type === 'email' ? 'email' : 'text'}
+              id={id}
+              className={`w-full p-3 md:p-4 bg-white/10 backdrop-blur-sm border rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 text-base md:text-lg shadow-sm ${
+                hasError 
+                  ? 'border-red-400 focus:ring-red-400/50' 
+                  : 'border-white/30 focus:ring-white/50'
+              }`}
+              placeholder={placeholder}
+              value={answers[id] || ''}
+              onChange={(e) => handleInputChange(e.target.value)}
+            />
+            {hasError && (
+              <div className="text-red-400 text-sm mt-2 text-center">
+                {hasError}
+              </div>
+            )}
+          </div>
+        ) : type === 'phone' ? (
+          <div className="space-y-2">
+            <div className="relative">
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center text-white/80 pointer-events-none z-10">
+                {/* India Flag */}
+                <span className="text-base mr-1">🇮🇳</span>
+                <span className="text-base font-medium">+91</span>
+                <span className="mx-2 text-white/40">|</span>
+              </div>
+              <input
+                type="tel"
+                id={id}
+                className={`w-full p-3 md:p-4 pl-24 md:pl-28 bg-white/10 backdrop-blur-sm border rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 text-base md:text-lg shadow-sm font-mono tracking-wider ${
+                  hasError 
+                    ? 'border-red-400 focus:ring-red-400/50' 
+                    : 'border-white/30 focus:ring-white/50'
+                }`}
+                placeholder={placeholder}
+                value={answers[id] || ''}
+                onChange={(e) => handleInputChange(e.target.value)}
+                maxLength={10}
+              />
+            </div>
+            {hasError && (
+              <div className="text-red-400 text-sm mt-2 text-center">
+                {hasError}
+              </div>
+            )}
+          </div>
         ) : type === 'radio' ? (
           <div className="space-y-2 sm:space-y-3">
             {options.map((option) => (

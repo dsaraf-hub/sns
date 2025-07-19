@@ -7,6 +7,7 @@ interface QuestionnaireData {
   location: string;
   name: string;
   age: string;
+  phone: string;
   email: string;
   social: string;
   sunday_vibe: string;
@@ -58,6 +59,7 @@ export async function POST(request: NextRequest) {
       data.location || '',
       data.name || '',
       data.age || '',
+      data.phone || '',
       data.email || '',
       data.social || '',
       data.sunday_vibe || '',
