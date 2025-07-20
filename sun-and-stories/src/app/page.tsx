@@ -116,23 +116,11 @@ export default function Home() {
 
     const calculateTimeLeft = () => {
       const now = new Date();
-      const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-      const nowIST = new Date(now.getTime() + istOffset);
       
-      // Find next Sunday at noon IST
-      const nextSunday = new Date(nowIST);
-      const daysUntilSunday = (7 - nowIST.getDay()) % 7;
+      // Target date: 10th August 2025, 12 PM IST
+      const targetDate = new Date('2025-08-10T12:00:00+05:30'); // IST timezone
       
-      if (daysUntilSunday === 0 && nowIST.getHours() >= 12) {
-        // If it's Sunday and past noon, get next Sunday
-        nextSunday.setDate(nowIST.getDate() + 7);
-      } else {
-        nextSunday.setDate(nowIST.getDate() + daysUntilSunday);
-      }
-      
-      nextSunday.setHours(12, 0, 0, 0); // Set to noon
-      
-      const difference = nextSunday.getTime() - nowIST.getTime();
+      const difference = targetDate.getTime() - now.getTime();
       
       if (difference > 0) {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -141,6 +129,9 @@ export default function Home() {
         const seconds = Math.floor((difference / 1000) % 60);
         
         setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // If the target date has passed, show zeros
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
@@ -310,7 +301,7 @@ export default function Home() {
 
           {/* Countdown Timer */}
           <div className="text-center px-4">
-            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch in</p>
+            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: Aug 10, 2025 at 12 PM IST</p>
             {isClient ? (
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
@@ -359,7 +350,7 @@ export default function Home() {
               {howItWorksSteps.map(step => (
                 <div
                   key={step.step}
-                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-60 h-96 border border-black rounded-2xl"
+                  className="how-it-works-card relative overflow-hidden flex-shrink-0 w-60 h-96 rounded-2xl"
                 >
                   {/* Background Image */}
                   <Image 
@@ -369,8 +360,8 @@ export default function Home() {
                     className="object-cover" 
                   />
                   
-                  {/* Dark overlay for better text readability */}
-                  <div className="absolute inset-0 bg-black/30"></div>
+                  {/* Light overlay for minimal contrast */}
+                  <div className="absolute inset-0 bg-black/5"></div>
                   
                   {/* Step number in top corner */}
                   <div className="step-circle absolute top-4 left-4 w-10 h-10 rounded-full text-black flex items-center justify-center font-bold text-lg z-10 border border-black italic" style={{ fontFamily: 'Times New Roman, serif' }}>
@@ -409,7 +400,7 @@ export default function Home() {
         <section className="px-4 md:px-16 pb-12 md:pb-20 py-12 md:py-20" style={{ backgroundColor: '#fffcf5' }}>
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
-              HOW WE SELECT OUR<br />
+              HOW WE PICK OUR<br />
               <em className="italic">RESTAURANTS?</em>
             </h2>
             <p className="text-base md:text-xl mb-6 md:mb-8 text-black max-w-2xl mx-auto animate-fade-in-up font-montserrat px-4" style={{ animationDelay: '0.2s' }}>
@@ -462,7 +453,7 @@ export default function Home() {
                   </div>
                   
                   {/* Text bubble at bottom */}
-                  <div className={`absolute bottom-4 left-4 right-4 ${selection.color} rounded-2xl p-4 z-10 border border-black/10 h-[140px] flex flex-col justify-center`}>
+                  <div className={`absolute bottom-4 left-4 right-4 ${selection.color} rounded-2xl p-4 z-10 h-[140px] flex flex-col justify-center`}>
                     <h3 className="font-bold mb-2 uppercase tracking-wide text-base leading-tight !text-black italic" style={{ textShadow: 'none', fontFamily: 'Times New Roman, serif' }}>
                       {selection.title}
                     </h3>

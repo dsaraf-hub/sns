@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
           <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             
             <!-- Header -->
-            <div style="background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%); padding: 40px 30px; text-align: center;">
-              <h1 style="margin: 0; color: white; font-size: 28px; font-weight: bold;">Welcome to Table 4 Six!</h1>
-              <p style="margin: 10px 0 0 0; color: rgba(255, 255, 255, 0.9); font-size: 16px;">Your spot has been confirmed ✨</p>
+            <div style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://www.table4six.in/background.jpg') center/cover; background-color: #2d3748; padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: white; font-size: 28px; font-weight: bold; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);">Welcome to Table 4 Six!</h1>
+              <p style="margin: 10px 0 0 0; color: rgba(255, 255, 255, 0.95); font-size: 16px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">Your spot has been confirmed ✨</p>
             </div>
 
             <!-- Main Content -->
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #666; font-weight: 500;">💰 Ticket Price:</td>
-                    <td style="padding: 8px 0; color: #4a4a4a; font-weight: bold;">₹399</td>
+                    <td style="padding: 8px 0; color: #4a4a4a; font-weight: bold;">₹299</td>
                   </tr>
                 </table>
               </div>
@@ -157,7 +157,7 @@ Your brunch details:
 - Date: ${formattedDate}
 - Location: ${formattedLocation}  
 - Dining Package: ${formattedRestaurant}
-- Ticket Price: ₹399
+- Ticket Price: ₹299
 
 What's Next?
 - Payment instructions will be sent within 24 hours

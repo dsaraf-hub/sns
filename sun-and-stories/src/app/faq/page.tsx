@@ -19,16 +19,13 @@ export default function FAQPage() {
     },
     {
       question: "What does it cost to join?",
-      answer: "Each participant pays for their own brunch (typically ₹800-1500 depending on the venue). We don't charge any matching or membership fees as we're focused on building community connections."
+      answer: "There's a Table4Six experience fee of ₹299 which covers the curation, matching, and coordination. Additionally, you'll pay for your meal directly at the restaurant. We offer three dining packages: Local Favourites (₹700), Gourmet Dining (₹1500), and Bottomless Brunch (₹2300). You choose your preferred package during signup."
     },
     {
       question: "Where do the brunches take place?",
       answer: "We partner with select restaurants and cafes in Mumbai, primarily in South Bombay and the Western suburbs (Bandra, Khar, Juhu, and Andheri). The exact location is shared with confirmed participants."
     },
-    {
-      question: "What if I need to cancel?",
-      answer: "We understand plans change. Please let us know at least 48 hours in advance so we can find a replacement. Last-minute cancellations make it difficult to maintain the group dynamic."
-    },
+
     {
       question: "Is this a dating service?",
       answer: "No, Table 4 Six is not a dating platform. We're focused on meaningful conversations and new friendships. While connections may naturally develop, our goal is to create a pressure-free environment for authentic interactions."
@@ -45,10 +42,7 @@ export default function FAQPage() {
       question: "Can I request to be matched with specific types of people?",
       answer: "While we don't allow requests for specific individuals, your questionnaire responses help us understand what types of conversations and connections you value. Our goal is to create groups with complementary perspectives."
     },
-    {
-      question: "How often can I participate?",
-      answer: "You can join once a month to ensure we're creating diverse groups and giving opportunities to new participants. After your brunch, you'll have the option to join the waitlist for a future date."
-    }
+
   ];
 
   return (

@@ -302,7 +302,7 @@ const questions: Question[] = [
       {
         value: 'table4six_ticket',
         title: 'One Table4Six ticket',
-        price: '₹ 399',
+        price: '₹ 299',
         description: [
           'Sign up now, Pay Later',
           'This price includes one curated Table4Six experience with a like-minded group',
@@ -319,9 +319,9 @@ const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
   0: { title: "Let's get to know you", subtitle: "Tell us about your brunch preferences" },
   5: { title: 'Your personality vibe', subtitle: "Help us understand who you are" },
   11: { title: "Final questions", subtitle: "Almost done!" },
-  14: { title: "Pick your date", subtitle: "Choose when you'd like to join us" },
-  15: { title: "Choose your dining experience", subtitle: "Select your restaurant preference" },
-  16: { title: "Choose your experience", subtitle: "Select your Table4Six ticket" },
+  15: { title: "Pick your date", subtitle: "Choose when you'd like to join us" },
+  16: { title: "Choose your dining experience", subtitle: "Select your restaurant preference" },
+  17: { title: "Choose your experience", subtitle: "Select your Table4Six ticket" },
 };
 
 export default function Questionnaire() {
@@ -937,9 +937,9 @@ export default function Questionnaire() {
                   ? handleSubmit
                   : handleNextQuestion
               }
-              disabled={loading || !answers[currentQuestion.id]}
+              disabled={loading || (currentQuestion.required && !answers[currentQuestion.id])}
               className={`bg-white text-black hover:bg-white/90 font-semibold py-2.5 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-full transition-colors text-sm md:text-base flex-1 max-w-xs ${
-                !answers[currentQuestion.id]
+                (currentQuestion.required && !answers[currentQuestion.id])
                   ? 'opacity-60 cursor-not-allowed'
                   : '' // Normal hover state is handled by .btn-accent:hover
               }`}
@@ -995,7 +995,7 @@ export default function Questionnaire() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Ticket Price:</span>
-                  <span className="font-medium">₹399</span>
+                  <span className="font-medium">₹299</span>
                 </div>
               </div>
             </div>

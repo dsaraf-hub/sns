@@ -617,50 +617,50 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 1 - Bright Blue Bubble */
+/* Step 1 - Light Blue Bubble (matches restaurant cards) */
 .how-it-works-card:nth-child(1) .text-bubble {
-  background: #BFDBFE;
+  background: #DBEAFE;
 }
 
-/* Step 2 - Bright Orange Bubble */
+/* Step 2 - Light Yellow Bubble (matches restaurant cards) */
 .how-it-works-card:nth-child(2) .text-bubble {
-  background: #FDBA74;
+  background: #FEF3C7;
 }
 
-/* Step 3 - Bright Green Bubble */
+/* Step 3 - Light Pink Bubble (matches restaurant cards) */
 .how-it-works-card:nth-child(3) .text-bubble {
-  background: #86EFAC;
+  background: #F9A8D4;
 }
 
-/* Step 4 - Bright Purple Bubble */
+/* Step 4 - Light Green Bubble (new complementary color) */
 .how-it-works-card:nth-child(4) .text-bubble {
-  background: #C4B5FD;
+  background: #BBF7D0;
 }
 
-/* Step 5 - Bright Yellow Bubble */
+/* Step 5 - Light Purple Bubble (new complementary color) */
 .how-it-works-card:nth-child(5) .text-bubble {
-  background: #FDE68A;
+  background: #E9D5FF;
 }
 
 /* Step Number Circle Colors - Match text bubble colors */
 .how-it-works-card:nth-child(1) .step-circle {
-  background: #BFDBFE;
+  background: #DBEAFE;
 }
 
 .how-it-works-card:nth-child(2) .step-circle {
-  background: #FDBA74;
+  background: #FEF3C7;
 }
 
 .how-it-works-card:nth-child(3) .step-circle {
-  background: #86EFAC;
+  background: #F9A8D4;
 }
 
 .how-it-works-card:nth-child(4) .step-circle {
-  background: #C4B5FD;
+  background: #BBF7D0;
 }
 
 .how-it-works-card:nth-child(5) .step-circle {
-  background: #FDE68A;
+  background: #E9D5FF;
 }
 
 /* Restaurant Selection Card Circle Colors - Match text bubble colors */
@@ -682,12 +682,11 @@ h1, h2, h3, h4, h5 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 0.5px solid black;
 }
 
 .how-it-works-card h3 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
@@ -715,7 +714,7 @@ h1, h2, h3, h4, h5 {
   }
   
   .how-it-works-card h3 {
-    font-size: 11px;
+    font-size: 16px;
   }
   
   .how-it-works-card p {
