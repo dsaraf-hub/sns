@@ -360,6 +360,9 @@ export default function Home() {
                     className="object-cover" 
                   />
                   
+                  {/* Light overlay for minimal contrast */}
+                  <div className="absolute inset-0 bg-black/5"></div>
+                  
                   {/* Step number in top corner */}
                   <div className="step-circle absolute top-4 left-4 w-10 h-10 rounded-full text-black flex items-center justify-center font-bold text-lg z-10 border border-black italic" style={{ fontFamily: 'Times New Roman, serif' }}>
                     {step.step}
@@ -381,7 +384,7 @@ export default function Home() {
         </section>
 
         {/* Mumbai Skyline Section */}
-        <section className="w-full pt-0 md:pt-6 px-8 md:px-0" style={{ backgroundColor: 'white' }}>
+        <section className="w-full pt-0 md:pt-6 px-8 md:px-0" style={{ backgroundColor: '#fffcf5' }}>
           <div className="relative h-48 md:h-64 w-full">
             <Image
               src="/mumbai-skyline.png"
@@ -393,8 +396,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Carefully Curated Restaurants Section - Now with white background */}
-        <section className="px-4 md:px-16 pb-12 md:pb-20 py-12 md:py-20" style={{ backgroundColor: 'white' }}>
+        {/* Carefully Curated Restaurants Section - Now with off-white background */}
+        <section className="px-4 md:px-16 pb-12 md:pb-20 py-12 md:py-20" style={{ backgroundColor: '#fffcf5' }}>
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               HOW WE PICK OUR<br />
@@ -441,6 +444,9 @@ export default function Home() {
                     className="object-cover" 
                   />
                   
+                  {/* Light overlay for minimal contrast */}
+                  <div className="absolute inset-0 bg-black/5"></div>
+                  
                   {/* Step number in top corner */}
                   <div className="selection-circle absolute top-4 left-4 w-10 h-10 rounded-full text-black flex items-center justify-center font-bold text-lg z-10 border border-black italic" style={{ fontFamily: 'Times New Roman, serif' }}>
                     {selection.step}
@@ -462,7 +468,7 @@ export default function Home() {
         </section>
 
         {/* Restaurant Picks section - Extended white background */}
-        <section className="py-12 md:py-20 px-4 md:px-16" style={{ backgroundColor: 'white' }}>
+        <section className="py-12 md:py-20 px-4 md:px-16" style={{ backgroundColor: '#fffcf5' }}>
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black animate-fade-in-up px-2" style={{ fontFamily: 'Times New Roman, serif' }}>
               OUR TOP <em className="italic">PICKS</em>

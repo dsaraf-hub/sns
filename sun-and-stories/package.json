@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:sheets": "node scripts/test-google-sheets.js",
-    "test:email": "node scripts/test-email.js",
-    "prepare:logo": "node scripts/prepare-logo-for-email.js"
+    "test:email": "node scripts/test-email.js"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",
