@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function PrivacyPage() {
+export default function PaymentsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -15,8 +15,8 @@ export default function PrivacyPage() {
           <Image
             src="/background3.jpg"
             alt="Abstract background"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             quality={100}
           />
         </div>
@@ -60,13 +60,6 @@ export default function PrivacyPage() {
               FAQ
             </Link>
             <Link 
-              href="/terms" 
-              className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Terms
-            </Link>
-            <Link 
               href="/questionnaire" 
               className="text-white font-semibold py-4 border-b border-white/20 font-montserrat hover:bg-white/5 transition-colors rounded px-2"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -78,7 +71,7 @@ export default function PrivacyPage() {
       </div>
 
       {/* Header - Standardized */}
-      <header className="w-full py-4 px-4 md:px-10 flex justify-between items-center bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+      <header className="w-full py-2 px-4 md:px-10 flex justify-between items-center bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <button 
           className="md:hidden text-white z-50 p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -114,8 +107,6 @@ export default function PrivacyPage() {
             <div className="h-6 w-px bg-white/40 mx-2"></div>
             <Link href="/faq" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">FAQ</Link>
             <div className="h-6 w-px bg-white/40 mx-2"></div>
-            <Link href="/terms" className="font-semibold hover:opacity-70 transition px-4 py-2 font-montserrat">Terms</Link>
-            <div className="h-6 w-px bg-white/40 mx-2"></div>
             <Link href="/questionnaire" className="font-semibold px-6 py-2 transition font-montserrat">
               Join Now
             </Link>
@@ -133,84 +124,84 @@ export default function PrivacyPage() {
           {/* Hero Section */}
           <section className="text-center">
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white">
-              PRIVACY <em className="italic">POLICY</em>
+              PAYMENTS & <em className="italic">CANCELLATION</em> POLICY
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Your privacy matters to us. Here&apos;s how we protect and handle your information.
+              At Table 4 Six, we are committed to providing a smooth and secure payment experience for all your curated dining experiences.
             </p>
             <p className="text-sm text-white/60 mt-4 font-montserrat">
-              Last updated: January 2024
+              Last Updated: [06/05/2025]
             </p>
           </section>
 
-          {/* Privacy Policy Content */}
+          {/* Policy Content */}
           <section className="space-y-8">
             
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Information We Collect</h2>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
-                <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>Personal Information:</strong> When you sign up for Table 4 Six, we collect your name, age, and optional social media handles to create your profile and match you with compatible participants.</p>
-                  <p><strong>Questionnaire Responses:</strong> Your personality quiz responses help us create meaningful group dynamics and are stored securely.</p>
-                  <p><strong>Communication Data:</strong> We may store communications related to your Table 4 Six experience for customer service purposes.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">How We Use Your Information</h2>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
-                <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>Matching & Curation:</strong> We use your responses to create balanced groups for Sunday brunches.</p>
-                  <p><strong>Communication:</strong> To send you brunch details, location information, and updates about your Table 4 Six experience.</p>
-                  <p><strong>Improvement:</strong> Anonymous data helps us improve our matching algorithm and overall service quality.</p>
-                  <p><strong>Safety:</strong> We may use information to ensure the safety and security of all participants.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Information Sharing</h2>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
-                <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>Limited Sharing:</strong> We only share basic information (first name, age range) with your matched group members before the brunch.</p>
-                  <p><strong>No Third-Party Sales:</strong> We never sell your personal information to third parties.</p>
-                  <p><strong>Service Providers:</strong> We may share data with trusted service providers (payment processors, email services) who help us operate Table 4 Six.</p>
-                  <p><strong>Legal Requirements:</strong> We may disclose information if required by law or to protect our rights and safety.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Data Security</h2>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
-                <div className="space-y-4 text-white/90 font-montserrat">
-                  <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-                  <p>Your data is stored on secure servers and encrypted during transmission.</p>
-                  <p>Access to personal information is limited to authorized personnel only.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Your Rights</h2>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
-                <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>Access:</strong> You can request a copy of the personal information we have about you.</p>
-                  <p><strong>Correction:</strong> You can update or correct your information at any time.</p>
-                  <p><strong>Deletion:</strong> You can request deletion of your account and personal data.</p>
-                  <p><strong>Opt-out:</strong> You can unsubscribe from our communications at any time.</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Contact Us</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Introduction</h2>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
                 <div className="text-white/90 font-montserrat">
-                  <p>If you have any questions about this Privacy Policy or your personal data, please contact us:</p>
+                  <p>At Table 4 Six, we are committed to providing a smooth and secure payment experience for all your curated dining experiences. This policy outlines how payments are processed and the conditions under which refunds may be issued.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">1. Payment Methods</h2>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
+                <div className="space-y-4 text-white/90 font-montserrat">
+                  <p><strong>1.1 Accepted Payment Methods:</strong> Payment can be made securely through the Table 4 Six app or website using our integrated payment gateway. We accept Credit Cards, Debit Cards, UPI (Unified Payments Interface), and Net Banking.</p>
+                  
+                  <p><strong>1.2 Advance Payment Requirement:</strong> Full payment is required at the time of booking to confirm your spot at the dinner event. Bookings without payment will not be considered valid.</p>
+                  
+                  <p><strong>1.3 Payment Security:</strong> We use industry-standard encryption protocols and secure payment gateways. Table 4 Six does not store or share your card details with third parties.</p>
+                  
+                  <p><strong>1.4 Invoice:</strong> An email confirmation and invoice will be sent to the registered email address upon successful payment. A separate receipt will be provided by the restaurant after the dinner event.</p>
+                  
+                  <p><strong>1.5 Additional Charges:</strong> There are no hidden fees. The amount paid during booking is a service fee charged by Table 4 Six to curate the group and book the restaurant. Guests pay for their dinner directly at the venue using the available payment modes there.</p>
+                  
+                  <p><strong>1.6 Cash Payments:</strong> We do not accept cash payments for advance bookings. Bookings must be confirmed through the Table 4 Six platform. Payments made at the restaurant are only applicable for the dinner cost.</p>
+                  
+                  <p><strong>1.7 Failed Payments:</strong> In case of a failed transaction, the amount (if debited) is typically refunded by the bank within 7 working days. For delays beyond this, please contact your bank directly.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">2. Refund Policy</h2>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
+                <div className="space-y-4 text-white/90 font-montserrat">
+                  <p><strong>2.1 User-Initiated Cancellations:</strong> No refund will be provided for any cancellations. However, you may reschedule your booking for the next available date free-of-charge up to 48 hours prior to the dinner.</p>
+                  
+                  <p><strong>2.2 No-Shows:</strong> If a guest fails to attend the event without prior cancellation, no refund will be issued. This includes late arrivals beyond 60 minutes of the scheduled start time.</p>
+                  
+                  <p><strong>2.3 Late Arrivals:</strong> Guests arriving more than 60 minutes after the event start time will be considered no-shows, and no refund will be applicable.</p>
+                  
+                  <p><strong>2.4 Table 4 Six-Initiated Cancellations:</strong> In the rare case that Table 4 Six cancels an event (due to low turnout, venue issues, or other unforeseen circumstances), guests will be entitled to either a full refund or a reschedule option for a future dinner event.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">3. Booking & Participation</h2>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
+                <div className="space-y-4 text-white/90 font-montserrat">
+                  <p><strong>3.1 Rescheduling Policy:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the "My Booking" section.</p>
+                  
+                  <p><strong>3.2 Booking Confirmation:</strong> Your booking is confirmed only after successful payment and will be reflected under "My Booking" in your Table 4 Six account.</p>
+                  
+                  <p><strong>3.3 Attendance Guidelines:</strong> Punctuality is encouraged. While short delays are understandable, arriving over an hour late may disrupt the group dynamic and will be treated as a no-show.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Contact Information</h2>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
+                <div className="text-white/90 font-montserrat">
+                  <p>For questions about this Payment & Cancellation Policy, please contact us:</p>
                   <p className="mt-4">
-                    <strong>Email:</strong> <a href="mailto:privacy@table4six.com" className="text-white hover:text-white/70 transition">privacy@table4six.com</a>
+                    <strong>Email:</strong> <a href="mailto:hello@table4six.in" className="text-white hover:text-white/70 transition">hello@table4six.in</a>
                   </p>
                   <p>
                     <strong>Address:</strong> Mumbai, India
@@ -227,7 +218,7 @@ export default function PrivacyPage() {
               READY TO <em className="italic">JOIN US?</em>
             </h2>
             <p className="text-lg text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed font-montserrat">
-              Now that you understand how we protect your privacy, come join our community of curious minds.
+              Now that you understand our payment and cancellation policy, come join our community of curious minds.
             </p>
             <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-full text-lg transition-colors shadow-lg font-montserrat">
               Join Table 4 Six
@@ -276,4 +267,4 @@ export default function PrivacyPage() {
       </footer>
     </div>
   );
-}
+} 

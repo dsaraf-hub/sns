@@ -176,10 +176,25 @@ export default function TermsPage() {
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">Payment & Cancellation</h2>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
                 <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>Payment Terms:</strong> Full payment is required upon booking confirmation. All payments are processed securely through our payment partners.</p>
-                  <p><strong>Cancellation Policy:</strong> Cancellations made 24+ hours before the event are eligible for a full refund minus processing fees.</p>
-                  <p><strong>No-Show Policy:</strong> Participants who fail to attend without prior notice forfeit their payment and may be restricted from future bookings.</p>
-                  <p><strong>Refunds:</strong> Refunds for valid cancellations will be processed within 5-7 business days to the original payment method.</p>
+                  <p><strong>Accepted Payment Methods:</strong> Payment can be made securely through the Table 4 Six app or website using our integrated payment gateway. We accept Credit Cards, Debit Cards, UPI (Unified Payments Interface), and Net Banking.</p>
+                  
+                  <p><strong>Advance Payment Requirement:</strong> Full payment is required at the time of booking to confirm your spot at the dinner event. Bookings without payment will not be considered valid.</p>
+                  
+                  <p><strong>Payment Security:</strong> We use industry-standard encryption protocols and secure payment gateways. Table 4 Six does not store or share your card details with third parties.</p>
+                  
+                  <p><strong>Invoice & Confirmation:</strong> An email confirmation and invoice will be sent to the registered email address upon successful payment. A separate receipt will be provided by the restaurant after the dinner event.</p>
+                  
+                  <p><strong>Additional Charges:</strong> There are no hidden fees. The amount paid during booking is a service fee charged by Table 4 Six to curate the group and book the restaurant. Guests pay for their dinner directly at the venue using the available payment modes there.</p>
+                  
+                  <p><strong>Cancellation Policy:</strong> No refund will be provided for any cancellations. However, you may reschedule your booking for the next available date free-of-charge up to 48 hours prior to the dinner.</p>
+                  
+                  <p><strong>No-Show Policy:</strong> If a guest fails to attend the event without prior cancellation, no refund will be issued. This includes late arrivals beyond 60 minutes of the scheduled start time. Guests arriving more than 60 minutes after the event start time will be considered no-shows.</p>
+                  
+                  <p><strong>Company-Initiated Cancellations:</strong> In the rare case that Table 4 Six cancels an event (due to low turnout, venue issues, or other unforeseen circumstances), guests will be entitled to either a full refund or a reschedule option for a future dinner event.</p>
+                  
+                  <p><strong>Rescheduling:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the "My Booking" section.</p>
+                  
+                  <p><strong>Failed Payments:</strong> In case of a failed transaction, the amount (if debited) is typically refunded by the bank within 7 working days. For delays beyond this, please contact your bank directly.</p>
                 </div>
               </div>
             </div>
@@ -225,10 +240,10 @@ export default function TermsPage() {
                 <div className="text-white/90 font-montserrat">
                   <p>For questions about these Terms and Conditions or to report violations, please contact us:</p>
                   <p className="mt-4">
-                    <strong>Email:</strong> <a href="mailto:legal@table4six.com" className="text-white hover:text-white/70 transition">legal@table4six.com</a>
+                    <strong>Email:</strong> <a href="mailto:legal@table4six.in" className="text-white hover:text-white/70 transition">legal@table4six.in</a>
                   </p>
                   <p>
-                    <strong>Support:</strong> <a href="mailto:hello@table4six.com" className="text-white hover:text-white/70 transition">hello@table4six.com</a>
+                    <strong>Support:</strong> <a href="mailto:hello@table4six.in" className="text-white hover:text-white/70 transition">hello@table4six.in</a>
                   </p>
                   <p>
                     <strong>Address:</strong> Mumbai, India
@@ -273,13 +288,14 @@ export default function TermsPage() {
               <li><Link href="/faq" className="text-gray-300 hover:text-white transition block py-1">FAQ</Link></li>
               <li><Link href="/privacy" className="text-gray-300 hover:text-white transition block py-1">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-gray-300 hover:text-white transition block py-1">Terms & Conditions</Link></li>
+              <li><Link href="/payments" className="text-gray-300 hover:text-white transition block py-1">Payments & Cancellation Policy</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-white">Get in Touch</h3>
+            <h3 className="font-semibold text-lg mb-4 text-white">Contact Us</h3>
             <p className="mb-2 flex items-center gap-2 text-sm text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <a href="mailto:hello@table4six.com" className="hover:text-white transition">hello@table4six.com</a>
+              <a href="mailto:hello@table4six.in" className="hover:text-white transition">hello@table4six.in</a>
             </p>
             <p className="flex items-center gap-2 text-sm text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

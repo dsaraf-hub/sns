@@ -164,13 +164,14 @@ export default function ConfirmationPage() {
               <li><Link href="/faq" className="text-gray-300 hover:text-white transition block py-1">FAQ</Link></li>
               <li><Link href="/privacy" className="text-gray-300 hover:text-white transition block py-1">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-gray-300 hover:text-white transition block py-1">Terms & Conditions</Link></li>
+              <li><Link href="/payments" className="text-gray-300 hover:text-white transition block py-1">Payments & Cancellation Policy</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-white">Get in Touch</h3>
+            <h3 className="font-semibold text-lg mb-4 text-white">Contact Us</h3>
             <p className="mb-2 flex items-center gap-2 text-sm text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <a href="mailto:hello@table4six.com" className="hover:text-white transition">hello@table4six.com</a>
+              <a href="mailto:hello@table4six.in" className="hover:text-white transition">hello@table4six.in</a>
             </p>
             <p className="flex items-center gap-2 text-sm text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
