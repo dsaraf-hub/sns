@@ -186,9 +186,9 @@ export default function PaymentsPage() {
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">3. Booking & Participation</h2>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl">
                 <div className="space-y-4 text-white/90 font-montserrat">
-                  <p><strong>3.1 Rescheduling Policy:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the "My Booking" section.</p>
+                  <p><strong>3.1 Rescheduling Policy:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the &quot;My Booking&quot; section.</p>
                   
-                  <p><strong>3.2 Booking Confirmation:</strong> Your booking is confirmed only after successful payment and will be reflected under "My Booking" in your Table 4 Six account.</p>
+                  <p><strong>3.2 Booking Confirmation:</strong> Your booking is confirmed only after successful payment and will be reflected under &quot;My Booking&quot; in your Table 4 Six account.</p>
                   
                   <p><strong>3.3 Attendance Guidelines:</strong> Punctuality is encouraged. While short delays are understandable, arriving over an hour late may disrupt the group dynamic and will be treated as a no-show.</p>
                 </div>

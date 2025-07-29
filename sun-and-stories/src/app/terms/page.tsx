@@ -192,7 +192,7 @@ export default function TermsPage() {
                   
                   <p><strong>Company-Initiated Cancellations:</strong> In the rare case that Table 4 Six cancels an event (due to low turnout, venue issues, or other unforeseen circumstances), guests will be entitled to either a full refund or a reschedule option for a future dinner event.</p>
                   
-                  <p><strong>Rescheduling:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the "My Booking" section.</p>
+                  <p><strong>Rescheduling:</strong> Rescheduling is permitted up to 48 hours before the event, subject to availability. This can be done through the app under the &quot;My Booking&quot; section.</p>
                   
                   <p><strong>Failed Payments:</strong> In case of a failed transaction, the amount (if debited) is typically refunded by the bank within 7 working days. For delays beyond this, please contact your bank directly.</p>
                 </div>
