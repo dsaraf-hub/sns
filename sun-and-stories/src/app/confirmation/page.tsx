@@ -2,10 +2,51 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function ConfirmationPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState<'loading' | 'success' | 'failed' | 'unknown'>('loading');
+  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const searchParams = useSearchParams();
+  
+  useEffect(() => {
+    const orderId = searchParams.get('order_id');
+    const status = searchParams.get('status');
+    
+    if (orderId) {
+      verifyPayment(orderId);
+    } else if (status === 'success') {
+      setPaymentStatus('success');
+    } else {
+      setPaymentStatus('unknown');
+    }
+  }, [searchParams]);
+
+  const verifyPayment = async (orderId: string) => {
+    try {
+      const response = await fetch(`/api/verify-payment?order_id=${orderId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        setOrderDetails(data);
+        // Check if payment is successful based on order status
+        if (data.order_status === 'PAID') {
+          setPaymentStatus('success');
+        } else if (data.order_status === 'EXPIRED' || data.order_status === 'CANCELLED') {
+          setPaymentStatus('failed');
+        } else {
+          setPaymentStatus('unknown');
+        }
+      } else {
+        setPaymentStatus('failed');
+      }
+    } catch (error) {
+      console.error('Payment verification error:', error);
+      setPaymentStatus('failed');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -119,24 +160,100 @@ export default function ConfirmationPage() {
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
         <div className="w-full max-w-4xl bg-black/40 backdrop-blur-lg border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl text-center">
           
-          {/* Success Icon */}
-          <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-green-500/50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-green-500">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
-            You&apos;re on the Waitlist!
-          </h1>
-          
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
-            You&apos;ve been successfully added to our waitlist. You&apos;ll receive an email shortly with further instructions.
-          </p>
-          
-          <Link href="/" className="bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-all shadow-lg">
-            Back to Home
-          </Link>
+          {paymentStatus === 'loading' && (
+            <>
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-blue-500/50">
+                <svg className="animate-spin w-10 h-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
+                Verifying Payment...
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
+                Please wait while we confirm your payment and booking details.
+              </p>
+            </>
+          )}
+
+          {paymentStatus === 'success' && (
+            <>
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-green-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-green-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
+                Payment Successful!
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
+                Welcome to Table 4 Six! Your payment has been processed and you&apos;ve officially joined our table. Check your email for confirmation details and next steps.
+              </p>
+              
+              {orderDetails && (
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl mb-8 max-w-md mx-auto">
+                  <h3 className="text-lg font-semibold mb-4">Booking Details</h3>
+                  <div className="space-y-2 text-sm text-white/80">
+                    <div className="flex justify-between">
+                      <span>Order ID:</span>
+                      <span className="font-mono">{orderDetails.order_id}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Amount Paid:</span>
+                      <span>₹{orderDetails.order_amount}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {paymentStatus === 'failed' && (
+            <>
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-red-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-red-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6m0 0L6 6l12 12" />
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
+                Payment Failed
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
+                Your payment could not be processed. Please try again or contact support if the issue persists.
+              </p>
+              <div className="space-x-4">
+                <Link href="/questionnaire" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg">
+                  Try Again
+                </Link>
+                <Link href="/" className="bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-all shadow-lg">
+                  Back to Home
+                </Link>
+              </div>
+            </>
+          )}
+
+          {paymentStatus === 'unknown' && (
+            <>
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-green-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-green-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
+                Thank You!
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
+                You&apos;ve successfully joined our table! You&apos;ll receive an email shortly with further instructions.
+              </p>
+            </>
+          )}
+
+          {paymentStatus !== 'loading' && paymentStatus !== 'failed' && (
+            <Link href="/" className="bg-white text-black hover:bg-white/90 font-semibold py-3 px-8 rounded-full transition-all shadow-lg">
+              Back to Home
+            </Link>
+          )}
         </div>
       </main>
 

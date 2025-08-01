@@ -296,7 +296,7 @@ export default function Home() {
 
           {/* Book Your Seat Button */}
           <Link href="/questionnaire" className="bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 text-white font-semibold py-3 px-6 md:px-8 rounded-full text-sm md:text-base mb-6 md:mb-8 transition-colors shadow-sm inline-block font-montserrat">
-            Join the Waitlist
+            Join the Table
           </Link>
 
           {/* Countdown Timer */}

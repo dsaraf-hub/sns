@@ -5,43 +5,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-// Razorpay type declarations
-interface RazorpayResponse {
-  payment_id: string;
-  order_id?: string;
-  signature?: string;
+// Cashfree type declarations
+interface CashfreeCheckoutOptions {
+  paymentSessionId: string;
+  redirectTarget?: '_self' | '_blank' | '_top' | '_modal' | string;
+  returnUrl?: string;
 }
 
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  image: string;
-  handler: (response: RazorpayResponse) => void;
-  prefill: {
-    name: string;
-    email: string;
-    contact: string;
-  };
-  notes: {
-    location: string;
-    restaurant_preference: string;
-  };
-  theme: {
-    color: string;
-  };
-  modal: {
-    ondismiss: () => void;
-  };
+interface CashfreeInstance {
+  checkout: (options: CashfreeCheckoutOptions) => Promise<{
+    error?: { message: string };
+    redirect?: boolean;
+    paymentDetails?: { paymentMessage: string };
+  }>;
 }
 
 declare global {
   interface Window {
-    Razorpay: new (options: RazorpayOptions) => {
-      open: () => void;
-    };
+    Cashfree: (config: { mode: 'sandbox' | 'production' }) => CashfreeInstance;
   }
 }
 
@@ -304,7 +285,6 @@ const questions: Question[] = [
         title: 'One Table4Six ticket',
         price: '₹ 299',
         description: [
-          'Sign up now, Pay Later',
           'This price includes one curated Table4Six experience with a like-minded group',
           'Meal cost to be paid at the restaurant'
         ]
@@ -333,6 +313,8 @@ export default function Questionnaire() {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
   
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -343,6 +325,30 @@ export default function Questionnaire() {
     const timer = setTimeout(() => setTransitionClass("animate-fade-in"), 50); // Small delay to trigger reflow
     return () => clearTimeout(timer);
   }, [currentQuestionIndex]);
+
+  // Load Cashfree SDK
+  useEffect(() => {
+    const loadCashfreeSDK = () => {
+      // Check if SDK is already loaded
+      if (typeof window !== 'undefined' && (window as any).Cashfree) {
+        return; // SDK already loaded
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js';
+      script.async = true;
+      script.onload = () => {
+        console.log('Cashfree SDK loaded successfully');
+      };
+      script.onerror = () => {
+        console.error('Failed to load Cashfree SDK');
+        setPaymentError('Payment system unavailable. Please try again later.');
+      };
+      document.head.appendChild(script);
+    };
+
+    loadCashfreeSDK();
+  }, []);
   
   const validateCurrentField = () => {
     const { id, type, required } = currentQuestion;
@@ -454,63 +460,95 @@ export default function Questionnaire() {
     setLoading(true);
     
     try {
-      // Submit to Google Sheets
-      await submitToGoogleSheets(answers);
-      console.log('✅ Successfully submitted to Google Sheets:', answers);
-      
-      // Send welcome email
-      await sendWelcomeEmail(answers);
-      
-      // Show waitlist confirmation instead of payment
-      await showWaitlistConfirmation();
+          // Submit to Google Sheets
+    await submitToGoogleSheets(answers);
+    console.log('✅ Successfully submitted to Google Sheets:', answers);
+    
+    // Show payment modal (email will be sent after successful payment)
+    await initiatePayment();
     } catch (error) {
       console.error('❌ Error submitting to Google Sheets:', error);
-      // Still try to send email and show confirmation even if sheets fails
-      try {
-        await sendWelcomeEmail(answers);
-      } catch (emailError) {
-        console.error('❌ Error sending welcome email:', emailError);
-      }
-      await showWaitlistConfirmation();
+      // Still show payment modal even if sheets fails
+      await initiatePayment();
     }
   };
 
-  const sendWelcomeEmail = async (answers: Record<string, string>) => {
-    console.log('📧 Sending welcome email...');
 
-    const response = await fetch('/api/send-welcome-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: answers.name || '',
-        email: answers.email || '',
-        date: answers.date || '',
-        location: answers.location || '',
-        restaurant_preference: answers.restaurant_preference || '',
-      })
-    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Email API Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorData
-      });
-      throw new Error(`Email sending failed: ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    console.log('📧 Welcome email sent successfully:', result);
-    return result;
-  };
-
-  const showWaitlistConfirmation = async () => {
-    // Show waitlist confirmation modal
+  const initiatePayment = async () => {
+    // Show payment modal
     setShowPaymentModal(true);
     setLoading(false);
+  };
+
+  const processPayment = async () => {
+    setPaymentLoading(true);
+    setPaymentError(null);
+
+    try {
+      // Generate unique order ID
+      const orderId = `table4six_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Create payment order
+      const orderResponse = await fetch('/api/create-payment-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId: orderId,
+          orderAmount: '299', // ₹299 as shown in the modal
+          customerDetails: {
+            customer_id: answers.email || 'customer',
+            customer_name: answers.name || 'Customer',
+            customer_email: answers.email || '',
+            customer_phone: answers.phone || '',
+          },
+        }),
+      });
+
+      if (!orderResponse.ok) {
+        throw new Error('Failed to create payment order');
+      }
+
+      const orderData = await orderResponse.json();
+      
+      if (!orderData.success) {
+        throw new Error(orderData.error || 'Failed to create payment order');
+      }
+
+      // Initialize Cashfree
+      if (!(window as any).Cashfree) {
+        throw new Error('Payment system not available. Please refresh the page and try again.');
+      }
+      
+      const cashfree = (window as any).Cashfree({
+        mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
+      });
+
+      // Open Cashfree checkout
+      const result = await cashfree.checkout({
+        paymentSessionId: orderData.payment_session_id,
+        redirectTarget: '_self',
+        returnUrl: `${window.location.origin}/confirmation?order_id=${orderData.order_id}`
+      });
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+
+      // If we reach here, payment was successful (for non-redirect flows)
+      if (result.paymentDetails) {
+        // Handle successful payment
+        router.push(`/confirmation?order_id=${orderData.order_id}&status=success`);
+      }
+
+    } catch (error) {
+      console.error('Payment processing error:', error);
+      setPaymentError(error instanceof Error ? error.message : 'Payment failed. Please try again.');
+    } finally {
+      setPaymentLoading(false);
+    }
   };
 
 
@@ -947,7 +985,7 @@ export default function Questionnaire() {
               {loading 
                 ? 'Processing...' 
                 : currentQuestionIndex === questions.length - 1 
-                  ? 'Join Waitlist' 
+                  ? 'Join Table' 
                   : 'Next Question'}
             </button>
           </div>
@@ -962,18 +1000,18 @@ export default function Questionnaire() {
         </div>
       )}
 
-      {/* Waitlist Confirmation Modal */}
+      {/* Payment Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-black/30 backdrop-blur-sm border border-white/20 text-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-md w-full">
             <div className="text-center mb-6">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-green-500/50">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-green-500">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-blue-500/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8 text-blue-500">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                 </svg>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2">You&apos;re on the Waitlist!</h3>
-              <p className="text-white/80 mb-6 text-sm md:text-base">You&apos;ll receive an email shortly with further instructions.</p>
+              <h3 className="text-xl md:text-2xl font-bold mb-2">Complete Your Payment</h3>
+              <p className="text-white/80 mb-6 text-sm md:text-base">Secure your spot at Table 4 Six</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm p-3 md:p-4 rounded-xl mb-6 border border-white/20">
@@ -993,27 +1031,55 @@ export default function Questionnaire() {
                   <span>Dining Package:</span>
                   <span className="font-medium">{answers.restaurant_preference?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span>Ticket Price:</span>
-                  <span className="font-medium">₹299</span>
+                <div className="flex justify-between items-center pt-2 border-t border-white/20">
+                  <span className="font-semibold">Total Amount:</span>
+                  <span className="font-bold text-lg">₹299</span>
                 </div>
               </div>
             </div>
 
+            {paymentError && (
+              <div className="bg-red-500/20 border border-red-500/30 p-3 rounded-xl mb-4">
+                <p className="text-red-300 text-sm">{paymentError}</p>
+              </div>
+            )}
+
             <div className="space-y-3">
               <button
-                onClick={() => {
-                  router.push('/confirmation');
-                }}
-                className="w-full bg-white text-black hover:bg-white/90 font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
+                onClick={processPayment}
+                disabled={paymentLoading}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-600 text-white font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base flex items-center justify-center"
               >
-                Continue
+                {paymentLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </>
+                ) : (
+                  'Pay ₹299 Securely'
+                )}
+              </button>
+              
+              <button
+                onClick={() => setShowPaymentModal(false)}
+                disabled={paymentLoading}
+                className="w-full bg-transparent border border-white/30 text-white hover:bg-white/10 disabled:opacity-50 font-semibold py-2.5 md:py-3 px-6 rounded-full transition-all text-sm md:text-base"
+              >
+                Cancel
               </button>
             </div>
 
-            <p className="text-xs text-white/60 text-center mt-4">
-              ✉️ Check your email for payment instructions and event details.
-            </p>
+            <div className="flex items-center justify-center mt-4 space-x-2">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
+              </svg>
+              <p className="text-xs text-white/60 text-center">
+                Secured by Cashfree • SSL Encrypted
+              </p>
+            </div>
           </div>
         </div>
       )}

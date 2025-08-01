@@ -8,11 +8,16 @@
     "start": "next start",
     "lint": "next lint",
     "test:sheets": "node scripts/test-google-sheets.js",
-    "test:email": "node scripts/test-email.js"
+    "test:email": "node scripts/test-email.js",
+    "test:cashfree": "node scripts/test-cashfree-connection.js",
+    "test:payment-email": "node scripts/test-payment-email.js"
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.5",
     "@sendgrid/mail": "^8.1.5",
     "@vercel/analytics": "^1.5.0",
+    "cashfree-pg": "^5.0.8",
+    "dotenv": "^17.2.1",
     "google-auth-library": "^10.1.0",
     "googleapis": "^150.0.1",
     "next": "15.3.1",
