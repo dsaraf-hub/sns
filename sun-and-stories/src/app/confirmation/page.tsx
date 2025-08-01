@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 interface OrderDetails {
@@ -12,7 +12,7 @@ interface OrderDetails {
   order_status: string;
 }
 
-export default function ConfirmationPage() {
+function ConfirmationPageContent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<'loading' | 'success' | 'failed' | 'unknown'>('loading');
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
@@ -311,5 +311,53 @@ export default function ConfirmationPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function ConfirmationPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white">
+        {/* Background Image */}
+        <div className="fixed inset-0 z-0 opacity-40">
+          <Image
+            src="/background.jpg"
+            alt="Abstract background"
+            fill
+            style={{ objectFit: 'cover' }}
+            quality={100}
+          />
+        </div>
+
+        {/* Header */}
+        <header className="w-full py-2 px-4 md:px-10 flex justify-between items-center bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+          <div className="hidden md:flex flex-1 justify-start">
+            <Link href="/" className="flex items-center">
+              <Image src="/logo.png" alt="Table 4 Six Logo" width={128} height={128} className="h-16 lg:h-18 w-auto ml-4" />
+            </Link>
+          </div>
+        </header>
+
+        {/* Loading Content */}
+        <main className="relative z-10 flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+          <div className="w-full max-w-4xl bg-black/40 backdrop-blur-lg border border-white/20 text-white p-8 md:p-12 rounded-2xl shadow-2xl text-center">
+            <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border-2 border-blue-500/50">
+              <svg className="animate-spin w-10 h-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-white">
+              Loading...
+            </h1>
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
+              Please wait while we load your confirmation details.
+            </p>
+          </div>
+        </main>
+      </div>
+    }>
+      <ConfirmationPageContent />
+    </Suspense>
   );
 } 
