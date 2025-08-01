@@ -1,5 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
+
+// Define webhook data interfaces
+interface WebhookOrder {
+  order_id: string;
+  order_status: string;
+  customer_details?: {
+    customer_name?: string;
+    customer_email?: string;
+  };
+}
+
+interface WebhookPayment {
+  payment_amount?: number;
+  payment_method?: {
+    upi?: unknown;
+    card?: unknown;
+    netbanking?: unknown;
+  };
+  payment_message?: string;
+  payment_status?: string;
+}
+
+interface WebhookData {
+  order: WebhookOrder;
+  payment?: WebhookPayment;
+  customer_details?: {
+    customer_name?: string;
+    customer_email?: string;
+  };
+}
+
+interface WebhookPayload {
+  type: string;
+  data: WebhookData;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +55,7 @@ export async function POST(request: NextRequest) {
     // In production, you may want to implement IP whitelisting or other security measures
 
     // Parse webhook data
-    const webhookData = JSON.parse(body);
+    const webhookData: WebhookPayload = JSON.parse(body);
     
     console.log('Received payment webhook:', {
       type: webhookData.type,
@@ -53,7 +87,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handlePaymentSuccess(data: any) {
+async function handlePaymentSuccess(data: WebhookData) {
   try {
     const order = data.order;
     const payment = data.payment;
@@ -140,14 +174,14 @@ async function sendPaymentSuccessEmail(details: {
   }
 }
 
-async function handlePaymentFailure(data: any) {
+async function handlePaymentFailure(data: WebhookData) {
   try {
     const order = data.order;
     const payment = data.payment;
 
     console.log('Payment failed:', {
       order_id: order.order_id,
-      failure_reason: payment.payment_message,
+      failure_reason: payment?.payment_message,
     });
 
     // Here you can:
@@ -160,7 +194,7 @@ async function handlePaymentFailure(data: any) {
   }
 }
 
-async function handlePaymentDropped(data: any) {
+async function handlePaymentDropped(data: WebhookData) {
   try {
     const order = data.order;
 

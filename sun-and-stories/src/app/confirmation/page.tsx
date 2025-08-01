@@ -5,10 +5,17 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+interface OrderDetails {
+  success: boolean;
+  order_id: string;
+  order_amount: number;
+  order_status: string;
+}
+
 export default function ConfirmationPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<'loading' | 'success' | 'failed' | 'unknown'>('loading');
-  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const searchParams = useSearchParams();
   
   useEffect(() => {

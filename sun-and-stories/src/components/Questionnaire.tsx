@@ -330,7 +330,7 @@ export default function Questionnaire() {
   useEffect(() => {
     const loadCashfreeSDK = () => {
       // Check if SDK is already loaded
-      if (typeof window !== 'undefined' && (window as any).Cashfree) {
+      if (typeof window !== 'undefined' && typeof window.Cashfree === 'function') {
         return; // SDK already loaded
       }
 
@@ -518,11 +518,11 @@ export default function Questionnaire() {
       }
 
       // Initialize Cashfree
-      if (!(window as any).Cashfree) {
+      if (typeof window.Cashfree !== 'function') {
         throw new Error('Payment system not available. Please refresh the page and try again.');
       }
       
-      const cashfree = (window as any).Cashfree({
+      const cashfree = window.Cashfree({
         mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
       });
 

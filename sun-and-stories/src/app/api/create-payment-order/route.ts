@@ -110,29 +110,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Payment order creation error:', error);
     
     // Log detailed error information
-    if (error.response) {
+    if (error && typeof error === 'object' && 'response' in error) {
+      const axiosError = error as { response: { status: number; data: unknown; headers: unknown } };
       console.error('Cashfree API Error Response:', {
-        status: error.response.status,
-        data: error.response.data,
-        headers: error.response.headers
+        status: axiosError.response.status,
+        data: axiosError.response.data,
+        headers: axiosError.response.headers
       });
       
       return NextResponse.json(
         { 
           error: 'Payment order creation failed',
-          details: error.response.data || 'Unknown error from payment gateway',
-          status: error.response.status
+          details: axiosError.response.data || 'Unknown error from payment gateway',
+          status: axiosError.response.status
         },
         { status: 400 }
       );
     }
     
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
