@@ -218,6 +218,9 @@ export default function AboutPage() {
             <Link href="/questionnaire" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-10 rounded-full text-lg transition-colors shadow-lg font-montserrat">
               Join Your First Table
             </Link>
+            <p className="text-xs text-white/60 mt-6 font-montserrat">
+              An initiative by Saaransh Harlalka, Sparsh Bohra and Dakshh Saraf
+            </p>
           </section>
         </div>
       </main>
@@ -259,6 +262,9 @@ export default function AboutPage() {
             <p className="flex items-center gap-2 text-sm text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               Mumbai, India
+            </p>
+            <p className="mt-2 text-sm text-gray-300">
+              Saaransh Sandeep Harlalka
             </p>
           </div>
         </div>
