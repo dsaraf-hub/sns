@@ -13,13 +13,13 @@ async function testPaymentSuccessEmail() {
     return;
   }
 
-  // Test data
+  // Test data - matches the interface expected by the API
   const testData = {
     name: 'Daksh Saraf',
-    email: 'dakshhsaraf@gmail.com',
-    order_id: 'test_order_123456',
+    email: 'dakshh.saraf@skyminyr.com',
+    order_id: 'test_order_' + Date.now(),
     payment_amount: 299,
-    payment_method: 'UPI'
+    payment_method: 'Test Card'
   };
 
   console.log('📋 Test Payment Data:');

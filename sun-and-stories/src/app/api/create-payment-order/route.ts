@@ -86,10 +86,17 @@ export async function POST(request: NextRequest) {
       order_note: 'Table 4 Six - Dining Experience Booking',
     };
 
+    // Log the request for debugging
+    console.log('Creating Cashfree order with request:', JSON.stringify(orderRequest, null, 2));
+    console.log('Using environment:', environment);
+    console.log('Client ID:', clientId?.substring(0, 10) + '...');
+
     // Create order with Cashfree
     const response = await cashfree.PGCreateOrder(orderRequest);
     
-    if (response.data && response.data.payment_session_id) {
+    console.log('Cashfree response:', JSON.stringify(response.data, null, 2));
+    
+    if (response.data) {
       return NextResponse.json({
         success: true,
         order_id: response.data.order_id,

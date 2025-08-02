@@ -34,21 +34,21 @@ export async function POST(request: NextRequest) {
         name: 'Table 4 Six'
       },
       replyTo: 'hello@table4six.in',
-      subject: '🎉 Payment Successful - Welcome to Table 4 Six!',
+      subject: '🎉 Welcome to Table 4 Six!',
       html: `
         <!DOCTYPE html>
         <html>
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Payment Successful - Table 4 Six</title>
+          <title>Welcome to Table 4 Six</title>
         </head>
         <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #fffcf5;">
           <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
             
             <!-- Header -->
-            <div style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://www.table4six.in/background.jpg') center/cover; background-color: #2d3748; padding: 40px 30px; text-align: center;">
-              <img src="https://www.table4six.in/logo.png" alt="Table 4 Six Logo" style="max-width: 120px; height: auto; margin: 0 auto;">
+            <div style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://www.table4six.in/background.jpg') center/cover; background-color: #2d3748; padding: 50px 30px; text-align: center;">
+              <img src="https://www.table4six.in/logo.png" alt="Table 4 Six Logo" style="width: 120px; height: auto; margin: 0 auto; display: block; filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.8));" />
             </div>
 
             <!-- Main Content -->
