@@ -10,7 +10,8 @@
     "test:sheets": "node scripts/test-google-sheets.js",
     "test:email": "node scripts/test-email.js",
     "test:cashfree": "node scripts/test-cashfree-connection.js",
-    "test:payment-email": "node scripts/test-payment-email.js"
+    "test:payment-email": "node scripts/test-payment-email.js",
+    "test:waitlist-email": "node scripts/test-waitlist-email.js"
   },
   "dependencies": {
     "@cashfreepayments/cashfree-js": "^1.0.5",

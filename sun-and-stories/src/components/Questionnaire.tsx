@@ -497,7 +497,7 @@ export default function Questionnaire() {
         },
         body: JSON.stringify({
           orderId: orderId,
-          orderAmount: '299', // ₹299 as shown in the modal
+          orderAmount: '20', // ₹20 for production testing
           customerDetails: {
             customer_id: answers.email || 'customer',
             customer_name: answers.name || 'Customer',
