@@ -522,8 +522,10 @@ export default function Questionnaire() {
         throw new Error('Payment system not available. Please refresh the page and try again.');
       }
       
+      const cashfreeMode = (process.env.NEXT_PUBLIC_CASHFREE_MODE === 'production' ? 'production' : 'sandbox') as 'sandbox' | 'production';
+      
       const cashfree = window.Cashfree({
-        mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
+        mode: cashfreeMode
       });
 
       // Open Cashfree checkout
