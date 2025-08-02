@@ -14,8 +14,8 @@ async function testWaitlistEmail() {
 
     // Test data - simple fields for waitlist conversion
     const testData = {
-      name: 'Daksh Saraf',
-      email: 'dakshh.saraf@skyminyr.com'
+      name: 'Dakshh Saraf',
+      email: 'dakshhsaraf@gmail.com'
     };
 
     console.log('📋 Test Waitlist Data:');

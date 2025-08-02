@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
               <h2 style="color: #4a4a4a; font-size: 24px; margin: 0 0 20px 0;">Hi ${name}! 🎉</h2>
               
               <p style="color: #666; line-height: 1.6; margin: 0 0 20px 0; font-size: 16px;">
-                <strong>The wait is finally over!</strong> Your table is now set and ready for an unforgettable dining experience.
+                <strong>The wait is finally over!</strong> Your table is now set and ready for an unforgettable brunch.
               </p>
               
               <p style="color: #666; line-height: 1.6; margin: 0 0 25px 0; font-size: 16px;">
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       `,
       text: `Hi ${name}!
 
-The wait is finally over! Your table is now set and ready for an unforgettable dining experience.
+The wait is finally over! Your table is now set and ready for an unforgettable brunch.
 
 We're excited to invite you to confirm your spot at Table 4 Six. This is your exclusive opportunity to join our curated dining community.
 
