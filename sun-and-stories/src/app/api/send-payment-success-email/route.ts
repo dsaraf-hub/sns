@@ -48,8 +48,7 @@ export async function POST(request: NextRequest) {
             
             <!-- Header -->
             <div style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://www.table4six.in/background.jpg') center/cover; background-color: #2d3748; padding: 40px 30px; text-align: center;">
-              <h1 style="margin: 0; color: white; font-size: 28px; font-weight: bold; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);">Payment Successful!</h1>
-              <p style="margin: 10px 0 0 0; color: rgba(255, 255, 255, 0.95); font-size: 16px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">Welcome to Table 4 Six ✨</p>
+              <img src="https://www.table4six.in/logo.png" alt="Table 4 Six Logo" style="max-width: 120px; height: auto; margin: 0 auto;">
             </div>
 
             <!-- Main Content -->
