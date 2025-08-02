@@ -81,7 +81,6 @@ export async function POST(request: NextRequest) {
       },
       order_meta: {
         return_url: `${request.headers.get('origin') || 'http://localhost:3000'}/confirmation?order_id=${orderId}`,
-        notify_url: `${request.headers.get('origin') || 'http://localhost:3000'}/api/payment-webhook`,
       },
       order_note: 'Table 4 Six - Dining Experience Booking',
     };

@@ -1,6 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
 
+// Email sending function
+async function sendPaymentSuccessEmail(details: {
+  name: string;
+  email: string;
+  order_id: string;
+  payment_amount: number;
+}) {
+  try {
+    console.log('📧 Sending welcome email after payment verification:', details.email);
+    
+    // Use production URL - works with Vercel and custom domains
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.PRODUCTION_URL || 'https://table4six.in';
+    
+    const response = await fetch(`${baseUrl}/api/send-payment-success-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: details.name,
+        email: details.email,
+        order_id: details.order_id,
+        payment_amount: details.payment_amount,
+        payment_method: 'Online Payment'
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Email sending failed: ${response.status} - ${errorText}`);
+    }
+
+    const result = await response.json();
+    console.log('✅ Welcome email sent successfully via payment verification:', result);
+  } catch (error) {
+    console.error('❌ Error sending welcome email via payment verification:', error);
+  }
+}
+
 async function verifyPaymentOrder(orderId: string) {
   // Get environment variables
   const clientId = process.env.CASHFREE_CLIENT_ID;
@@ -72,6 +113,27 @@ export async function GET(request: NextRequest) {
 
   try {
     const result = await verifyPaymentOrder(orderId);
+    
+    // If payment is successful, send welcome email
+    if (result.success && result.order_status === 'PAID' && result.customer_details) {
+      const customerName = result.customer_details.customer_name || 'Customer';
+      const customerEmail = result.customer_details.customer_email;
+      
+      if (customerEmail && result.order_id && result.order_amount) {
+        // Send welcome email (don't await to avoid blocking the response)
+        sendPaymentSuccessEmail({
+          name: customerName,
+          email: customerEmail,
+          order_id: result.order_id,
+          payment_amount: result.order_amount
+        }).catch(emailError => {
+          console.error('Email sending failed but payment verification succeeded:', emailError);
+        });
+      } else {
+        console.warn('Missing required data for email - Order ID:', result.order_id, 'Amount:', result.order_amount, 'Email:', customerEmail);
+      }
+    }
+    
     return NextResponse.json(result);
 
   } catch (error) {
