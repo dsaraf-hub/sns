@@ -4,6 +4,34 @@ import sgMail from '@sendgrid/mail';
 import { GoogleAuth } from 'google-auth-library';
 import { google } from 'googleapis';
 
+// TypeScript interfaces
+interface QuestionnaireData {
+  location?: string;
+  name?: string;
+  age?: string;
+  phone?: string;
+  email?: string;
+  social?: string;
+  sunday_vibe?: string;
+  personality_type?: string;
+  fashion?: string;
+  brunch_plate?: string;
+  alcohol?: string;
+  introversion?: string;
+  humor?: string;
+  workout?: string;
+  motivation?: string;
+  date?: string;
+  restaurant_preference?: string;
+  ticket?: string;
+}
+
+interface OrderMetaWithQuestionnaire {
+  return_url?: string;
+  questionnaire_data?: string;
+  [key: string]: unknown;
+}
+
 // Set SendGrid API key
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -12,7 +40,7 @@ if (process.env.SENDGRID_API_KEY) {
 }
 
 // Google Sheets submission function
-async function submitToGoogleSheets(questionnaireData: any) {
+async function submitToGoogleSheets(questionnaireData: QuestionnaireData) {
   try {
     // Check if we have the required environment variables
     const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -321,10 +349,10 @@ export async function GET(request: NextRequest) {
         });
 
         // Record questionnaire data to Google Sheets for PAID users only
-        if (result.order_meta && (result.order_meta as any).questionnaire_data) {
+        const orderMeta = result.order_meta as OrderMetaWithQuestionnaire;
+        if (orderMeta && orderMeta.questionnaire_data) {
           try {
-            const questionnaireDataString = (result.order_meta as any).questionnaire_data;
-            const questionnaireData = JSON.parse(questionnaireDataString);
+            const questionnaireData: QuestionnaireData = JSON.parse(orderMeta.questionnaire_data);
             console.log('🎯 Payment confirmed - recording PAID user to Google Sheets:', customerEmail);
             
             // Record to Google Sheets (don't await to avoid blocking the response)
