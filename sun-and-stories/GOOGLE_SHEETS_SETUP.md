@@ -14,29 +14,32 @@ This guide will help you set up Google Sheets integration to automatically colle
    - Rename to "Table 4 Six - Questionnaire Responses"
 
 ### 1.2 Set Up Column Headers
-**Copy and paste these headers into Row 1 (A1 to P1):**
+**Copy and paste these headers into Row 1 (A1 to S1):**
 
 ```
-Timestamp	Location	Name	Age	Social Handle	Sunday Vibe	Personality Type	Fashion Statement	Dream Brunch Plate	Alcohol Preference	Introversion Level	Humor Importance	Workout Preference	Motivation	Ticket	Restaurant Preference
+Timestamp	Location	Name	Email	Age	Phone	Social Handle	Sunday Vibe	Personality Type	Fashion Statement	Dream Brunch Plate	Alcohol Preference	Introversion Level	Humor Importance	Workout Preference	Motivation	Date	Restaurant Preference	Ticket
 ```
 
 **Or set up manually:**
 - A1: `Timestamp`
 - B1: `Location`
 - C1: `Name`
-- D1: `Age`
-- E1: `Social Handle`
-- F1: `Sunday Vibe`
-- G1: `Personality Type`
-- H1: `Fashion Statement`
-- I1: `Dream Brunch Plate`
-- J1: `Alcohol Preference`
-- K1: `Introversion Level`
-- L1: `Humor Importance`
-- M1: `Workout Preference`
-- N1: `Motivation`
-- O1: `Ticket`
-- P1: `Restaurant Preference`
+- D1: `Email`
+- E1: `Age`
+- F1: `Phone`
+- G1: `Social Handle`
+- H1: `Sunday Vibe`
+- I1: `Personality Type`
+- J1: `Fashion Statement`
+- K1: `Dream Brunch Plate`
+- L1: `Alcohol Preference`
+- M1: `Introversion Level`
+- N1: `Humor Importance`
+- O1: `Workout Preference`
+- P1: `Motivation`
+- Q1: `Date`
+- R1: `Restaurant Preference`
+- S1: `Ticket`
 
 ### 1.3 Format Your Sheet (Optional but Recommended)
 1. **Select Row 1**: Click on the "1" to select the entire first row

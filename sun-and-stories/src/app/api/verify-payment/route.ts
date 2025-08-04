@@ -1,12 +1,93 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
 import sgMail from '@sendgrid/mail';
+import { GoogleAuth } from 'google-auth-library';
+import { google } from 'googleapis';
 
 // Set SendGrid API key
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 } else {
   console.error('❌ SENDGRID_API_KEY is not set');
+}
+
+// Google Sheets submission function
+async function submitToGoogleSheets(questionnaireData: any) {
+  try {
+    // Check if we have the required environment variables
+    const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    const serviceAccountKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+    const sheetId = process.env.GOOGLE_SHEET_ID;
+
+    if (!serviceAccountEmail || !serviceAccountKey || !sheetId) {
+      console.error('Missing required Google Sheets environment variables');
+      return { success: false, error: 'Server configuration error' };
+    }
+
+    // Set up Google Auth
+    const auth = new GoogleAuth({
+      credentials: {
+        client_email: serviceAccountEmail,
+        private_key: serviceAccountKey.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    // Create Google Sheets client
+    const sheets = google.sheets({ version: 'v4', auth });
+
+    // Prepare the row data in the exact order specified
+    // Timestamp, Location, Name, Email, Age, Phone, Social Handle, Sunday Vibe, Personality Type, 
+    // Fashion Statement, Dream Brunch Plate, Alcohol Preference, Introversion Level, Humor Importance, 
+    // Workout Preference, Motivation, Date, Restaurant Preference, Ticket
+    const rowData = [
+      new Date().toISOString(), // A: Timestamp
+      questionnaireData.location || '', // B: Location
+      questionnaireData.name || '', // C: Name
+      questionnaireData.email || '', // D: Email
+      questionnaireData.age || '', // E: Age
+      questionnaireData.phone || '', // F: Phone
+      questionnaireData.social || '', // G: Social Handle
+      questionnaireData.sunday_vibe || '', // H: Sunday Vibe
+      questionnaireData.personality_type || '', // I: Personality Type
+      questionnaireData.fashion || '', // J: Fashion Statement
+      questionnaireData.brunch_plate || '', // K: Dream Brunch Plate
+      questionnaireData.alcohol || '', // L: Alcohol Preference
+      questionnaireData.introversion || '', // M: Introversion Level
+      questionnaireData.humor || '', // N: Humor Importance
+      questionnaireData.workout || '', // O: Workout Preference
+      questionnaireData.motivation || '', // P: Motivation
+      questionnaireData.date || '', // Q: Date
+      questionnaireData.restaurant_preference || '', // R: Restaurant Preference
+      questionnaireData.ticket || '', // S: Ticket
+    ];
+
+    console.log('📊 Submitting PAID user to Google Sheets...', {
+      sheetId: sheetId.substring(0, 10) + '...',
+      email: questionnaireData.email,
+      dataLength: rowData.length
+    });
+
+    // Append the data to the sheet
+    const response = await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Sheet1!A:S',
+      valueInputOption: 'RAW',
+      requestBody: {
+        values: [rowData],
+      },
+    });
+
+    console.log('✅ Successfully submitted PAID user to Google Sheets');
+    return { success: true, updatedRows: response.data.updates?.updatedRows || 0 };
+
+  } catch (error) {
+    console.error('❌ Error submitting PAID user to Google Sheets:', error);
+    return { 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Unknown error' 
+    };
+  }
 }
 
 // Direct email sending function (no internal API calls)
@@ -178,6 +259,7 @@ async function verifyPaymentOrder(orderId: string) {
       order_currency: orderDetails.order_currency,
       created_at: orderDetails.created_at,
       customer_details: orderDetails.customer_details,
+      order_meta: orderDetails.order_meta, // Include metadata to access questionnaire data
     };
   } else {
     throw new Error('Failed to fetch order details');
@@ -222,7 +304,7 @@ export async function GET(request: NextRequest) {
   try {
     const result = await verifyPaymentOrder(orderId);
     
-    // If payment is successful, send welcome email
+    // If payment is successful, send welcome email AND record to Google Sheets
     if (result.success && result.order_status === 'PAID' && result.customer_details) {
       const customerName = result.customer_details.customer_name || 'Customer';
       const customerEmail = result.customer_details.customer_email;
@@ -237,6 +319,24 @@ export async function GET(request: NextRequest) {
         }).catch(emailError => {
           console.error('Email sending failed but payment verification succeeded:', emailError);
         });
+
+        // Record questionnaire data to Google Sheets for PAID users only
+        if (result.order_meta && (result.order_meta as any).questionnaire_data) {
+          try {
+            const questionnaireDataString = (result.order_meta as any).questionnaire_data;
+            const questionnaireData = JSON.parse(questionnaireDataString);
+            console.log('🎯 Payment confirmed - recording PAID user to Google Sheets:', customerEmail);
+            
+            // Record to Google Sheets (don't await to avoid blocking the response)
+            submitToGoogleSheets(questionnaireData).catch(sheetsError => {
+              console.error('Google Sheets recording failed but payment verification succeeded:', sheetsError);
+            });
+          } catch (parseError) {
+            console.error('Failed to parse questionnaire data from order metadata:', parseError);
+          }
+        } else {
+          console.warn('No questionnaire data found in order metadata for PAID user:', customerEmail);
+        }
       } else {
         console.warn('Missing required data for email - Order ID:', result.order_id, 'Amount:', result.order_amount, 'Email:', customerEmail);
       }

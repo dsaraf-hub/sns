@@ -460,15 +460,14 @@ export default function Questionnaire() {
     setLoading(true);
     
     try {
-          // Submit to Google Sheets
-    await submitToGoogleSheets(answers);
-    console.log('✅ Successfully submitted to Google Sheets:', answers);
-    
-    // Show payment modal (email will be sent after successful payment)
-    await initiatePayment();
+      // Remove Google Sheets submission - this will now happen after payment confirmation
+      console.log('✅ Questionnaire completed, proceeding to payment:', answers);
+      
+      // Show payment modal (data will be recorded after successful payment)
+      await initiatePayment();
     } catch (error) {
-      console.error('❌ Error submitting to Google Sheets:', error);
-      // Still show payment modal even if sheets fails
+      console.error('❌ Error during form submission:', error);
+      // Still show payment modal even if there's an error
       await initiatePayment();
     }
   };
@@ -489,7 +488,7 @@ export default function Questionnaire() {
       // Generate unique order ID
       const orderId = `table4six_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
-      // Create payment order
+      // Create payment order with questionnaire data
       const orderResponse = await fetch('/api/create-payment-order', {
         method: 'POST',
         headers: {
@@ -503,6 +502,27 @@ export default function Questionnaire() {
             customer_name: answers.name || 'Customer',
             customer_email: answers.email || '',
             customer_phone: answers.phone || '',
+          },
+          // Include questionnaire data to be recorded after payment success
+          questionnaireData: {
+            location: answers.location || '',
+            name: answers.name || '',
+            age: answers.age || '',
+            phone: answers.phone || '',
+            email: answers.email || '',
+            social: answers.social || '',
+            sunday_vibe: answers.sunday_vibe || '',
+            personality_type: answers.personality_type || '',
+            fashion: answers.fashion || '',
+            brunch_plate: answers.brunch_plate || '',
+            alcohol: answers.alcohol || '',
+            introversion: answers.introversion || '',
+            humor: answers.humor || '',
+            workout: answers.workout || '',
+            motivation: answers.motivation || '',
+            date: answers.date || '',
+            restaurant_preference: answers.restaurant_preference || '',
+            ticket: answers.ticket || '',
           },
         }),
       });
@@ -555,51 +575,8 @@ export default function Questionnaire() {
 
 
 
-  // Google Sheets submission function
-  const submitToGoogleSheets = async (answers: Record<string, string>) => {
-    console.log('📊 Submitting to Google Sheets via API route...');
-
-    const response = await fetch('/api/submit-questionnaire', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-        location: answers.location || '',
-        name: answers.name || '',
-        age: answers.age || '',
-        phone: answers.phone || '',
-        email: answers.email || '',
-        social: answers.social || '',
-        sunday_vibe: answers.sunday_vibe || '',
-        personality_type: answers.personality_type || '',
-        fashion: answers.fashion || '',
-        brunch_plate: answers.brunch_plate || '',
-        alcohol: answers.alcohol || '',
-        introversion: answers.introversion || '',
-        humor: answers.humor || '',
-        workout: answers.workout || '',
-        motivation: answers.motivation || '',
-        date: answers.date || '',
-        restaurant_preference: answers.restaurant_preference || '',
-        ticket: answers.ticket || '',
-        })
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('API Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorData
-      });
-      throw new Error(`Questionnaire submission failed: ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    console.log('📈 API response:', result);
-    return result;
-  };
+  // Note: Google Sheets submission now happens after payment confirmation
+  // This ensures only PAID users are recorded in the spreadsheet
 
   const renderQuestion = () => {
     const { id, type, question, options = [], ticketOptions = [], restaurantOptions = [], placeholder = '', scaleLabels } = currentQuestion;

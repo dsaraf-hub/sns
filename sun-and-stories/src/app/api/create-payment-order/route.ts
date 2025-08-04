@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     const cashfree = new Cashfree(cashfreeEnv, clientId, clientSecret);
 
     // Parse request body
-    const { customerDetails, orderAmount, orderId } = await request.json();
+    const { customerDetails, orderAmount, orderId, questionnaireData } = await request.json();
 
     // Validate required fields
     if (!customerDetails || !orderAmount || !orderId) {
@@ -81,6 +81,8 @@ export async function POST(request: NextRequest) {
       },
       order_meta: {
         return_url: `${request.headers.get('origin') || 'http://localhost:3000'}/confirmation?order_id=${orderId}`,
+        // Store questionnaire data as JSON string to record after payment success
+        ...(questionnaireData && { questionnaire_data: JSON.stringify(questionnaireData) }),
       },
       order_note: 'Table 4 Six - Dining Experience Booking',
     };
