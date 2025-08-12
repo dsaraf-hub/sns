@@ -263,7 +263,7 @@ async function verifyPaymentOrder(orderId: string) {
   // Get environment variables
   const clientId = process.env.CASHFREE_CLIENT_ID;
   const clientSecret = process.env.CASHFREE_CLIENT_SECRET;
-  const environment = process.env.CASHFREE_ENVIRONMENT || 'sandbox';
+  const environment = process.env.CASHFREE_ENVIRONMENT || 'production';
 
   if (!clientId || !clientSecret) {
     throw new Error('Cashfree configuration not found');
