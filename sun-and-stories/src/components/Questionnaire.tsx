@@ -263,15 +263,6 @@ const questions: Question[] = [
           'Approximate price of a meal ₹1500 per person',
           'Pay for your meal directly at the restaurant'
         ]
-      },
-      {
-        value: 'local_favourites',
-        title: 'Local Favourites',
-        price: '₹700 per person',
-        description: [
-          'Approximate price of a meal ₹700 per person',
-          'Pay for your meal directly at the restaurant'
-        ]
       }
     ],
     required: true,
@@ -524,7 +515,7 @@ export default function Questionnaire() {
         },
         body: JSON.stringify({
           orderId: orderId,
-          orderAmount: '10', // ₹10 test amount
+          orderAmount: '299', // ₹299 live amount
           customerDetails: {
             customer_id: answers.email || 'customer',
             customer_name: answers.name || 'Customer',
@@ -1049,7 +1040,7 @@ export default function Questionnaire() {
                     Processing...
                   </>
                 ) : (
-                  'Pay ₹10 Securely'
+                  'Pay ₹299 Securely'
                 )}
               </button>
               
