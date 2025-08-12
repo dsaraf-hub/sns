@@ -297,7 +297,7 @@ async function verifyPaymentOrder(orderId: string) {
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
-    const { orderId } = await request.json();
+    const { orderId, questionnaireData } = await request.json();
 
     if (!orderId) {
       return NextResponse.json(
@@ -307,6 +307,40 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await verifyPaymentOrder(orderId);
+
+    // If payment is successful, record to Google Sheets (email is handled in GET flow)
+    if (result.success && result.order_status === 'PAID' && result.customer_details) {
+      const customerEmail = result.customer_details.customer_email;
+
+      // Determine questionnaire data source (client-provided takes precedence)
+      let dataToSubmit: QuestionnaireData | null = null;
+      if (questionnaireData && typeof questionnaireData === 'object') {
+        dataToSubmit = questionnaireData as QuestionnaireData;
+        console.log('📝 [POST] Using questionnaire data provided in body for PAID user:', customerEmail);
+      } else {
+        const orderMeta = result.order_meta as OrderMetaWithQuestionnaire;
+        if (orderMeta && orderMeta.questionnaire_data) {
+          try {
+            dataToSubmit = JSON.parse(orderMeta.questionnaire_data) as QuestionnaireData;
+            console.log('📝 [POST] Using questionnaire data from order metadata for PAID user:', customerEmail);
+          } catch (parseError) {
+            console.error('Failed to parse questionnaire data from order metadata:', parseError);
+          }
+        } else {
+          console.warn('No questionnaire data found in order metadata for PAID user (POST):', customerEmail);
+        }
+      }
+
+      if (dataToSubmit) {
+        // Record to Google Sheets (don't await to avoid blocking the response)
+        submitToGoogleSheets(dataToSubmit).catch(sheetsError => {
+          console.error('Google Sheets recording failed but payment verification succeeded (POST):', sheetsError);
+        });
+      } else {
+        console.warn('No questionnaire data available to record for PAID user (POST):', customerEmail);
+      }
+    }
+
     return NextResponse.json(result);
 
   } catch (error) {

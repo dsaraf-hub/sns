@@ -488,7 +488,34 @@ export default function Questionnaire() {
     try {
       // Generate unique order ID
       const orderId = `table4six_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      
+
+      // Build questionnaire payload once
+      const questionnairePayload = {
+        location: answers.location || '',
+        name: answers.name || '',
+        age: answers.age || '',
+        phone: answers.phone || '',
+        email: answers.email || '',
+        social: answers.social || '',
+        sunday_vibe: answers.sunday_vibe || '',
+        personality_type: answers.personality_type || '',
+        fashion: answers.fashion || '',
+        brunch_plate: answers.brunch_plate || '',
+        alcohol: answers.alcohol || '',
+        introversion: answers.introversion || '',
+        humor: answers.humor || '',
+        workout: answers.workout || '',
+        motivation: answers.motivation || '',
+        date: answers.date || '',
+        restaurant_preference: answers.restaurant_preference || '',
+        ticket: answers.ticket || '',
+      };
+
+      // Temporarily persist questionnaire data for post-redirect verification
+      try {
+        localStorage.setItem('t4s_questionnaire', JSON.stringify({ orderId, questionnaire: questionnairePayload }));
+      } catch {}
+
       // Create payment order with questionnaire data
       const orderResponse = await fetch('/api/create-payment-order', {
         method: 'POST',
@@ -505,26 +532,7 @@ export default function Questionnaire() {
             customer_phone: answers.phone || '',
           },
           // Include questionnaire data to be recorded after payment success
-          questionnaireData: {
-            location: answers.location || '',
-            name: answers.name || '',
-            age: answers.age || '',
-            phone: answers.phone || '',
-            email: answers.email || '',
-            social: answers.social || '',
-            sunday_vibe: answers.sunday_vibe || '',
-            personality_type: answers.personality_type || '',
-            fashion: answers.fashion || '',
-            brunch_plate: answers.brunch_plate || '',
-            alcohol: answers.alcohol || '',
-            introversion: answers.introversion || '',
-            humor: answers.humor || '',
-            workout: answers.workout || '',
-            motivation: answers.motivation || '',
-            date: answers.date || '',
-            restaurant_preference: answers.restaurant_preference || '',
-            ticket: answers.ticket || '',
-          },
+          questionnaireData: questionnairePayload,
         }),
       });
 
@@ -533,7 +541,7 @@ export default function Questionnaire() {
       }
 
       const orderData = await orderResponse.json();
-      
+
       if (!orderData.success) {
         throw new Error(orderData.error || 'Failed to create payment order');
       }
@@ -542,7 +550,7 @@ export default function Questionnaire() {
       if (typeof window.Cashfree !== 'function') {
         throw new Error('Payment system not available. Please refresh the page and try again.');
       }
-      
+
       const cashfree = window.Cashfree({
         mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
       });
