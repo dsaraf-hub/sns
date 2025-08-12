@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     // Get environment variables
     const clientId = process.env.CASHFREE_CLIENT_ID;
     const clientSecret = process.env.CASHFREE_CLIENT_SECRET;
-    const environment = process.env.CASHFREE_ENVIRONMENT || 'production';
+    const environment = process.env.CASHFREE_ENVIRONMENT || 'sandbox';
 
     if (!clientId || !clientSecret) {
       return NextResponse.json(

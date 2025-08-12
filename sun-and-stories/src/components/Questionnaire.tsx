@@ -552,7 +552,7 @@ export default function Questionnaire() {
       }
 
       const cashfree = window.Cashfree({
-        mode: (process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT as 'sandbox' | 'production') || 'production'
+        mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
       });
 
       // Open Cashfree checkout
