@@ -524,7 +524,7 @@ export default function Questionnaire() {
         },
         body: JSON.stringify({
           orderId: orderId,
-          orderAmount: '10', // ₹10 test amount
+          orderAmount: '299', // ₹299 live amount
           customerDetails: {
             customer_id: answers.email || 'customer',
             customer_name: answers.name || 'Customer',
@@ -1049,7 +1049,7 @@ export default function Questionnaire() {
                     Processing...
                   </>
                 ) : (
-                  'Pay ₹10 Securely'
+                  'Pay ₹299 Securely'
                 )}
               </button>
               

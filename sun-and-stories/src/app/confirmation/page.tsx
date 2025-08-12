@@ -42,23 +42,23 @@ function ConfirmationPageContent() {
         if (data.order_status === 'PAID') {
           setPaymentStatus('success');
 
-          // Best-effort POST with questionnaire data (fallback path)
+          // Best-effort record to Google Sheets using dedicated endpoint
           try {
             const stored = typeof window !== 'undefined' ? localStorage.getItem('t4s_questionnaire') : null;
             if (stored) {
               const parsed = JSON.parse(stored);
               if (parsed && parsed.orderId === orderId && parsed.questionnaire) {
-                await fetch('/api/verify-payment', {
+                await fetch('/api/record-paid-user', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ orderId, questionnaireData: parsed.questionnaire })
+                  body: JSON.stringify({ questionnaireData: parsed.questionnaire })
                 });
               }
               // Clean up regardless
               localStorage.removeItem('t4s_questionnaire');
             }
           } catch (e) {
-            console.warn('Questionnaire POST fallback failed:', e);
+            console.warn('Recording to Sheets failed:', e);
           }
         } else if (data.order_status === 'EXPIRED' || data.order_status === 'CANCELLED') {
           setPaymentStatus('failed');
