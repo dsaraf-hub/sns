@@ -234,7 +234,6 @@ const questions: Question[] = [
     type: 'radio',
     question: 'Which date would you like to join us for brunch?',
     options: [
-      { value: '2025-08-24', label: '24th August, 2025' },
       { value: '2025-09-14', label: '14th September, 2025' },
       { value: '2025-09-28', label: '28th September, 2025' },
     ],
@@ -999,8 +998,8 @@ export default function Questionnaire() {
                 <div className="flex justify-between items-center">
                   <span>Date:</span>
                   <span className="font-medium">
-                    {answers.date === '2025-08-24' ? '24th August, 2025' : 
-                     answers.date === '2025-09-14' ? '14th September, 2025' : 
+                    {answers.date === '2025-09-14' ? '14th September, 2025' : 
+                     answers.date === '2025-09-28' ? '28th September, 2025' : 
                      '28th September, 2025'}
                   </span>
                 </div>
