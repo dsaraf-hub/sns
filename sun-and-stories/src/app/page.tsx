@@ -301,7 +301,7 @@ export default function Home() {
 
           {/* Countdown Timer */}
           <div className="text-center px-4">
-            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: Sep 14, 2025 at 12 PM IST</p>
+            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: 28th September, 2025 at 12 noon IST</p>
             {isClient ? (
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
