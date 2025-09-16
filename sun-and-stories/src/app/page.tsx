@@ -117,8 +117,8 @@ export default function Home() {
     const calculateTimeLeft = () => {
       const now = new Date();
       
-      // Target date: 14th September 2025, 12 PM IST
-      const targetDate = new Date('2025-09-14T12:00:00+05:30'); // IST timezone
+      // Target date: 28th September 2025, 12 PM IST
+      const targetDate = new Date('2025-09-28T12:00:00+05:30'); // IST timezone
       
       const difference = targetDate.getTime() - now.getTime();
       
