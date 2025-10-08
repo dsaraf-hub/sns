@@ -117,8 +117,8 @@ export default function Home() {
     const calculateTimeLeft = () => {
       const now = new Date();
       
-      // Target date: 12th October 2025, 12:30 PM IST
-      const targetDate = new Date('2025-10-12T12:30:00+05:30'); // IST timezone
+      // Target date: 19th October 2025, 12:30 PM IST
+      const targetDate = new Date('2025-10-19T12:30:00+05:30'); // IST timezone
       
       const difference = targetDate.getTime() - now.getTime();
       
@@ -301,7 +301,7 @@ export default function Home() {
 
           {/* Countdown Timer */}
           <div className="text-center px-4">
-            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: 12th October, 2025 at 12:30 PM IST</p>
+            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: 19th October, 2025 at 12:30 PM IST</p>
             {isClient ? (
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
