@@ -287,9 +287,6 @@ const generateQuestions = (): Question[] => {
 ];
 };
 
-// Generate questions once - will be regenerated on component mount
-const questions: Question[] = generateQuestions();
-
 // Section headers mapping for grouping
 const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
   0: { title: "Let's get to know you", subtitle: "Tell us about your brunch preferences" },
