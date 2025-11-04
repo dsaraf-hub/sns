@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { BRUNCH_DATES, getNextTwoBrunchDates } from '@/config/brunchDates';
 
 // Cashfree type declarations
 interface CashfreeCheckoutOptions {
@@ -67,8 +68,11 @@ type Question = {
   };
 };
 
-// Define all the questions based on the provided questionnaire
-const questions: Question[] = [
+// Function to generate questions with dynamic brunch dates
+const generateQuestions = (): Question[] => {
+  const nextTwoDates = getNextTwoBrunchDates();
+  
+  return [
   {
     id: 'location',
     type: 'radio',
@@ -233,10 +237,7 @@ const questions: Question[] = [
     id: 'date',
     type: 'radio',
     question: 'Which date would you like to join us for brunch?',
-    options: [
-      { value: '2025-10-19', label: '19th October, 2025' },
-      { value: '2025-11-09', label: '9th November, 2025' },
-    ],
+    options: nextTwoDates.map(date => ({ value: date.value, label: date.label })),
     required: true,
   },
   {
@@ -284,6 +285,10 @@ const questions: Question[] = [
     required: true,
   },
 ];
+};
+
+// Generate questions once - will be regenerated on component mount
+const questions: Question[] = generateQuestions();
 
 // Section headers mapping for grouping
 const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
@@ -297,6 +302,10 @@ const sectionHeaders: Record<number, { title: string; subtitle?: string }> = {
 
 export default function Questionnaire() {
   const router = useRouter();
+  
+  // Generate questions dynamically on component mount
+  const dynamicQuestions = useMemo(() => generateQuestions(), []);
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -307,8 +316,8 @@ export default function Questionnaire() {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   
-  const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const currentQuestion = dynamicQuestions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / dynamicQuestions.length) * 100;
   
   useEffect(() => {
     // Reset transition class when question changes to allow re-animation
@@ -388,7 +397,7 @@ export default function Questionnaire() {
       return; // Don't proceed if validation fails
     }
 
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < dynamicQuestions.length - 1) {
       setTransitionClass("animate-fade-out"); // Assuming you have a fade-out animation
       setTimeout(() => {
         setCurrentQuestionIndex(prevIndex => prevIndex + 1);
@@ -947,7 +956,7 @@ export default function Questionnaire() {
             
             <button
               onClick={
-                currentQuestionIndex === questions.length - 1
+                currentQuestionIndex === dynamicQuestions.length - 1
                   ? handleSubmit
                   : handleNextQuestion
               }
@@ -960,7 +969,7 @@ export default function Questionnaire() {
             >
               {loading 
                 ? 'Processing...' 
-                : currentQuestionIndex === questions.length - 1 
+                : currentQuestionIndex === dynamicQuestions.length - 1 
                   ? 'Join Table' 
                   : 'Next Question'}
             </button>
@@ -998,9 +1007,9 @@ export default function Questionnaire() {
                 <div className="flex justify-between items-center">
                   <span>Date:</span>
                   <span className="font-medium">
-                    {answers.date === '2025-10-19' ? '19th October, 2025' : 
-                     answers.date === '2025-11-09' ? '9th November, 2025' : 
-                     '19th October, 2025'}
+                    {BRUNCH_DATES.find(d => d.value === answers.date)?.label || 
+                     BRUNCH_DATES[0]?.label || 
+                     'To be confirmed'}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState, useMemo, useRef } from 'react';
+import { BRUNCH_DATES, type BrunchDate } from '@/config/brunchDates';
 
 // Animated Text Component for the hero title
 function AnimatedText() {
@@ -111,15 +112,37 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
+  // State for the next brunch date
+  const [nextBrunchDate, setNextBrunchDate] = useState<BrunchDate | null>(null);
+
   useEffect(() => {
     if (!isClient) return;
 
-    const calculateTimeLeft = () => {
+    const findNextBrunchDate = () => {
       const now = new Date();
       
-      // Target date: 19th October 2025, 12:30 PM IST
-      const targetDate = new Date('2025-10-19T12:30:00+05:30'); // IST timezone
+      // Find the next upcoming brunch date
+      for (const brunch of BRUNCH_DATES) {
+        const brunchDate = new Date(brunch.date);
+        if (brunchDate.getTime() > now.getTime()) {
+          return brunch;
+        }
+      }
       
+      // If all dates have passed, return the last date
+      return BRUNCH_DATES[BRUNCH_DATES.length - 1];
+    };
+
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const nextBrunch = findNextBrunchDate();
+      
+      // Update the next brunch date state if it changed
+      if (!nextBrunchDate || nextBrunchDate.date !== nextBrunch.date) {
+        setNextBrunchDate(nextBrunch);
+      }
+      
+      const targetDate = new Date(nextBrunch.date);
       const difference = targetDate.getTime() - now.getTime();
       
       if (difference > 0) {
@@ -139,7 +162,7 @@ export default function Home() {
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
-  }, [isClient]);
+  }, [isClient, nextBrunchDate]);
 
   // Initialize restaurant carousel to start at the middle (original items)
   useEffect(() => {
@@ -301,7 +324,9 @@ export default function Home() {
 
           {/* Countdown Timer */}
           <div className="text-center px-4">
-            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">Next brunch: 19th October, 2025 at 12:30 PM IST</p>
+            <p className="text-base md:text-lg font-medium mb-3 font-montserrat">
+              Next brunch: {nextBrunchDate ? nextBrunchDate.label : '9th November, 2025'} at 12:30 PM IST
+            </p>
             {isClient ? (
             <div className="flex gap-3 md:gap-4 justify-center">
               <div className="text-center">
