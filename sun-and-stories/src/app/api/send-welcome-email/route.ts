@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #666; font-weight: 500;">💰 Ticket Price:</td>
-                    <td style="padding: 8px 0; color: #4a4a4a; font-weight: bold;">₹299</td>
+                    <td style="padding: 8px 0; color: #4a4a4a; font-weight: bold;">₹10</td>
                   </tr>
                 </table>
               </div>
@@ -157,7 +157,7 @@ Your brunch details:
 - Date: ${formattedDate}
 - Location: ${formattedLocation}  
 - Dining Package: ${formattedRestaurant}
-- Ticket Price: ₹299
+- Ticket Price: ₹10
 
 What's Next?
 - Payment instructions will be sent within 24 hours

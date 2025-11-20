@@ -19,7 +19,7 @@ export default function FAQPage() {
     },
     {
       question: "What does it cost to join?",
-      answer: "There's a Table4Six experience fee of ₹299 which covers the curation, matching, and coordination. Additionally, you'll pay for your meal directly at the restaurant. We offer three dining packages: Local Favourites (₹700), Gourmet Dining (₹1500), and Bottomless Brunch (₹2300). You choose your preferred package during signup."
+      answer: "There's a Table4Six experience fee of ₹10 which covers the curation, matching, and coordination. Additionally, you'll pay for your meal directly at the restaurant. We offer three dining packages: Local Favourites (₹700), Gourmet Dining (₹1500), and Bottomless Brunch (₹2300). You choose your preferred package during signup."
     },
     {
       question: "Where do the brunches take place?",

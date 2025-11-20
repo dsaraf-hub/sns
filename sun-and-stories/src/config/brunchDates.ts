@@ -25,9 +25,14 @@ export const BRUNCH_DATES: BrunchDate[] = [
     label: '23rd November, 2025' 
   },
   { 
-    date: '2025-12-14T12:30:00+05:30', 
-    value: '2025-12-14', 
-    label: '14th December, 2025' 
+    date: '2025-12-07T12:30:00+05:30', 
+    value: '2025-12-07', 
+    label: '7th December, 2025' 
+  },
+  { 
+    date: '2025-12-21T12:30:00+05:30', 
+    value: '2025-12-21', 
+    label: '21st December, 2025' 
   },
   // Add more dates here following the pattern:
   // Usually: 2nd Sunday after the previous brunch
