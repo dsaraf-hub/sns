@@ -275,7 +275,7 @@ const generateQuestions = (): Question[] => {
       {
         value: 'table4six_ticket',
         title: 'One Table4Six ticket',
-        price: '₹ 10',
+        price: '₹ 299',
         description: [
           'This price includes one curated Table4Six experience with a like-minded group',
           'Meal cost to be paid at the restaurant'
@@ -522,7 +522,7 @@ export default function Questionnaire() {
         },
         body: JSON.stringify({
           orderId: orderId,
-          orderAmount: '10', // ₹10 live amount
+          orderAmount: '299', // ₹299 live amount
           customerDetails: {
             customer_id: answers.email || 'customer',
             customer_name: answers.name || 'Customer',
@@ -1021,7 +1021,7 @@ export default function Questionnaire() {
                 </div>
                 <div className="flex justify-between items-center pt-2 border-t border-white/20">
                   <span className="font-semibold">Total Amount:</span>
-                  <span className="font-bold text-lg">₹10</span>
+                  <span className="font-bold text-lg">₹299</span>
                 </div>
               </div>
             </div>
@@ -1047,7 +1047,7 @@ export default function Questionnaire() {
                     Processing...
                   </>
                 ) : (
-                  'Pay ₹10 Securely'
+                  'Pay ₹299 Securely'
                 )}
               </button>
               
