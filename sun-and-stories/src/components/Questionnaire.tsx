@@ -509,7 +509,9 @@ export default function Questionnaire() {
 
       // Temporarily persist questionnaire data for post-redirect verification
       try {
-        localStorage.setItem('t4s_questionnaire', JSON.stringify({ orderId, questionnaire: questionnairePayload }));
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('t4s_questionnaire', JSON.stringify({ orderId, questionnaire: questionnairePayload }));
+        }
       } catch {}
 
       // Create payment order with questionnaire data

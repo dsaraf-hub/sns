@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
+import { submitToGoogleSheets, QuestionnaireData } from '@/lib/googleSheets';
 
 // Generate a valid customer_id from email (alphanumeric + underscore/hyphen only)
 function generateValidCustomerId(email: string): string {
@@ -41,6 +42,26 @@ function formatPhoneNumber(phone: string | undefined): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // Parse request body first
+    const { customerDetails, orderAmount, orderId, questionnaireData } = await request.json();
+
+    // Validate required fields
+    if (!customerDetails || !orderAmount || !orderId) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Record to Google Sheets as PENDING immediately to capture data
+    // Do this FIRST, before any payment gateway checks
+    if (questionnaireData) {
+      // Don't await to avoid blocking, but log errors
+      submitToGoogleSheets(questionnaireData as QuestionnaireData, 'PENDING').catch(sheetError => {
+        console.error('Failed to record PENDING status to Google Sheets:', sheetError);
+      });
+    }
+
     // Get environment variables
     const clientId = process.env.CASHFREE_CLIENT_ID;
     const clientSecret = process.env.CASHFREE_CLIENT_SECRET;
@@ -56,17 +77,6 @@ export async function POST(request: NextRequest) {
     // Initialize Cashfree
     const cashfreeEnv = environment === 'production' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX;
     const cashfree = new Cashfree(cashfreeEnv, clientId, clientSecret);
-
-    // Parse request body
-    const { customerDetails, orderAmount, orderId, questionnaireData } = await request.json();
-
-    // Validate required fields
-    if (!customerDetails || !orderAmount || !orderId) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
-    }
 
     // Create order request
     const orderRequest = {
@@ -87,15 +97,8 @@ export async function POST(request: NextRequest) {
       order_note: 'Table 4 Six - Dining Experience Booking',
     };
 
-    // Log the request for debugging
-    console.log('Creating Cashfree order with request:', JSON.stringify(orderRequest, null, 2));
-    console.log('Using environment:', environment);
-    console.log('Client ID:', clientId?.substring(0, 10) + '...');
-
     // Create order with Cashfree
     const response = await cashfree.PGCreateOrder(orderRequest);
-    
-    console.log('Cashfree response:', JSON.stringify(response.data, null, 2));
     
     if (response.data) {
       return NextResponse.json({
@@ -138,4 +141,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

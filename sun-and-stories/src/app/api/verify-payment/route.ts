@@ -1,31 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
 import sgMail from '@sendgrid/mail';
-import { GoogleAuth } from 'google-auth-library';
-import { google } from 'googleapis';
+import { submitToGoogleSheets, QuestionnaireData } from '@/lib/googleSheets';
 
 // TypeScript interfaces
-interface QuestionnaireData {
-  location?: string;
-  name?: string;
-  age?: string;
-  phone?: string;
-  email?: string;
-  social?: string;
-  sunday_vibe?: string;
-  personality_type?: string;
-  fashion?: string;
-  brunch_plate?: string;
-  alcohol?: string;
-  introversion?: string;
-  humor?: string;
-  workout?: string;
-  motivation?: string;
-  date?: string;
-  restaurant_preference?: string;
-  ticket?: string;
-}
-
 interface OrderMetaWithQuestionnaire {
   return_url?: string;
   questionnaire_data?: string;
@@ -37,85 +15,6 @@ if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 } else {
   console.error('❌ SENDGRID_API_KEY is not set');
-}
-
-// Google Sheets submission function
-async function submitToGoogleSheets(questionnaireData: QuestionnaireData) {
-  try {
-    // Check if we have the required environment variables
-    const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-    const serviceAccountKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
-    const sheetId = process.env.GOOGLE_SHEET_ID;
-
-    if (!serviceAccountEmail || !serviceAccountKey || !sheetId) {
-      console.error('Missing required Google Sheets environment variables');
-      return { success: false, error: 'Server configuration error' };
-    }
-
-    // Set up Google Auth
-    const auth = new GoogleAuth({
-      credentials: {
-        client_email: serviceAccountEmail,
-        private_key: serviceAccountKey.replace(/\\n/g, '\n'),
-      },
-      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
-
-    // Create Google Sheets client
-    const sheets = google.sheets({ version: 'v4', auth });
-
-    // Prepare the row data in the exact order specified
-    // Timestamp, Location, Name, Email, Age, Phone, Social Handle, Sunday Vibe, Personality Type, 
-    // Fashion Statement, Dream Brunch Plate, Alcohol Preference, Introversion Level, Humor Importance, 
-    // Workout Preference, Motivation, Date, Restaurant Preference, Ticket
-    const rowData = [
-      new Date().toISOString(), // A: Timestamp
-      questionnaireData.location || '', // B: Location
-      questionnaireData.name || '', // C: Name
-      questionnaireData.email || '', // D: Email
-      questionnaireData.age || '', // E: Age
-      questionnaireData.phone || '', // F: Phone
-      questionnaireData.social || '', // G: Social Handle
-      questionnaireData.sunday_vibe || '', // H: Sunday Vibe
-      questionnaireData.personality_type || '', // I: Personality Type
-      questionnaireData.fashion || '', // J: Fashion Statement
-      questionnaireData.brunch_plate || '', // K: Dream Brunch Plate
-      questionnaireData.alcohol || '', // L: Alcohol Preference
-      questionnaireData.introversion || '', // M: Introversion Level
-      questionnaireData.humor || '', // N: Humor Importance
-      questionnaireData.workout || '', // O: Workout Preference
-      questionnaireData.motivation || '', // P: Motivation
-      questionnaireData.date || '', // Q: Date
-      questionnaireData.restaurant_preference || '', // R: Restaurant Preference
-      questionnaireData.ticket || '', // S: Ticket
-    ];
-
-    console.log('📊 Submitting PAID user to Google Sheets...', {
-      sheetId: sheetId.substring(0, 10) + '...',
-      email: questionnaireData.email,
-      dataLength: rowData.length
-    });
-
-    // Append the data to the sheet
-    const response = await sheets.spreadsheets.values.append({
-      spreadsheetId: sheetId,
-      range: 'Sheet1!A:S',
-      valueInputOption: 'RAW',
-      requestBody: {
-        values: [rowData],
-      },
-    });
-
-    console.log('✅ Successfully submitted PAID user to Google Sheets');
-    return { success: true, updatedRows: response.data.updates?.updatedRows || 0 };
-
-  } catch (error) {
-    console.error('❌ Error submitting PAID user to Google Sheets:', error);
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Unknown error' 
-    };
-  }
 }
 
 // Direct email sending function (no internal API calls)
@@ -333,7 +232,8 @@ export async function POST(request: NextRequest) {
 
       if (dataToSubmit) {
         // Record to Google Sheets (don't await to avoid blocking the response)
-        submitToGoogleSheets(dataToSubmit).catch(sheetsError => {
+        // Using "PAID" status to differentiate or just mark as final
+        submitToGoogleSheets(dataToSubmit, 'PAID').catch(sheetsError => {
           console.error('Google Sheets recording failed but payment verification succeeded (POST):', sheetsError);
         });
       } else {
@@ -390,7 +290,7 @@ export async function GET(request: NextRequest) {
             console.log('🎯 Payment confirmed - recording PAID user to Google Sheets:', customerEmail);
             
             // Record to Google Sheets (don't await to avoid blocking the response)
-            submitToGoogleSheets(questionnaireData).catch(sheetsError => {
+            submitToGoogleSheets(questionnaireData, 'PAID').catch(sheetsError => {
               console.error('Google Sheets recording failed but payment verification succeeded:', sheetsError);
             });
           } catch (parseError) {
@@ -398,6 +298,8 @@ export async function GET(request: NextRequest) {
           }
         } else {
           console.warn('No questionnaire data found in order metadata for PAID user:', customerEmail);
+          // If metadata is missing, we can't do much here for the GET request as we don't have body data
+          // But the client-side might call POST later.
         }
       } else {
         console.warn('Missing required data for email - Order ID:', result.order_id, 'Amount:', result.order_amount, 'Email:', customerEmail);
@@ -413,4 +315,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
