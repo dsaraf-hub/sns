@@ -10,14 +10,19 @@ export interface BrunchDate {
 
 export const BRUNCH_DATES: BrunchDate[] = [
   { 
-    date: '2026-01-11T12:30:00+05:30', 
-    value: '2026-01-11', 
-    label: '11th January, 2026' 
+    date: '2026-01-18T12:30:00+05:30', 
+    value: '2026-01-18', 
+    label: '18th January, 2026' 
   },
   { 
-    date: '2026-01-25T12:30:00+05:30', 
-    value: '2026-01-25', 
-    label: '25th January, 2026' 
+    date: '2026-02-01T12:30:00+05:30', 
+    value: '2026-02-01', 
+    label: '1st February, 2026' 
+  },
+  { 
+    date: '2026-02-15T12:30:00+05:30', 
+    value: '2026-02-15', 
+    label: '15th February, 2026' 
   },
   // Add more dates here following the pattern:
   // Usually: 2nd Sunday after the previous brunch
@@ -25,9 +30,9 @@ export const BRUNCH_DATES: BrunchDate[] = [
   // 
   // Example for future dates:
   // { 
-  //   date: '2026-02-08T12:30:00+05:30', 
-  //   value: '2026-02-08', 
-  //   label: '8th February, 2026' 
+  //   date: '2026-03-01T12:30:00+05:30', 
+  //   value: '2026-03-01', 
+  //   label: '1st March, 2026' 
   // },
 ];
 
